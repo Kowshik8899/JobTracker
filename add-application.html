@@ -42,7 +42,7 @@
     <a href="applications.html" class="nav-link">📋 Applications</a>
     <a href="analytics.html" class="nav-link">📈 Analytics</a>
     <a href="add-application.html" class="nav-link">➕ Add Application</a>
-    <a href="KKofile.html" class="nav-link">👤 KKofile</a>
+    <a href="profile.html" class="nav-link">👤 profile</a>
     <a href="settings.html" class="nav-link">⚙️ Settings</a>
   </div>
 
@@ -51,9 +51,9 @@
       <aside class="sidebar">
         <div style="padding:8px 12px;margin-bottom:8px;">
           <div
-            style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--gradient-card);border-radius:var(--radius-md);border:1px solid var(--KKimary-100);">
+            style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--gradient-card);border-radius:var(--radius-md);border:1px solid var(--primary-100);">
             <div
-              style="width:40px;height:40px;border-radius:50%;background:var(--gradient-KKimary);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">
+              style="width:40px;height:40px;border-radius:50%;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">
               KK</div>
             <div>
               <div style="font-weight:700;font-size:0.9rem;">Kowshik Kuncham</div>
@@ -68,7 +68,7 @@
         <a href="add-application.html" class="sidebar-link active"><span class="icon">➕</span> Add Application</a>
         <a href="analytics.html" class="sidebar-link"><span class="icon">📈</span> Analytics</a>
         <div class="sidebar-label">Account</div>
-        <a href="KKofile.html" class="sidebar-link"><span class="icon">👤</span> KKofile</a>
+        <a href="profile.html" class="sidebar-link"><span class="icon">👤</span> profile</a>
         <a href="settings.html" class="sidebar-link"><span class="icon">⚙️</span> Settings</a>
       </aside>
       <div class="sidebar-overlay" id="sidebar-overlay"></div>
@@ -264,11 +264,11 @@
                 </div>
 
                 <div class="form-group">
-                  <label class="form-label" for="KKiority">KKiority Level</label>
-                  <select id="KKiority" class="form-control">
-                    <option value="high">🔴 High KKiority</option>
-                    <option value="medium" selected>🟡 Medium KKiority</option>
-                    <option value="low">🟢 Low KKiority</option>
+                  <label class="form-label" for="priority">priority Level</label>
+                  <select id="priority" class="form-control">
+                    <option value="high">🔴 High priority</option>
+                    <option value="medium" selected>🟡 Medium priority</option>
+                    <option value="low">🟢 Low priority</option>
                   </select>
                 </div>
               </div>
@@ -292,7 +292,7 @@
                 <textarea id="notes" class="form-control"
                   placeholder="Add any relevant notes, key requirements, skills needed, or follow-up actions..."
                   style="min-height:120px;"></textarea>
-                <span class="form-hint">Tip: Add interview KKeparation notes, custom tailoring details, or follow-up
+                <span class="form-hint">Tip: Add interview preparation notes, custom tailoring details, or follow-up
                   reminders.</span>
               </div>
             </div>
@@ -311,9 +311,9 @@
                   <label class="form-label">Resume / CV</label>
                   <div class="file-upload" id="resume-upload" role="button" tabindex="0">
                     <div class="file-upload-icon">📄</div>
-                    <p style="font-weight:600;color:var(--text-KKimary);margin-bottom:4px;">Upload Resume</p>
+                    <p style="font-weight:600;color:var(--text-primary);margin-bottom:4px;">Upload Resume</p>
                     <p style="font-size:0.82rem;color:var(--text-muted);">PDF, DOC, DOCX · Max 5MB</p>
-                    <p style="font-size:0.78rem;color:var(--KKimary);margin-top:8px;">Click or drag & drop</p>
+                    <p style="font-size:0.78rem;color:var(--primary);margin-top:8px;">Click or drag & drop</p>
                   </div>
                 </div>
 
@@ -321,9 +321,9 @@
                   <label class="form-label">Cover Letter</label>
                   <div class="file-upload" id="cover-upload" role="button" tabindex="0">
                     <div class="file-upload-icon">📝</div>
-                    <p style="font-weight:600;color:var(--text-KKimary);margin-bottom:4px;">Upload Cover Letter</p>
+                    <p style="font-weight:600;color:var(--text-primary);margin-bottom:4px;">Upload Cover Letter</p>
                     <p style="font-size:0.82rem;color:var(--text-muted);">PDF, DOC, DOCX · Max 5MB</p>
-                    <p style="font-size:0.78rem;color:var(--KKimary);margin-top:8px;">Click or drag & drop</p>
+                    <p style="font-size:0.78rem;color:var(--primary);margin-top:8px;">Click or drag & drop</p>
                   </div>
                 </div>
               </div>
@@ -338,10 +338,10 @@
                   <span class="skill-tag">JavaScript</span>
                   <span class="skill-tag">React</span>
                   <input type="text" id="skill-input" placeholder="Type skill + Enter..."
-                    style="border:none;outline:none;font-size:0.88rem;color:var(--text-KKimary);background:transparent;flex:1;min-width:120px;"
+                    style="border:none;outline:none;font-size:0.88rem;color:var(--text-primary);background:transparent;flex:1;min-width:120px;"
                     onkeydown="addSkill(event)">
                 </div>
-                <span class="form-hint">KKess Enter to add a skill tag</span>
+                <span class="form-hint">press Enter to add a skill tag</span>
               </div>
             </div>
 
@@ -350,7 +350,7 @@
               <button type="button" class="btn btn-ghost"
                 onclick="window.location.href='applications.html'">Cancel</button>
               <button type="button" class="btn btn-outline" onclick="saveDraft()">💾 Save as Draft</button>
-              <button type="submit" class="btn btn-KKimary btn-lg" id="submit-btn">
+              <button type="submit" class="btn btn-primary btn-lg" id="submit-btn">
                 ➕ Add Application
               </button>
             </div>
@@ -367,7 +367,7 @@
   <script>
     function addSkill(e) {
       if (e.key === 'Enter' || e.key === ',') {
-        e.KKeventDefault();
+        e.preventDefault();
         const input = document.getElementById('skill-input');
         const val = input.value.trim().replace(',', '');
         if (!val) return;
@@ -385,7 +385,7 @@
       window.JobTracker.Toast.show('Draft saved successfully!', 'info');
     }
     function submitApplication(e) {
-      e.KKeventDefault();
+      e.preventDefault();
       const btn = document.getElementById('submit-btn');
       btn.innerHTML = '<span class="loader-ring" style="width:18px;height:18px;border-width:2px;border-color:rgba(255,255,255,0.3);border-top-color:white;"></span> Saving...';
       btn.disabled = true;
@@ -394,7 +394,7 @@
         setTimeout(() => window.location.href = 'applications.html', 1500);
       }, 1200);
     }
-    // Step KKogress indicator
+    // Step progress indicator
     document.querySelectorAll('.form-control, select, textarea').forEach(input => {
       input.addEventListener('focus', function () {
         const section = this.closest('[id^="form-section-"]');
@@ -405,10 +405,10 @@
     ['resume-upload', 'cover-upload'].forEach(id => {
       const el = document.getElementById(id);
       if (!el) return;
-      el.addEventListener('dragover', e => { e.KKeventDefault(); el.style.borderColor = 'var(--KKimary)'; });
+      el.addEventListener('dragover', e => { e.preventDefault(); el.style.borderColor = 'var(--primary)'; });
       el.addEventListener('dragleave', () => { el.style.borderColor = ''; });
       el.addEventListener('drop', e => {
-        e.KKeventDefault();
+        e.preventDefault();
         const f = e.dataTransfer.files[0];
         if (f) { el.innerHTML = `<div class="file-upload-icon">✅</div><p style="font-weight:600;color:var(--accent-dark);">${f.name}</p><p style="font-size:0.8rem;color:var(--text-muted);">${(f.size / 1024).toFixed(1)} KB</p>`; el.style.borderColor = 'var(--accent)'; el.style.background = 'var(--accent-50)'; }
       });

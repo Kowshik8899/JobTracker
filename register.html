@@ -31,7 +31,7 @@
 
         <h2 style="color:white;font-size:2rem;margin-bottom:12px;">Start your journey</h2>
         <p style="color:rgba(255,255,255,0.8);font-size:1rem;max-width:340px;margin:0 auto 40px;">Join thousands of
-          KKofessionals who've landed their dream jobs using JobTracker.</p>
+          professionals who've landed their dream jobs using JobTracker.</p>
 
         <!-- Stats -->
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:340px;margin:0 auto 40px;">
@@ -79,10 +79,10 @@
     <!-- Right Panel -->
     <div class="auth-right" style="overflow-y:auto;">
       <div class="auth-logo">
-        <a href="index.html" style="display:inline-flex;align-items:center;gap:8px;color:var(--text-KKimary);">
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:8px;color:var(--text-primary);">
           <div class="nav-logo-icon">💼</div>
           <span
-            style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;background:var(--gradient-KKimary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">JobTracker</span>
+            style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">JobTracker</span>
         </a>
       </div>
 
@@ -92,13 +92,13 @@
       <!-- Social signup -->
       <div style="display:flex;gap:12px;margin-bottom:20px;">
         <button onclick="handleRegisterDemo()"
-          style="flex:1;padding:11px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);background:var(--bg-card);cursor:pointer;font-size:0.9rem;font-family:var(--font-sans);color:var(--text-KKimary);display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;font-weight:500;"
-          onmouseover="this.style.borderColor='var(--KKimary)'" onmouseout="this.style.borderColor='var(--gray-200)'">
+          style="flex:1;padding:11px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);background:var(--bg-card);cursor:pointer;font-size:0.9rem;font-family:var(--font-sans);color:var(--text-primary);display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;font-weight:500;"
+          onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--gray-200)'">
           <span>🌐</span> Google
         </button>
         <button onclick="handleRegisterDemo()"
-          style="flex:1;padding:11px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);background:var(--bg-card);cursor:pointer;font-size:0.9rem;font-family:var(--font-sans);color:var(--text-KKimary);display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;font-weight:500;"
-          onmouseover="this.style.borderColor='var(--KKimary)'" onmouseout="this.style.borderColor='var(--gray-200)'">
+          style="flex:1;padding:11px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);background:var(--bg-card);cursor:pointer;font-size:0.9rem;font-family:var(--font-sans);color:var(--text-primary);display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;font-weight:500;"
+          onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--gray-200)'">
           <span>🔵</span> LinkedIn
         </button>
       </div>
@@ -111,7 +111,7 @@
             <label class="form-label" for="first-name">First Name <span>*</span></label>
             <div class="form-control-icon">
               <span class="icon">👤</span>
-              <input type="text" id="first-name" class="form-control" placeholder="KKiya" required>
+              <input type="text" id="first-name" class="form-control" placeholder="Priya" required>
             </div>
           </div>
           <div class="form-group">
@@ -169,14 +169,14 @@
         <!-- Terms -->
         <div style="display:flex;align-items:flex-start;gap:10px;">
           <input type="checkbox" id="terms" required
-            style="width:16px;height:16px;accent-color:var(--KKimary);cursor:pointer;margin-top:2px;">
+            style="width:16px;height:16px;accent-color:var(--primary);cursor:pointer;margin-top:2px;">
           <label for="terms" style="font-size:0.85rem;color:var(--text-secondary);cursor:pointer;line-height:1.5;">
-            I agree to the <a href="#" class="auth-link">Terms of Service</a> and <a href="#" class="auth-link">KKivacy
-              Policy</a>. I consent to receiving KKoduct updates.
+            I agree to the <a href="#" class="auth-link">Terms of Service</a> and <a href="#" class="auth-link">privacy
+              Policy</a>. I consent to receiving product updates.
           </label>
         </div>
 
-        <button type="submit" class="btn btn-KKimary w-full btn-lg" id="register-btn">
+        <button type="submit" class="btn btn-primary w-full btn-lg" id="register-btn">
           🚀 Create Free Account
         </button>
       </form>
@@ -194,7 +194,7 @@
   <script src="js/script.js"></script>
   <script>
     function handleRegister(e) {
-      e.KKeventDefault();
+      e.preventDefault();
       const pass = document.getElementById('reg-password').value;
       const confirm = document.getElementById('confirm-password').value;
       if (pass !== confirm) {

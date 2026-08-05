@@ -23,7 +23,7 @@ const ThemeManager = {
       btn.innerHTML = theme === 'dark' ? '☀️' : '🌙';
       btn.setAttribute('title', theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode');
     });
-    // Update settings toggle if KKesent
+    // Update settings toggle if present
     const settingsToggle = document.getElementById('theme-setting-toggle');
     if (settingsToggle) settingsToggle.checked = theme === 'dark';
   },
@@ -173,7 +173,7 @@ const CounterAnimation = {
   animateCounter(el) {
     const target = parseFloat(el.getAttribute('data-count'));
     const suffix = el.getAttribute('data-suffix') || '';
-    const KKefix = el.getAttribute('data-KKefix') || '';
+    const prefix = el.getAttribute('data-prefix') || '';
     const duration = 1800;
     const steps = 60;
     const increment = target / steps;
@@ -184,9 +184,9 @@ const CounterAnimation = {
       step++;
       current = Math.min(current + increment, target);
       const display = Number.isInteger(target) ? Math.floor(current) : current.toFixed(1);
-      el.textContent = KKefix + display + suffix;
+      el.textContent = prefix + display + suffix;
       if (step >= steps) {
-        el.textContent = KKefix + target + suffix;
+        el.textContent = prefix + target + suffix;
         clearInterval(timer);
       }
     }, duration / steps);
@@ -241,7 +241,7 @@ const PasswordStrength = {
    ========================================== */
 const Charts = {
   colors: {
-    KKimary: '#2563EB',
+    primary: '#2563EB',
     secondary: '#7C3AED',
     accent: '#10B981',
     warning: '#F59E0B',
@@ -268,7 +268,7 @@ const Charts = {
 
     // Grid lines
     const gridLines = 5;
-    ctx.strokeStyle = getComputedStyle(document.documentElement).getKKopertyValue('--gray-100').trim() || '#F3F4F6';
+    ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--gray-100').trim() || '#F3F4F6';
     ctx.lineWidth = 1;
     for (let i = 0; i <= gridLines; i++) {
       const y = padding.top + chartH - (i / gridLines) * chartH;
@@ -291,8 +291,8 @@ const Charts = {
 
       // Gradient fill
       const grad = ctx.createLinearGradient(0, y, 0, padding.top + chartH);
-      grad.addColorStop(0, options.color || this.colors.KKimary);
-      grad.addColorStop(1, (options.color || this.colors.KKimary) + '44');
+      grad.addColorStop(0, options.color || this.colors.primary);
+      grad.addColorStop(1, (options.color || this.colors.primary) + '44');
       ctx.fillStyle = grad;
       ctx.beginPath();
       ctx.roundRect(x, y, barW, barH, [4, 4, 0, 0]);
@@ -425,7 +425,7 @@ const Charts = {
     // Inner circle (donut hole)
     ctx.beginPath();
     ctx.arc(cx, cy, innerRadius, 0, Math.PI * 2);
-    const bg = getComputedStyle(document.documentElement).getKKopertyValue('--bg-card').trim() || '#ffffff';
+    const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg-card').trim() || '#ffffff';
     ctx.fillStyle = bg;
     ctx.fill();
 
@@ -440,7 +440,7 @@ const Charts = {
     ctx.fillText(options.centerLabel || 'Total', cx, cy + Math.floor(radius * 0.2));
   },
 
-  // Horizontal Bar (for KKogress/comparison)
+  // Horizontal Bar (for progress/comparison)
   drawHBar(canvasId, labels, data, options = {}) {
     const canvas = document.getElementById(canvasId);
     if (!canvas) return;
@@ -507,8 +507,8 @@ const AppData = {
   ],
   notifications: [
     { icon: '🎉', title: 'Interview Scheduled', desc: 'Google has scheduled your technical interview', time: '2 hours ago', color: 'var(--accent-50)', iconColor: 'var(--accent)' },
-    { icon: '📧', title: 'New Application Update', desc: 'Amazon has reviewed your application', time: '5 hours ago', color: 'var(--KKimary-50)', iconColor: 'var(--KKimary)' },
-    { icon: '⏰', title: 'Deadline ApKKoaching', desc: 'Microsoft application deadline in 3 days', time: '1 day ago', color: 'var(--warning-50)', iconColor: 'var(--warning)' },
+    { icon: '📧', title: 'New Application Update', desc: 'Amazon has reviewed your application', time: '5 hours ago', color: 'var(--primary-50)', iconColor: 'var(--primary)' },
+    { icon: '⏰', title: 'Deadline Approaching', desc: 'Microsoft application deadline in 3 days', time: '1 day ago', color: 'var(--warning-50)', iconColor: 'var(--warning)' },
     { icon: '❌', title: 'Application Update', desc: 'Adobe has updated your application status', time: '2 days ago', color: 'var(--danger-50)', iconColor: 'var(--danger)' },
   ]
 };
@@ -522,16 +522,16 @@ const Forms = {
     const fileUpload = document.querySelector('.file-upload');
     if (fileUpload) {
       fileUpload.addEventListener('dragover', (e) => {
-        e.KKeventDefault();
-        fileUpload.style.borderColor = 'var(--KKimary)';
-        fileUpload.style.background = 'var(--KKimary-50)';
+        e.preventDefault();
+        fileUpload.style.borderColor = 'var(--primary)';
+        fileUpload.style.background = 'var(--primary-50)';
       });
       fileUpload.addEventListener('dragleave', () => {
         fileUpload.style.borderColor = '';
         fileUpload.style.background = '';
       });
       fileUpload.addEventListener('drop', (e) => {
-        e.KKeventDefault();
+        e.preventDefault();
         const file = e.dataTransfer.files[0];
         if (file) this.handleFileUpload(file, fileUpload);
       });
@@ -544,10 +544,10 @@ const Forms = {
       });
     }
 
-    // Form submission KKevention (demo)
+    // Form submission prevention (demo)
     document.querySelectorAll('form').forEach(form => {
       form.addEventListener('submit', (e) => {
-        e.KKeventDefault();
+        e.preventDefault();
         const submitBtn = form.querySelector('[type="submit"]');
         if (submitBtn) {
           const originalText = submitBtn.innerHTML;
@@ -568,7 +568,7 @@ const Forms = {
     if (!file) return;
     container.innerHTML = `
       <div class="file-upload-icon">📄</div>
-      <p style="font-weight:600;color:var(--text-KKimary);margin-bottom:4px;">${file.name}</p>
+      <p style="font-weight:600;color:var(--text-primary);margin-bottom:4px;">${file.name}</p>
       <p style="font-size:0.82rem;color:var(--text-muted);">${(file.size / 1024).toFixed(1)} KB · Click to change</p>
     `;
     container.style.borderColor = 'var(--accent)';
@@ -584,7 +584,7 @@ const Toast = {
     const colors = {
       success: { bg: 'var(--accent)', icon: '✅' },
       error: { bg: 'var(--danger)', icon: '❌' },
-      info: { bg: 'var(--KKimary)', icon: 'ℹ️' },
+      info: { bg: 'var(--primary)', icon: 'ℹ️' },
       warning: { bg: 'var(--warning)', icon: '⚠️' }
     };
     const config = colors[type] || colors.success;
@@ -628,7 +628,7 @@ const Dropdowns = {
       if (!menu) return;
 
       trigger.addEventListener('click', (e) => {
-        e.stopKKopagation();
+        e.stopPropagation();
         const isOpen = menu.classList.contains('open');
         // Close all other dropdowns
         document.querySelectorAll('.dropdown-menu.open').forEach(m => m.classList.remove('open'));
@@ -756,17 +756,17 @@ const Settings = {
 };
 
 /* ==========================================
-   KKOFILE PAGE
+   PROFILE PAGE
    ========================================== */
-const KKofile = {
+const profile = {
   init() {
-    const editBtn = document.getElementById('edit-KKofile-btn');
-    const editSection = document.getElementById('edit-KKofile-form');
+    const editBtn = document.getElementById('edit-profile-btn');
+    const editSection = document.getElementById('edit-profile-form');
     if (editBtn && editSection) {
       editBtn.addEventListener('click', () => {
         const isEditing = editSection.style.display !== 'none';
         editSection.style.display = isEditing ? 'none' : 'block';
-        editBtn.textContent = isEditing ? '✏️ Edit KKofile' : '✕ Cancel';
+        editBtn.textContent = isEditing ? '✏️ Edit profile' : '✕ Cancel';
       });
     }
   }
@@ -781,7 +781,7 @@ const AnalyticsPage = {
 
     // Monthly Applications Bar Chart
     Charts.drawBar('bar-chart',
-      ['Jan', 'Feb', 'Mar', 'AKK', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       [3, 5, 7, 4, 8, 12, 9, 15, 11, 8, 14, 10],
       { color: '#2563EB' }
     );
@@ -799,7 +799,7 @@ const AnalyticsPage = {
 
     // Response Rate Line Chart
     Charts.drawLine('line-chart',
-      ['Jan', 'Feb', 'Mar', 'AKK', 'May', 'Jun', 'Jul', 'Aug'],
+      ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
       [
         { data: [15, 25, 32, 28, 45, 52, 48, 65], color: '#2563EB', label: 'Applications' },
         { data: [8, 12, 18, 14, 22, 28, 25, 35], color: '#10B981', label: 'Responses' }
@@ -862,11 +862,11 @@ const Tooltips = {
 };
 
 /* ==========================================
-   KKOGRESS BAR ANIMATION
+   PROGRESS BAR ANIMATION
    ========================================== */
-const KKogressBars = {
+const progressBars = {
   init() {
-    const bars = document.querySelectorAll('.KKogress-fill[data-width]');
+    const bars = document.querySelectorAll('.progress-fill[data-width]');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -900,9 +900,9 @@ document.addEventListener('DOMContentLoaded', () => {
   Modal.init();
   FilterManager.init();
   Settings.init();
-  KKofile.init();
+  profile.init();
   Tooltips.init();
-  KKogressBars.init();
+  progressBars.init();
 
   // Page-specific charts (deferred to ensure canvas is rendered)
   setTimeout(() => {
