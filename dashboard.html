@@ -1,408 +1,472 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Your JobTracker Dashboard — overview of all applications, interviews, and analytics.">
+  <meta name="description"
+    content="Your JobTracker Dashboard — overview of all applications, interviews, and analytics.">
   <title>Dashboard — JobTracker</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
+
 <body>
-<div class="page-loader" id="page-loader"><div class="loader-ring"></div></div>
-
-<!-- NAVBAR -->
-<nav class="navbar scrolled" id="navbar">
-  <div class="nav-container">
-    <a href="index.html" class="nav-logo">
-      <div class="nav-logo-icon">💼</div>
-      <span>JobTracker</span>
-    </a>
-    <div class="nav-links">
-      <a href="dashboard.html" class="nav-link active">Dashboard</a>
-      <a href="applications.html" class="nav-link">Applications</a>
-      <a href="analytics.html" class="nav-link">Analytics</a>
-      <a href="add-application.html" class="nav-link">+ Add New</a>
-    </div>
-    <div class="nav-actions">
-      <button class="theme-toggle" title="Toggle theme">🌙</button>
-      <div class="notification-bell" onclick="window.JobTracker && window.JobTracker.Toast.show('You have 3 new notifications', 'info')" style="cursor:pointer;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;border:1.5px solid var(--gray-200);position:relative;">
-        🔔
-        <span class="badge-dot" style="position:absolute;top:2px;right:2px;width:8px;height:8px;background:var(--danger);border-radius:50%;border:2px solid white;"></span>
-      </div>
-      <div class="dropdown">
-        <div class="nav-avatar" data-dropdown="user-menu">PR</div>
-        <div class="dropdown-menu" id="user-menu">
-          <a href="profile.html" class="dropdown-item">👤 My Profile</a>
-          <a href="settings.html" class="dropdown-item">⚙️ Settings</a>
-          <div class="dropdown-divider"></div>
-          <a href="index.html" class="dropdown-item danger">🚪 Sign Out</a>
-        </div>
-      </div>
-    </div>
-    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  <div class="page-loader" id="page-loader">
+    <div class="loader-ring"></div>
   </div>
-</nav>
 
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobile-menu">
-  <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
-  <a href="applications.html" class="nav-link">📋 Applications</a>
-  <a href="analytics.html" class="nav-link">📈 Analytics</a>
-  <a href="add-application.html" class="nav-link">➕ Add Application</a>
-  <a href="profile.html" class="nav-link">👤 Profile</a>
-  <a href="settings.html" class="nav-link">⚙️ Settings</a>
-  <div style="height:1px;background:var(--gray-200);margin:8px 0;"></div>
-  <a href="index.html" class="nav-link" style="color:var(--danger);">🚪 Sign Out</a>
-</div>
-
-<div class="page-body">
-  <div class="app-layout">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div style="padding:8px 12px;margin-bottom:8px;">
-        <div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--gradient-card);border-radius:var(--radius-md);border:1px solid var(--primary-100);">
-          <div style="width:40px;height:40px;border-radius:50%;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">PR</div>
-          <div>
-            <div style="font-weight:700;font-size:0.9rem;">Priya Rajan</div>
-            <div style="font-size:0.75rem;color:var(--text-muted);">IIT Bombay · 2025</div>
+  <!-- NAVBAR -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">💼</div>
+        <span>JobTracker</span>
+      </a>
+      <div class="nav-links">
+        <a href="dashboard.html" class="nav-link active">Dashboard</a>
+        <a href="applications.html" class="nav-link">Applications</a>
+        <a href="analytics.html" class="nav-link">Analytics</a>
+        <a href="add-application.html" class="nav-link">+ Add New</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" title="Toggle theme">🌙</button>
+        <div class="notification-bell"
+          onclick="window.JobTracker && window.JobTracker.Toast.show('You have 3 new notifications', 'info')"
+          style="cursor:pointer;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;border:1.5px solid var(--gray-200);position:relative;">
+          🔔
+          <span class="badge-dot"
+            style="position:absolute;top:2px;right:2px;width:8px;height:8px;background:var(--danger);border-radius:50%;border:2px solid white;"></span>
+        </div>
+        <div class="dropdown">
+          <div class="nav-avatar" data-dropdown="user-menu">KK</div>
+          <div class="dropdown-menu" id="user-menu">
+            <a href="KKofile.html" class="dropdown-item">👤 My KKofile</a>
+            <a href="settings.html" class="dropdown-item">⚙️ Settings</a>
+            <div class="dropdown-divider"></div>
+            <a href="index.html" class="dropdown-item danger">🚪 Sign Out</a>
           </div>
         </div>
       </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
 
-      <div class="sidebar-label">Main Menu</div>
-      <a href="dashboard.html" class="sidebar-link active">
-        <span class="icon">📊</span> Dashboard
-      </a>
-      <a href="applications.html" class="sidebar-link">
-        <span class="icon">📋</span> Applications
-        <span class="sidebar-badge">10</span>
-      </a>
-      <a href="add-application.html" class="sidebar-link">
-        <span class="icon">➕</span> Add Application
-      </a>
-      <a href="analytics.html" class="sidebar-link">
-        <span class="icon">📈</span> Analytics
-      </a>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+    <a href="applications.html" class="nav-link">📋 Applications</a>
+    <a href="analytics.html" class="nav-link">📈 Analytics</a>
+    <a href="add-application.html" class="nav-link">➕ Add Application</a>
+    <a href="KKofile.html" class="nav-link">👤 KKofile</a>
+    <a href="settings.html" class="nav-link">⚙️ Settings</a>
+    <div style="height:1px;background:var(--gray-200);margin:8px 0;"></div>
+    <a href="index.html" class="nav-link" style="color:var(--danger);">🚪 Sign Out</a>
+  </div>
 
-      <div class="sidebar-label">Account</div>
-      <a href="profile.html" class="sidebar-link">
-        <span class="icon">👤</span> Profile
-      </a>
-      <a href="settings.html" class="sidebar-link">
-        <span class="icon">⚙️</span> Settings
-      </a>
-
-      <div class="sidebar-label">Status</div>
-      <div style="padding:0 12px;">
-        <div style="margin-bottom:10px;">
-          <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:5px;">
-            <span style="color:var(--text-secondary);">Applications this week</span>
-            <span style="font-weight:700;color:var(--primary);">7/10</span>
+  <div class="page-body">
+    <div class="app-layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div style="padding:8px 12px;margin-bottom:8px;">
+          <div
+            style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--gradient-card);border-radius:var(--radius-md);border:1px solid var(--KKimary-100);">
+            <div
+              style="width:40px;height:40px;border-radius:50%;background:var(--gradient-KKimary);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">
+              KK</div>
+            <div>
+              <div style="font-weight:700;font-size:0.9rem;">Kowshik Kuncham</div>
+              <div style="font-size:0.75rem;color:var(--text-muted);">Sri Vasavi Engineering College</div>
+            </div>
           </div>
-          <div class="progress-bar"><div class="progress-fill" data-width="70"></div></div>
         </div>
-        <div style="margin-bottom:10px;">
-          <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:5px;">
-            <span style="color:var(--text-secondary);">Profile completeness</span>
-            <span style="font-weight:700;color:var(--accent);">85%</span>
-          </div>
-          <div class="progress-bar"><div class="progress-fill" data-width="85" style="background:var(--accent);"></div></div>
-        </div>
-      </div>
 
-      <div style="margin-top:auto;padding:12px;margin-top:24px;">
-        <a href="index.html" class="sidebar-link" style="color:var(--danger);">
-          <span class="icon">🚪</span> Sign Out
+        <div class="sidebar-label">Main Menu</div>
+        <a href="dashboard.html" class="sidebar-link active">
+          <span class="icon">📊</span> Dashboard
         </a>
-      </div>
-    </aside>
+        <a href="applications.html" class="sidebar-link">
+          <span class="icon">📋</span> Applications
+          <span class="sidebar-badge">10</span>
+        </a>
+        <a href="add-application.html" class="sidebar-link">
+          <span class="icon">➕</span> Add Application
+        </a>
+        <a href="analytics.html" class="sidebar-link">
+          <span class="icon">📈</span> Analytics
+        </a>
 
-    <!-- Sidebar overlay -->
-    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+        <div class="sidebar-label">Account</div>
+        <a href="KKofile.html" class="sidebar-link">
+          <span class="icon">👤</span> KKofile
+        </a>
+        <a href="settings.html" class="sidebar-link">
+          <span class="icon">⚙️</span> Settings
+        </a>
 
-    <!-- Main Content -->
-    <main class="main-content">
-
-      <!-- Page Header -->
-      <div class="page-header-row">
-        <div>
-          <h1 style="font-size:1.75rem;margin-bottom:4px;">Good morning, Priya! 👋</h1>
-          <p>Here's your job search overview for today — <strong>Wednesday, Aug 5, 2026</strong></p>
-        </div>
-        <div style="display:flex;gap:12px;align-items:center;">
-          <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Generating report...', 'info')">📄 Export Report</button>
-          <a href="add-application.html" class="btn btn-primary btn-sm">➕ Add Application</a>
-        </div>
-      </div>
-
-      <!-- Stat Cards -->
-      <div class="stat-cards-grid">
-        <div class="stat-card">
-          <div class="stat-icon" style="background:var(--primary-50);color:var(--primary);">📋</div>
-          <div class="stat-value" data-count="24">24</div>
-          <div class="stat-label">Total Applications</div>
-          <div class="stat-change positive">↑ +4 this week</div>
-        </div>
-        <div class="stat-card" style="--card-color:var(--secondary);">
-          <div class="stat-icon" style="background:var(--secondary-50);color:var(--secondary);">🎤</div>
-          <div class="stat-value" data-count="8">8</div>
-          <div class="stat-label">Interviews</div>
-          <div class="stat-change positive">↑ +2 scheduled</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon" style="background:var(--accent-50);color:var(--accent);">🎉</div>
-          <div class="stat-value" data-count="2">2</div>
-          <div class="stat-label">Offers Received</div>
-          <div class="stat-change positive">↑ +1 this month</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon" style="background:var(--danger-50);color:var(--danger);">❌</div>
-          <div class="stat-value" data-count="5">5</div>
-          <div class="stat-label">Rejections</div>
-          <div class="stat-change negative">↓ 20.8% rate</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon" style="background:var(--warning-50);color:var(--warning);">⏳</div>
-          <div class="stat-value" data-count="9">9</div>
-          <div class="stat-label">Pending Review</div>
-          <div class="stat-change positive">Awaiting response</div>
-        </div>
-      </div>
-
-      <!-- Charts Row -->
-      <div class="two-col-grid" style="margin-bottom:24px;">
-        <!-- Line Chart -->
-        <div class="chart-card">
-          <div class="chart-header">
-            <div>
-              <div class="chart-title">Applications Timeline</div>
-              <div class="chart-subtitle">Last 6 weeks activity</div>
+        <div class="sidebar-label">Status</div>
+        <div style="padding:0 12px;">
+          <div style="margin-bottom:10px;">
+            <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:5px;">
+              <span style="color:var(--text-secondary);">Applications this week</span>
+              <span style="font-weight:700;color:var(--KKimary);">7/10</span>
             </div>
-            <select class="filter-select" style="height:36px;font-size:0.82rem;" onchange="window.JobTracker.Toast.show('Filter applied', 'info')">
-              <option>Last 6 Weeks</option>
-              <option>Last 3 Months</option>
-              <option>This Year</option>
-            </select>
+            <div class="KKogress-bar">
+              <div class="KKogress-fill" data-width="70"></div>
+            </div>
           </div>
-          <div class="chart-container" style="height:220px;">
-            <canvas id="dash-line-chart" style="width:100%;height:100%;"></canvas>
+          <div style="margin-bottom:10px;">
+            <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:5px;">
+              <span style="color:var(--text-secondary);">KKofile completeness</span>
+              <span style="font-weight:700;color:var(--accent);">85%</span>
+            </div>
+            <div class="KKogress-bar">
+              <div class="KKogress-fill" data-width="85" style="background:var(--accent);"></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:auto;padding:12px;margin-top:24px;">
+          <a href="index.html" class="sidebar-link" style="color:var(--danger);">
+            <span class="icon">🚪</span> Sign Out
+          </a>
+        </div>
+      </aside>
+
+      <!-- Sidebar overlay -->
+      <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+      <!-- Main Content -->
+      <main class="main-content">
+
+        <!-- Page Header -->
+        <div class="page-header-row">
+          <div>
+            <h1 style="font-size:1.75rem;margin-bottom:4px;">Good morning, KKiya! 👋</h1>
+            <p>Here's your job search overview for today — <strong>Wednesday, Aug 5, 2026</strong></p>
+          </div>
+          <div style="display:flex;gap:12px;align-items:center;">
+            <button class="btn btn-ghost btn-sm"
+              onclick="window.JobTracker.Toast.show('Generating report...', 'info')">📄 Export Report</button>
+            <a href="add-application.html" class="btn btn-KKimary btn-sm">➕ Add Application</a>
           </div>
         </div>
 
-        <!-- Donut Chart -->
-        <div class="chart-card">
-          <div class="chart-header">
-            <div>
-              <div class="chart-title">Status Distribution</div>
-              <div class="chart-subtitle">All applications breakdown</div>
+        <!-- Stat Cards -->
+        <div class="stat-cards-grid">
+          <div class="stat-card">
+            <div class="stat-icon" style="background:var(--KKimary-50);color:var(--KKimary);">📋</div>
+            <div class="stat-value" data-count="24">24</div>
+            <div class="stat-label">Total Applications</div>
+            <div class="stat-change positive">↑ +4 this week</div>
+          </div>
+          <div class="stat-card" style="--card-color:var(--secondary);">
+            <div class="stat-icon" style="background:var(--secondary-50);color:var(--secondary);">🎤</div>
+            <div class="stat-value" data-count="8">8</div>
+            <div class="stat-label">Interviews</div>
+            <div class="stat-change positive">↑ +2 scheduled</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:var(--accent-50);color:var(--accent);">🎉</div>
+            <div class="stat-value" data-count="2">2</div>
+            <div class="stat-label">Offers Received</div>
+            <div class="stat-change positive">↑ +1 this month</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:var(--danger-50);color:var(--danger);">❌</div>
+            <div class="stat-value" data-count="5">5</div>
+            <div class="stat-label">Rejections</div>
+            <div class="stat-change negative">↓ 20.8% rate</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:var(--warning-50);color:var(--warning);">⏳</div>
+            <div class="stat-value" data-count="9">9</div>
+            <div class="stat-label">Pending Review</div>
+            <div class="stat-change positive">Awaiting response</div>
+          </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="two-col-grid" style="margin-bottom:24px;">
+          <!-- Line Chart -->
+          <div class="chart-card">
+            <div class="chart-header">
+              <div>
+                <div class="chart-title">Applications Timeline</div>
+                <div class="chart-subtitle">Last 6 weeks activity</div>
+              </div>
+              <select class="filter-select" style="height:36px;font-size:0.82rem;"
+                onchange="window.JobTracker.Toast.show('Filter applied', 'info')">
+                <option>Last 6 Weeks</option>
+                <option>Last 3 Months</option>
+                <option>This Year</option>
+              </select>
+            </div>
+            <div class="chart-container" style="height:220px;">
+              <canvas id="dash-line-chart" style="width:100%;height:100%;"></canvas>
             </div>
           </div>
-          <div style="display:flex;align-items:center;gap:16px;">
-            <div class="chart-container" style="height:180px;width:180px;flex-shrink:0;">
-              <canvas id="dash-donut-chart" style="width:100%;height:100%;"></canvas>
+
+          <!-- Donut Chart -->
+          <div class="chart-card">
+            <div class="chart-header">
+              <div>
+                <div class="chart-title">Status Distribution</div>
+                <div class="chart-subtitle">All applications breakdown</div>
+              </div>
             </div>
-            <div style="flex:1;">
-              <div class="chart-legend" style="flex-direction:column;gap:10px;">
-                <div class="legend-item"><div class="legend-dot" style="background:#2563EB;"></div>Applied (10)</div>
-                <div class="legend-item"><div class="legend-dot" style="background:#7C3AED;"></div>Interview (4)</div>
-                <div class="legend-item"><div class="legend-dot" style="background:#10B981;"></div>Offer (2)</div>
-                <div class="legend-item"><div class="legend-dot" style="background:#EF4444;"></div>Rejected (3)</div>
-                <div class="legend-item"><div class="legend-dot" style="background:#F59E0B;"></div>Pending (5)</div>
+            <div style="display:flex;align-items:center;gap:16px;">
+              <div class="chart-container" style="height:180px;width:180px;flex-shrink:0;">
+                <canvas id="dash-donut-chart" style="width:100%;height:100%;"></canvas>
+              </div>
+              <div style="flex:1;">
+                <div class="chart-legend" style="flex-direction:column;gap:10px;">
+                  <div class="legend-item">
+                    <div class="legend-dot" style="background:#2563EB;"></div>Applied (10)
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-dot" style="background:#7C3AED;"></div>Interview (4)
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-dot" style="background:#10B981;"></div>Offer (2)
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-dot" style="background:#EF4444;"></div>Rejected (3)
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-dot" style="background:#F59E0B;"></div>Pending (5)
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Bottom Row: Recent Applications + Notifications -->
-      <div class="two-col-grid">
-        <!-- Recent Applications Table -->
-        <div class="chart-card" style="grid-column:1/2;">
+        <!-- Bottom Row: Recent Applications + Notifications -->
+        <div class="two-col-grid">
+          <!-- Recent Applications Table -->
+          <div class="chart-card" style="grid-column:1/2;">
+            <div class="chart-header" style="margin-bottom:16px;">
+              <div>
+                <div class="chart-title">Recent Applications</div>
+                <div class="chart-subtitle">Your latest submitted applications</div>
+              </div>
+              <a href="applications.html" class="btn btn-ghost btn-sm">View All →</a>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Company</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="company-cell">
+                        <div class="company-logo color-google">G</div><span>Google</span>
+                      </div>
+                    </td>
+                    <td style="color:var(--text-secondary);font-size:0.88rem;">SWE Intern</td>
+                    <td><span class="badge badge-interview">Interview</span></td>
+                    <td style="color:var(--text-muted);font-size:0.85rem;">Dec 10</td>
+                    <td><a href="applications.html" class="btn btn-ghost btn-sm">View</a></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="company-cell">
+                        <div class="company-logo color-microsoft">MS</div><span>Microsoft</span>
+                      </div>
+                    </td>
+                    <td style="color:var(--text-secondary);font-size:0.88rem;">Frontend Dev</td>
+                    <td><span class="badge badge-applied">Applied</span></td>
+                    <td style="color:var(--text-muted);font-size:0.85rem;">Dec 8</td>
+                    <td><a href="applications.html" class="btn btn-ghost btn-sm">View</a></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="company-cell">
+                        <div class="company-logo color-amazon">A</div><span>Amazon</span>
+                      </div>
+                    </td>
+                    <td style="color:var(--text-secondary);font-size:0.88rem;">SDE Intern</td>
+                    <td><span class="badge badge-offer">Offer</span></td>
+                    <td style="color:var(--text-muted);font-size:0.85rem;">Nov 25</td>
+                    <td><a href="applications.html" class="btn btn-ghost btn-sm">View</a></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="company-cell">
+                        <div class="company-logo color-adobe">Ad</div><span>Adobe</span>
+                      </div>
+                    </td>
+                    <td style="color:var(--text-secondary);font-size:0.88rem;">UX Design Intern</td>
+                    <td><span class="badge badge-rejected">Rejected</span></td>
+                    <td style="color:var(--text-muted);font-size:0.85rem;">Nov 18</td>
+                    <td><a href="applications.html" class="btn btn-ghost btn-sm">View</a></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="company-cell">
+                        <div class="company-logo color-deloitte">D</div><span>Deloitte</span>
+                      </div>
+                    </td>
+                    <td style="color:var(--text-secondary);font-size:0.88rem;">Business Analyst</td>
+                    <td><span class="badge badge-interview">Interview</span></td>
+                    <td style="color:var(--text-muted);font-size:0.85rem;">Dec 1</td>
+                    <td><a href="applications.html" class="btn btn-ghost btn-sm">View</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Right Column: Quick Actions + Notifications -->
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <!-- Quick Actions -->
+            <div class="chart-card">
+              <div class="chart-title" style="margin-bottom:16px;">⚡ Quick Actions</div>
+              <div class="quick-actions-grid" style="grid-template-columns:repeat(2,1fr);">
+                <a href="add-application.html" class="quick-action">
+                  <div class="quick-action-icon" style="background:var(--KKimary-50);color:var(--KKimary);">➕</div>
+                  <span class="quick-action-label">Add Application</span>
+                </a>
+                <a href="analytics.html" class="quick-action">
+                  <div class="quick-action-icon" style="background:var(--secondary-50);color:var(--secondary);">📊</div>
+                  <span class="quick-action-label">View Analytics</span>
+                </a>
+                <a href="KKofile.html" class="quick-action">
+                  <div class="quick-action-icon" style="background:var(--accent-50);color:var(--accent);">👤</div>
+                  <span class="quick-action-label">Update KKofile</span>
+                </a>
+                <a href="applications.html" class="quick-action">
+                  <div class="quick-action-icon" style="background:var(--warning-50);color:var(--warning);">📋</div>
+                  <span class="quick-action-label">All Applications</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Notifications -->
+            <div class="chart-card">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+                <div class="chart-title">🔔 Notifications</div>
+                <span style="font-size:0.75rem;color:var(--KKimary);font-weight:600;cursor:pointer;">Mark all
+                  read</span>
+              </div>
+              <div>
+                <div class="notification-item">
+                  <div class="notif-icon" style="background:var(--accent-50);font-size:1rem;">🎉</div>
+                  <div class="notif-content">
+                    <div class="notif-title">Interview Scheduled</div>
+                    <div class="notif-desc">Google · Technical Round · Tomorrow 10 AM</div>
+                    <div class="notif-time">2 hours ago</div>
+                  </div>
+                  <div class="notif-dot"></div>
+                </div>
+                <div class="notification-item">
+                  <div class="notif-icon" style="background:var(--KKimary-50);font-size:1rem;">📧</div>
+                  <div class="notif-content">
+                    <div class="notif-title">Application Reviewed</div>
+                    <div class="notif-desc">Amazon has updated your SDE Intern status</div>
+                    <div class="notif-time">5 hours ago</div>
+                  </div>
+                  <div class="notif-dot"></div>
+                </div>
+                <div class="notification-item">
+                  <div class="notif-icon" style="background:var(--warning-50);font-size:1rem;">⏰</div>
+                  <div class="notif-content">
+                    <div class="notif-title">Deadline ApKKoaching</div>
+                    <div class="notif-desc">Microsoft application — 3 days left</div>
+                    <div class="notif-time">1 day ago</div>
+                  </div>
+                  <div class="notif-dot" style="background:var(--warning);"></div>
+                </div>
+                <div class="notification-item">
+                  <div class="notif-icon" style="background:var(--danger-50);font-size:1rem;">❌</div>
+                  <div class="notif-content">
+                    <div class="notif-title">Application Update</div>
+                    <div class="notif-desc">Adobe — Application not moved forward</div>
+                    <div class="notif-time">2 days ago</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upcoming Deadlines -->
+        <div class="chart-card" style="margin-top:24px;">
           <div class="chart-header" style="margin-bottom:16px;">
             <div>
-              <div class="chart-title">Recent Applications</div>
-              <div class="chart-subtitle">Your latest submitted applications</div>
+              <div class="chart-title">⏰ Upcoming Deadlines</div>
+              <div class="chart-subtitle">Don't miss these important dates</div>
             </div>
-            <a href="applications.html" class="btn btn-ghost btn-sm">View All →</a>
+            <a href="applications.html" class="btn btn-ghost btn-sm">View All</a>
           </div>
-          <div class="table-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>Company</th>
-                  <th>Role</th>
-                  <th>Status</th>
-                  <th>Date</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><div class="company-cell"><div class="company-logo color-google">G</div><span>Google</span></div></td>
-                  <td style="color:var(--text-secondary);font-size:0.88rem;">SWE Intern</td>
-                  <td><span class="badge badge-interview">Interview</span></td>
-                  <td style="color:var(--text-muted);font-size:0.85rem;">Dec 10</td>
-                  <td><a href="applications.html" class="btn btn-ghost btn-sm">View</a></td>
-                </tr>
-                <tr>
-                  <td><div class="company-cell"><div class="company-logo color-microsoft">MS</div><span>Microsoft</span></div></td>
-                  <td style="color:var(--text-secondary);font-size:0.88rem;">Frontend Dev</td>
-                  <td><span class="badge badge-applied">Applied</span></td>
-                  <td style="color:var(--text-muted);font-size:0.85rem;">Dec 8</td>
-                  <td><a href="applications.html" class="btn btn-ghost btn-sm">View</a></td>
-                </tr>
-                <tr>
-                  <td><div class="company-cell"><div class="company-logo color-amazon">A</div><span>Amazon</span></div></td>
-                  <td style="color:var(--text-secondary);font-size:0.88rem;">SDE Intern</td>
-                  <td><span class="badge badge-offer">Offer</span></td>
-                  <td style="color:var(--text-muted);font-size:0.85rem;">Nov 25</td>
-                  <td><a href="applications.html" class="btn btn-ghost btn-sm">View</a></td>
-                </tr>
-                <tr>
-                  <td><div class="company-cell"><div class="company-logo color-adobe">Ad</div><span>Adobe</span></div></td>
-                  <td style="color:var(--text-secondary);font-size:0.88rem;">UX Design Intern</td>
-                  <td><span class="badge badge-rejected">Rejected</span></td>
-                  <td style="color:var(--text-muted);font-size:0.85rem;">Nov 18</td>
-                  <td><a href="applications.html" class="btn btn-ghost btn-sm">View</a></td>
-                </tr>
-                <tr>
-                  <td><div class="company-cell"><div class="company-logo color-deloitte">D</div><span>Deloitte</span></div></td>
-                  <td style="color:var(--text-secondary);font-size:0.88rem;">Business Analyst</td>
-                  <td><span class="badge badge-interview">Interview</span></td>
-                  <td style="color:var(--text-muted);font-size:0.85rem;">Dec 1</td>
-                  <td><a href="applications.html" class="btn btn-ghost btn-sm">View</a></td>
-                </tr>
-              </tbody>
-            </table>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;">
+            <div
+              style="padding:16px;border:1.5px solid var(--danger-light);border-radius:var(--radius-md);background:var(--danger-50);">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+                <div style="font-weight:700;font-size:0.9rem;">TCS</div>
+                <span
+                  style="background:var(--danger);color:white;font-size:0.72rem;font-weight:700;padding:2px 8px;border-radius:999px;">2
+                  days left!</span>
+              </div>
+              <div style="font-size:0.82rem;color:var(--text-secondary);">Software Developer</div>
+              <div style="font-size:0.78rem;color:var(--danger);margin-top:6px;font-weight:600;">Deadline: Jan 30, 2025
+              </div>
+            </div>
+            <div
+              style="padding:16px;border:1.5px solid var(--warning-light);border-radius:var(--radius-md);background:var(--warning-50);">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+                <div style="font-weight:700;font-size:0.9rem;">Google</div>
+                <span
+                  style="background:var(--warning);color:white;font-size:0.72rem;font-weight:700;padding:2px 8px;border-radius:999px;">5
+                  days</span>
+              </div>
+              <div style="font-size:0.82rem;color:var(--text-secondary);">SWE Intern</div>
+              <div style="font-size:0.78rem;color:#92400E;margin-top:6px;font-weight:600;">Deadline: Jan 15, 2025</div>
+            </div>
+            <div style="padding:16px;border:1.5px solid var(--gray-200);border-radius:var(--radius-md);">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+                <div style="font-weight:700;font-size:0.9rem;">Microsoft</div>
+                <span
+                  style="background:var(--KKimary);color:white;font-size:0.72rem;font-weight:700;padding:2px 8px;border-radius:999px;">12
+                  days</span>
+              </div>
+              <div style="font-size:0.82rem;color:var(--text-secondary);">Frontend Developer</div>
+              <div style="font-size:0.78rem;color:var(--text-muted);margin-top:6px;font-weight:600;">Deadline: Jan 20,
+                2025</div>
+            </div>
+            <div style="padding:16px;border:1.5px solid var(--gray-200);border-radius:var(--radius-md);">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+                <div style="font-weight:700;font-size:0.9rem;">Infosys</div>
+                <span
+                  style="background:var(--gray-400);color:white;font-size:0.72rem;font-weight:700;padding:2px 8px;border-radius:999px;">27
+                  days</span>
+              </div>
+              <div style="font-size:0.82rem;color:var(--text-secondary);">Technology Analyst</div>
+              <div style="font-size:0.78rem;color:var(--text-muted);margin-top:6px;font-weight:600;">Deadline: Feb 1,
+                2025</div>
+            </div>
           </div>
         </div>
 
-        <!-- Right Column: Quick Actions + Notifications -->
-        <div style="display:flex;flex-direction:column;gap:20px;">
-          <!-- Quick Actions -->
-          <div class="chart-card">
-            <div class="chart-title" style="margin-bottom:16px;">⚡ Quick Actions</div>
-            <div class="quick-actions-grid" style="grid-template-columns:repeat(2,1fr);">
-              <a href="add-application.html" class="quick-action">
-                <div class="quick-action-icon" style="background:var(--primary-50);color:var(--primary);">➕</div>
-                <span class="quick-action-label">Add Application</span>
-              </a>
-              <a href="analytics.html" class="quick-action">
-                <div class="quick-action-icon" style="background:var(--secondary-50);color:var(--secondary);">📊</div>
-                <span class="quick-action-label">View Analytics</span>
-              </a>
-              <a href="profile.html" class="quick-action">
-                <div class="quick-action-icon" style="background:var(--accent-50);color:var(--accent);">👤</div>
-                <span class="quick-action-label">Update Profile</span>
-              </a>
-              <a href="applications.html" class="quick-action">
-                <div class="quick-action-icon" style="background:var(--warning-50);color:var(--warning);">📋</div>
-                <span class="quick-action-label">All Applications</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Notifications -->
-          <div class="chart-card">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
-              <div class="chart-title">🔔 Notifications</div>
-              <span style="font-size:0.75rem;color:var(--primary);font-weight:600;cursor:pointer;">Mark all read</span>
-            </div>
-            <div>
-              <div class="notification-item">
-                <div class="notif-icon" style="background:var(--accent-50);font-size:1rem;">🎉</div>
-                <div class="notif-content">
-                  <div class="notif-title">Interview Scheduled</div>
-                  <div class="notif-desc">Google · Technical Round · Tomorrow 10 AM</div>
-                  <div class="notif-time">2 hours ago</div>
-                </div>
-                <div class="notif-dot"></div>
-              </div>
-              <div class="notification-item">
-                <div class="notif-icon" style="background:var(--primary-50);font-size:1rem;">📧</div>
-                <div class="notif-content">
-                  <div class="notif-title">Application Reviewed</div>
-                  <div class="notif-desc">Amazon has updated your SDE Intern status</div>
-                  <div class="notif-time">5 hours ago</div>
-                </div>
-                <div class="notif-dot"></div>
-              </div>
-              <div class="notification-item">
-                <div class="notif-icon" style="background:var(--warning-50);font-size:1rem;">⏰</div>
-                <div class="notif-content">
-                  <div class="notif-title">Deadline Approaching</div>
-                  <div class="notif-desc">Microsoft application — 3 days left</div>
-                  <div class="notif-time">1 day ago</div>
-                </div>
-                <div class="notif-dot" style="background:var(--warning);"></div>
-              </div>
-              <div class="notification-item">
-                <div class="notif-icon" style="background:var(--danger-50);font-size:1rem;">❌</div>
-                <div class="notif-content">
-                  <div class="notif-title">Application Update</div>
-                  <div class="notif-desc">Adobe — Application not moved forward</div>
-                  <div class="notif-time">2 days ago</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Upcoming Deadlines -->
-      <div class="chart-card" style="margin-top:24px;">
-        <div class="chart-header" style="margin-bottom:16px;">
-          <div>
-            <div class="chart-title">⏰ Upcoming Deadlines</div>
-            <div class="chart-subtitle">Don't miss these important dates</div>
-          </div>
-          <a href="applications.html" class="btn btn-ghost btn-sm">View All</a>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;">
-          <div style="padding:16px;border:1.5px solid var(--danger-light);border-radius:var(--radius-md);background:var(--danger-50);">
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
-              <div style="font-weight:700;font-size:0.9rem;">TCS</div>
-              <span style="background:var(--danger);color:white;font-size:0.72rem;font-weight:700;padding:2px 8px;border-radius:999px;">2 days left!</span>
-            </div>
-            <div style="font-size:0.82rem;color:var(--text-secondary);">Software Developer</div>
-            <div style="font-size:0.78rem;color:var(--danger);margin-top:6px;font-weight:600;">Deadline: Jan 30, 2025</div>
-          </div>
-          <div style="padding:16px;border:1.5px solid var(--warning-light);border-radius:var(--radius-md);background:var(--warning-50);">
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
-              <div style="font-weight:700;font-size:0.9rem;">Google</div>
-              <span style="background:var(--warning);color:white;font-size:0.72rem;font-weight:700;padding:2px 8px;border-radius:999px;">5 days</span>
-            </div>
-            <div style="font-size:0.82rem;color:var(--text-secondary);">SWE Intern</div>
-            <div style="font-size:0.78rem;color:#92400E;margin-top:6px;font-weight:600;">Deadline: Jan 15, 2025</div>
-          </div>
-          <div style="padding:16px;border:1.5px solid var(--gray-200);border-radius:var(--radius-md);">
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
-              <div style="font-weight:700;font-size:0.9rem;">Microsoft</div>
-              <span style="background:var(--primary);color:white;font-size:0.72rem;font-weight:700;padding:2px 8px;border-radius:999px;">12 days</span>
-            </div>
-            <div style="font-size:0.82rem;color:var(--text-secondary);">Frontend Developer</div>
-            <div style="font-size:0.78rem;color:var(--text-muted);margin-top:6px;font-weight:600;">Deadline: Jan 20, 2025</div>
-          </div>
-          <div style="padding:16px;border:1.5px solid var(--gray-200);border-radius:var(--radius-md);">
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
-              <div style="font-weight:700;font-size:0.9rem;">Infosys</div>
-              <span style="background:var(--gray-400);color:white;font-size:0.72rem;font-weight:700;padding:2px 8px;border-radius:999px;">27 days</span>
-            </div>
-            <div style="font-size:0.82rem;color:var(--text-secondary);">Technology Analyst</div>
-            <div style="font-size:0.78rem;color:var(--text-muted);margin-top:6px;font-weight:600;">Deadline: Feb 1, 2025</div>
-          </div>
-        </div>
-      </div>
-
-    </main>
+      </main>
+    </div>
   </div>
-</div>
 
-<!-- Mobile Sidebar Toggle -->
-<button class="mobile-sidebar-toggle" id="sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').classList.toggle('show');">☰</button>
+  <!-- Mobile Sidebar Toggle -->
+  <button class="mobile-sidebar-toggle" id="sidebar-toggle"
+    onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').classList.toggle('show');">☰</button>
 
-<script src="js/script.js"></script>
+  <script src="js/script.js"></script>
 </body>
+
 </html>

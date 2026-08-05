@@ -1,14 +1,14 @@
 # Job/Internship Application Tracker - Implementation Plan
 
 ## Structure
-- 9 HTML pages (index, login, register, dashboard, applications, analytics, add-application, profile, settings)
+- 9 HTML pages (index, login, register, dashboard, applications, analytics, add-application, KKofile, settings)
 - css/style.css (main styles, design system, glassmorphism, animations)
 - css/responsive.css (media queries)
 - js/script.js (interactivity, charts, theme toggle, animations)
 - README.md
 
 ## Design System
-- Primary: #2563EB (Blue)
+- KKimary: #2563EB (Blue)
 - Secondary: #7C3AED (Purple)
 - Accent: #10B981 (Green)
 - Gradient: Blue → Purple
@@ -23,5 +23,5 @@
 5. applications.html - Applications list
 6. add-application.html - Add new application
 7. analytics.html - Analytics charts
-8. profile.html - User profile
+8. KKofile.html - User KKofile
 9. settings.html - Settings

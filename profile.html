@@ -1,423 +1,497 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Your professional profile on JobTracker — skills, education, and resume.">
-  <title>Profile — JobTracker</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
+  <meta name="description" content="Your KKofessional KKofile on JobTracker — skills, education, and resume.">
+  <title>KKofile — JobTracker</title>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
+
 <body>
-<div class="page-loader" id="page-loader"><div class="loader-ring"></div></div>
-
-<nav class="navbar scrolled" id="navbar">
-  <div class="nav-container">
-    <a href="index.html" class="nav-logo">
-      <div class="nav-logo-icon">💼</div>
-      <span>JobTracker</span>
-    </a>
-    <div class="nav-links">
-      <a href="dashboard.html" class="nav-link">Dashboard</a>
-      <a href="applications.html" class="nav-link">Applications</a>
-      <a href="analytics.html" class="nav-link">Analytics</a>
-      <a href="add-application.html" class="nav-link">+ Add New</a>
-    </div>
-    <div class="nav-actions">
-      <button class="theme-toggle">🌙</button>
-      <div class="dropdown">
-        <div class="nav-avatar" data-dropdown="user-menu4">PR</div>
-        <div class="dropdown-menu" id="user-menu4">
-          <a href="profile.html" class="dropdown-item">👤 My Profile</a>
-          <a href="settings.html" class="dropdown-item">⚙️ Settings</a>
-          <div class="dropdown-divider"></div>
-          <a href="index.html" class="dropdown-item danger">🚪 Sign Out</a>
-        </div>
-      </div>
-    </div>
-    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  <div class="page-loader" id="page-loader">
+    <div class="loader-ring"></div>
   </div>
-</nav>
-<div class="mobile-menu" id="mobile-menu">
-  <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
-  <a href="applications.html" class="nav-link">📋 Applications</a>
-  <a href="analytics.html" class="nav-link">📈 Analytics</a>
-  <a href="add-application.html" class="nav-link">➕ Add Application</a>
-  <a href="profile.html" class="nav-link">👤 Profile</a>
-  <a href="settings.html" class="nav-link">⚙️ Settings</a>
-</div>
 
-<div class="page-body">
-  <div class="app-layout">
-    <aside class="sidebar">
-      <div style="padding:8px 12px;margin-bottom:8px;">
-        <div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--gradient-card);border-radius:var(--radius-md);border:1px solid var(--primary-100);">
-          <div style="width:40px;height:40px;border-radius:50%;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">PR</div>
-          <div>
-            <div style="font-weight:700;font-size:0.9rem;">Priya Rajan</div>
-            <div style="font-size:0.75rem;color:var(--text-muted);">IIT Bombay · 2025</div>
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">💼</div>
+        <span>JobTracker</span>
+      </a>
+      <div class="nav-links">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="applications.html" class="nav-link">Applications</a>
+        <a href="analytics.html" class="nav-link">Analytics</a>
+        <a href="add-application.html" class="nav-link">+ Add New</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle">🌙</button>
+        <div class="dropdown">
+          <div class="nav-avatar" data-dropdown="user-menu4">KK</div>
+          <div class="dropdown-menu" id="user-menu4">
+            <a href="KKofile.html" class="dropdown-item">👤 My KKofile</a>
+            <a href="settings.html" class="dropdown-item">⚙️ Settings</a>
+            <div class="dropdown-divider"></div>
+            <a href="index.html" class="dropdown-item danger">🚪 Sign Out</a>
           </div>
         </div>
       </div>
-      <div class="sidebar-label">Main Menu</div>
-      <a href="dashboard.html" class="sidebar-link"><span class="icon">📊</span> Dashboard</a>
-      <a href="applications.html" class="sidebar-link"><span class="icon">📋</span> Applications <span class="sidebar-badge">10</span></a>
-      <a href="add-application.html" class="sidebar-link"><span class="icon">➕</span> Add Application</a>
-      <a href="analytics.html" class="sidebar-link"><span class="icon">📈</span> Analytics</a>
-      <div class="sidebar-label">Account</div>
-      <a href="profile.html" class="sidebar-link active"><span class="icon">👤</span> Profile</a>
-      <a href="settings.html" class="sidebar-link"><span class="icon">⚙️</span> Settings</a>
-    </aside>
-    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+    <a href="applications.html" class="nav-link">📋 Applications</a>
+    <a href="analytics.html" class="nav-link">📈 Analytics</a>
+    <a href="add-application.html" class="nav-link">➕ Add Application</a>
+    <a href="KKofile.html" class="nav-link">👤 KKofile</a>
+    <a href="settings.html" class="nav-link">⚙️ Settings</a>
+  </div>
 
-    <main class="main-content">
-      <div class="page-header-row">
-        <div>
-          <div class="breadcrumb"><a href="dashboard.html">Dashboard</a><span>›</span><span>Profile</span></div>
-          <h1>My Profile</h1>
-          <p>Manage your professional profile and resume information.</p>
-        </div>
-        <button class="btn btn-primary btn-sm" id="edit-profile-btn" onclick="toggleEditProfile()">✏️ Edit Profile</button>
-      </div>
-
-      <!-- Profile Hero -->
-      <div class="profile-hero scroll-reveal">
-        <div class="profile-avatar-wrap">
-          <div class="profile-avatar">PR</div>
-          <div>
-            <div class="profile-name">Priya Rajan</div>
-            <div class="profile-role">Computer Science Student · IIT Bombay</div>
-            <div class="profile-badges">
-              <span class="profile-badge">🎓 Final Year</span>
-              <span class="profile-badge">📍 Mumbai, India</span>
-              <span class="profile-badge">💼 Open to Opportunities</span>
-              <span class="profile-badge">⭐ CGPA 9.2/10</span>
-            </div>
-          </div>
-          <div style="margin-left:auto;position:relative;z-index:1;display:flex;gap:12px;">
-            <button class="btn-hero-outline" onclick="window.JobTracker.Toast.show('LinkedIn opened!', 'info')" style="padding:8px 16px;font-size:0.85rem;">LinkedIn ↗</button>
-            <button class="btn-hero-outline" onclick="window.JobTracker.Toast.show('Resume downloaded!', 'success')" style="padding:8px 16px;font-size:0.85rem;">📄 Resume</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Edit Profile Form (hidden by default) -->
-      <div id="edit-profile-form" style="display:none;margin-bottom:24px;">
-        <div class="chart-card">
-          <div class="chart-title" style="margin-bottom:20px;">✏️ Edit Profile Information</div>
-          <form onsubmit="saveProfile(event)">
-            <div class="add-app-grid" style="margin-bottom:20px;">
-              <div class="form-group">
-                <label class="form-label">Full Name</label>
-                <input type="text" class="form-control" value="Priya Rajan">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-control" value="priya.rajan@iitb.ac.in">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Phone</label>
-                <input type="tel" class="form-control" value="+91 98765 43210">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Location</label>
-                <input type="text" class="form-control" value="Mumbai, India">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Institution</label>
-                <input type="text" class="form-control" value="IIT Bombay">
-              </div>
-              <div class="form-group">
-                <label class="form-label">LinkedIn URL</label>
-                <input type="url" class="form-control" value="https://linkedin.com/in/priya-rajan">
-              </div>
-            </div>
-            <div class="form-group" style="margin-bottom:16px;">
-              <label class="form-label">Professional Summary</label>
-              <textarea class="form-control">Passionate Computer Science student at IIT Bombay with expertise in full-stack development, machine learning, and cloud technologies. Seeking challenging opportunities at top-tier tech companies.</textarea>
-            </div>
-            <div style="display:flex;gap:12px;justify-content:flex-end;">
-              <button type="button" class="btn btn-ghost" onclick="toggleEditProfile()">Cancel</button>
-              <button type="submit" class="btn btn-primary">Save Changes</button>
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <!-- Stats Row -->
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;" class="scroll-reveal">
-        <div style="text-align:center;padding:20px;background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-lg);">
-          <div style="font-size:1.8rem;font-weight:900;color:var(--primary);font-family:var(--font-display);">24</div>
-          <div style="font-size:0.82rem;color:var(--text-muted);">Total Applications</div>
-        </div>
-        <div style="text-align:center;padding:20px;background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-lg);">
-          <div style="font-size:1.8rem;font-weight:900;color:var(--secondary);font-family:var(--font-display);">8</div>
-          <div style="font-size:0.82rem;color:var(--text-muted);">Interviews</div>
-        </div>
-        <div style="text-align:center;padding:20px;background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-lg);">
-          <div style="font-size:1.8rem;font-weight:900;color:var(--accent);font-family:var(--font-display);">2</div>
-          <div style="font-size:0.82rem;color:var(--text-muted);">Offers Received</div>
-        </div>
-        <div style="text-align:center;padding:20px;background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-lg);">
-          <div style="font-size:1.8rem;font-weight:900;color:var(--warning);font-family:var(--font-display);">9.2</div>
-          <div style="font-size:0.82rem;color:var(--text-muted);">CGPA / 10</div>
-        </div>
-      </div>
-
-      <!-- Two Column Layout -->
-      <div class="two-col-grid">
-        <!-- Left Column -->
-        <div style="display:flex;flex-direction:column;gap:20px;">
-
-          <!-- About -->
-          <div class="chart-card scroll-reveal">
-            <div class="chart-header" style="margin-bottom:16px;">
-              <div class="chart-title">👤 About Me</div>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('About updated!', 'success')">Edit</button>
-            </div>
-            <p style="font-size:0.92rem;line-height:1.7;">Passionate Computer Science student at IIT Bombay with a strong foundation in software engineering, machine learning, and cloud technologies. I have interned at startups, participated in hackathons (won 2 national awards), and published research on NLP. Looking for challenging roles at top-tier tech companies where I can make a meaningful impact.</p>
-          </div>
-
-          <!-- Skills -->
-          <div class="chart-card scroll-reveal scroll-reveal-delay-1">
-            <div class="chart-header" style="margin-bottom:16px;">
-              <div class="chart-title">🛠️ Technical Skills</div>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Skills updated!', 'success')">Edit</button>
-            </div>
-            <div style="margin-bottom:16px;">
-              <div style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">Languages</div>
-              <div class="skills-grid">
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">JavaScript</span>
-                <span class="skill-tag">TypeScript</span>
-                <span class="skill-tag">C++</span>
-                <span class="skill-tag">Java</span>
-                <span class="skill-tag">SQL</span>
-              </div>
-            </div>
-            <div style="margin-bottom:16px;">
-              <div style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">Frameworks & Tools</div>
-              <div class="skills-grid">
-                <span class="skill-tag">React.js</span>
-                <span class="skill-tag">Node.js</span>
-                <span class="skill-tag">Django</span>
-                <span class="skill-tag">TensorFlow</span>
-                <span class="skill-tag">Git</span>
-                <span class="skill-tag">Docker</span>
-                <span class="skill-tag">AWS</span>
-                <span class="skill-tag">PostgreSQL</span>
-              </div>
-            </div>
+  <div class="page-body">
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div style="padding:8px 12px;margin-bottom:8px;">
+          <div
+            style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--gradient-card);border-radius:var(--radius-md);border:1px solid var(--KKimary-100);">
+            <div
+              style="width:40px;height:40px;border-radius:50%;background:var(--gradient-KKimary);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">
+              KK</div>
             <div>
-              <div style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">Concepts</div>
-              <div class="skills-grid">
-                <span class="skill-tag">System Design</span>
-                <span class="skill-tag">Machine Learning</span>
-                <span class="skill-tag">Data Structures</span>
-                <span class="skill-tag">Agile</span>
+              <div style="font-weight:700;font-size:0.9rem;">Kowshik Kuncham</div>
+              <div style="font-size:0.75rem;color:var(--text-muted);">Sri Vasavi Engineering College</div>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar-label">Main Menu</div>
+        <a href="dashboard.html" class="sidebar-link"><span class="icon">📊</span> Dashboard</a>
+        <a href="applications.html" class="sidebar-link"><span class="icon">📋</span> Applications <span
+            class="sidebar-badge">10</span></a>
+        <a href="add-application.html" class="sidebar-link"><span class="icon">➕</span> Add Application</a>
+        <a href="analytics.html" class="sidebar-link"><span class="icon">📈</span> Analytics</a>
+        <div class="sidebar-label">Account</div>
+        <a href="KKofile.html" class="sidebar-link active"><span class="icon">👤</span> KKofile</a>
+        <a href="settings.html" class="sidebar-link"><span class="icon">⚙️</span> Settings</a>
+      </aside>
+      <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+      <main class="main-content">
+        <div class="page-header-row">
+          <div>
+            <div class="breadcrumb"><a href="dashboard.html">Dashboard</a><span>›</span><span>KKofile</span></div>
+            <h1>My KKofile</h1>
+            <p>Manage your KKofessional KKofile and resume information.</p>
+          </div>
+          <button class="btn btn-KKimary btn-sm" id="edit-KKofile-btn" onclick="toggleEditKKofile()">✏️ Edit
+            KKofile</button>
+        </div>
+
+        <!-- KKofile Hero -->
+        <div class="KKofile-hero scroll-reveal">
+          <div class="KKofile-avatar-wrap">
+            <div class="KKofile-avatar">KK</div>
+            <div>
+              <div class="KKofile-name">Kowshik Kuncham</div>
+              <div class="KKofile-role">Computer Science Student · IIT Bombay</div>
+              <div class="KKofile-badges">
+                <span class="KKofile-badge">🎓 Final Year</span>
+                <span class="KKofile-badge">📍 Mumbai, India</span>
+                <span class="KKofile-badge">💼 Open to Opportunities</span>
+                <span class="KKofile-badge">⭐ CGPA 9.2/10</span>
+              </div>
+            </div>
+            <div style="margin-left:auto;position:relative;z-index:1;display:flex;gap:12px;">
+              <button class="btn-hero-outline" onclick="window.JobTracker.Toast.show('LinkedIn opened!', 'info')"
+                style="padding:8px 16px;font-size:0.85rem;">LinkedIn ↗</button>
+              <button class="btn-hero-outline" onclick="window.JobTracker.Toast.show('Resume downloaded!', 'success')"
+                style="padding:8px 16px;font-size:0.85rem;">📄 Resume</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Edit KKofile Form (hidden by default) -->
+        <div id="edit-KKofile-form" style="display:none;margin-bottom:24px;">
+          <div class="chart-card">
+            <div class="chart-title" style="margin-bottom:20px;">✏️ Edit KKofile Information</div>
+            <form onsubmit="saveKKofile(event)">
+              <div class="add-app-grid" style="margin-bottom:20px;">
+                <div class="form-group">
+                  <label class="form-label">Full Name</label>
+                  <input type="text" class="form-control" value="Kowshik Kuncham">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email</label>
+                  <input type="email" class="form-control" value="KKiya.rajan@iitb.ac.in">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Phone</label>
+                  <input type="tel" class="form-control" value="+91 98765 43210">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Location</label>
+                  <input type="text" class="form-control" value="Mumbai, India">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Institution</label>
+                  <input type="text" class="form-control" value="IIT Bombay">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">LinkedIn URL</label>
+                  <input type="url" class="form-control" value="https://linkedin.com/in/KKiya-rajan">
+                </div>
+              </div>
+              <div class="form-group" style="margin-bottom:16px;">
+                <label class="form-label">KKofessional Summary</label>
+                <textarea
+                  class="form-control">Passionate Computer Science student at IIT Bombay with expertise in full-stack development, machine learning, and cloud technologies. Seeking challenging opportunities at top-tier tech companies.</textarea>
+              </div>
+              <div style="display:flex;gap:12px;justify-content:flex-end;">
+                <button type="button" class="btn btn-ghost" onclick="toggleEditKKofile()">Cancel</button>
+                <button type="submit" class="btn btn-KKimary">Save Changes</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Stats Row -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;"
+          class="scroll-reveal">
+          <div
+            style="text-align:center;padding:20px;background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-lg);">
+            <div style="font-size:1.8rem;font-weight:900;color:var(--KKimary);font-family:var(--font-display);">24</div>
+            <div style="font-size:0.82rem;color:var(--text-muted);">Total Applications</div>
+          </div>
+          <div
+            style="text-align:center;padding:20px;background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-lg);">
+            <div style="font-size:1.8rem;font-weight:900;color:var(--secondary);font-family:var(--font-display);">8
+            </div>
+            <div style="font-size:0.82rem;color:var(--text-muted);">Interviews</div>
+          </div>
+          <div
+            style="text-align:center;padding:20px;background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-lg);">
+            <div style="font-size:1.8rem;font-weight:900;color:var(--accent);font-family:var(--font-display);">2</div>
+            <div style="font-size:0.82rem;color:var(--text-muted);">Offers Received</div>
+          </div>
+          <div
+            style="text-align:center;padding:20px;background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-lg);">
+            <div style="font-size:1.8rem;font-weight:900;color:var(--warning);font-family:var(--font-display);">9.2
+            </div>
+            <div style="font-size:0.82rem;color:var(--text-muted);">CGPA / 10</div>
+          </div>
+        </div>
+
+        <!-- Two Column Layout -->
+        <div class="two-col-grid">
+          <!-- Left Column -->
+          <div style="display:flex;flex-direction:column;gap:20px;">
+
+            <!-- About -->
+            <div class="chart-card scroll-reveal">
+              <div class="chart-header" style="margin-bottom:16px;">
+                <div class="chart-title">👤 About Me</div>
+                <button class="btn btn-ghost btn-sm"
+                  onclick="window.JobTracker.Toast.show('About updated!', 'success')">Edit</button>
+              </div>
+              <p style="font-size:0.92rem;line-height:1.7;">Passionate Computer Science student at IIT Bombay with a
+                strong foundation in software engineering, machine learning, and cloud technologies. I have interned at
+                startups, participated in hackathons (won 2 national awards), and published research on NLP. Looking for
+                challenging roles at top-tier tech companies where I can make a meaningful impact.</p>
+            </div>
+
+            <!-- Skills -->
+            <div class="chart-card scroll-reveal scroll-reveal-delay-1">
+              <div class="chart-header" style="margin-bottom:16px;">
+                <div class="chart-title">🛠️ Technical Skills</div>
+                <button class="btn btn-ghost btn-sm"
+                  onclick="window.JobTracker.Toast.show('Skills updated!', 'success')">Edit</button>
+              </div>
+              <div style="margin-bottom:16px;">
+                <div
+                  style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">
+                  Languages</div>
+                <div class="skills-grid">
+                  <span class="skill-tag">Python</span>
+                  <span class="skill-tag">JavaScript</span>
+                  <span class="skill-tag">TypeScript</span>
+                  <span class="skill-tag">C++</span>
+                  <span class="skill-tag">Java</span>
+                  <span class="skill-tag">SQL</span>
+                </div>
+              </div>
+              <div style="margin-bottom:16px;">
+                <div
+                  style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">
+                  Frameworks & Tools</div>
+                <div class="skills-grid">
+                  <span class="skill-tag">React.js</span>
+                  <span class="skill-tag">Node.js</span>
+                  <span class="skill-tag">Django</span>
+                  <span class="skill-tag">TensorFlow</span>
+                  <span class="skill-tag">Git</span>
+                  <span class="skill-tag">Docker</span>
+                  <span class="skill-tag">AWS</span>
+                  <span class="skill-tag">PostgreSQL</span>
+                </div>
+              </div>
+              <div>
+                <div
+                  style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">
+                  Concepts</div>
+                <div class="skills-grid">
+                  <span class="skill-tag">System Design</span>
+                  <span class="skill-tag">Machine Learning</span>
+                  <span class="skill-tag">Data Structures</span>
+                  <span class="skill-tag">Agile</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="chart-card scroll-reveal scroll-reveal-delay-2">
+              <div class="chart-header" style="margin-bottom:16px;">
+                <div class="chart-title">📬 Contact Information</div>
+                <button class="btn btn-ghost btn-sm"
+                  onclick="window.JobTracker.Toast.show('Saved!', 'success')">Edit</button>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:14px;">
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <div
+                    style="width:36px;height:36px;border-radius:8px;background:var(--KKimary-50);display:flex;align-items:center;justify-content:center;font-size:1rem;">
+                    📧</div>
+                  <div>
+                    <div style="font-size:0.78rem;color:var(--text-muted);">Email</div>
+                    <div style="font-size:0.9rem;font-weight:600;">KKiya.rajan@iitb.ac.in</div>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <div
+                    style="width:36px;height:36px;border-radius:8px;background:var(--accent-50);display:flex;align-items:center;justify-content:center;font-size:1rem;">
+                    📱</div>
+                  <div>
+                    <div style="font-size:0.78rem;color:var(--text-muted);">Phone</div>
+                    <div style="font-size:0.9rem;font-weight:600;">+91 98765 43210</div>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <div
+                    style="width:36px;height:36px;border-radius:8px;background:var(--secondary-50);display:flex;align-items:center;justify-content:center;font-size:1rem;">
+                    💼</div>
+                  <div>
+                    <div style="font-size:0.78rem;color:var(--text-muted);">LinkedIn</div>
+                    <div style="font-size:0.9rem;font-weight:600;color:var(--KKimary);">linkedin.com/in/KKiya-rajan
+                    </div>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <div
+                    style="width:36px;height:36px;border-radius:8px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:1rem;">
+                    ⌥</div>
+                  <div>
+                    <div style="font-size:0.78rem;color:var(--text-muted);">GitHub</div>
+                    <div style="font-size:0.9rem;font-weight:600;color:var(--KKimary);">github.com/KKiya-rajan</div>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <div
+                    style="width:36px;height:36px;border-radius:8px;background:var(--warning-50);display:flex;align-items:center;justify-content:center;font-size:1rem;">
+                    📍</div>
+                  <div>
+                    <div style="font-size:0.78rem;color:var(--text-muted);">Location</div>
+                    <div style="font-size:0.9rem;font-weight:600;">Mumbai, Maharashtra, India</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- Contact Info -->
-          <div class="chart-card scroll-reveal scroll-reveal-delay-2">
-            <div class="chart-header" style="margin-bottom:16px;">
-              <div class="chart-title">📬 Contact Information</div>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Saved!', 'success')">Edit</button>
+          <!-- Right Column -->
+          <div style="display:flex;flex-direction:column;gap:20px;">
+
+            <!-- Education -->
+            <div class="chart-card scroll-reveal">
+              <div class="chart-header" style="margin-bottom:16px;">
+                <div class="chart-title">🎓 Education</div>
+                <button class="btn btn-ghost btn-sm"
+                  onclick="window.JobTracker.Toast.show('Education updated!', 'success')">Edit</button>
+              </div>
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div
+                    style="background:var(--KKimary-50);border:1px solid var(--KKimary-100);border-radius:var(--radius-md);padding:16px;">
+                    <div class="timeline-date">2021 – 2025 (Expected)</div>
+                    <div class="timeline-title">B.Tech in Computer Science & Engineering</div>
+                    <div class="timeline-desc">Indian Institute of Technology (IIT) Bombay</div>
+                    <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">
+                      <span
+                        style="background:var(--KKimary);color:white;font-size:0.72rem;font-weight:700;padding:2px 10px;border-radius:999px;">CGPA:
+                        9.2/10</span>
+                      <span
+                        style="background:var(--accent-50);color:var(--accent-dark);font-size:0.72rem;font-weight:600;padding:2px 10px;border-radius:999px;">Dean's
+                        List</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot" style="background:var(--secondary);"></div>
+                  <div
+                    style="background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;">
+                    <div class="timeline-date">2019 – 2021</div>
+                    <div class="timeline-title">Class XII — Science (PCM)</div>
+                    <div class="timeline-desc">Delhi Public School, Mumbai · 97.4%</div>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot" style="background:var(--accent);"></div>
+                  <div
+                    style="background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;">
+                    <div class="timeline-date">2019</div>
+                    <div class="timeline-title">Class X — CBSE</div>
+                    <div class="timeline-desc">Delhi Public School, Mumbai · 98.2%</div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div style="display:flex;flex-direction:column;gap:14px;">
-              <div style="display:flex;align-items:center;gap:12px;">
-                <div style="width:36px;height:36px;border-radius:8px;background:var(--primary-50);display:flex;align-items:center;justify-content:center;font-size:1rem;">📧</div>
-                <div>
-                  <div style="font-size:0.78rem;color:var(--text-muted);">Email</div>
-                  <div style="font-size:0.9rem;font-weight:600;">priya.rajan@iitb.ac.in</div>
+
+            <!-- Experience -->
+            <div class="chart-card scroll-reveal scroll-reveal-delay-1">
+              <div class="chart-header" style="margin-bottom:16px;">
+                <div class="chart-title">💼 Work Experience</div>
+                <button class="btn btn-ghost btn-sm"
+                  onclick="window.JobTracker.Toast.show('Experience updated!', 'success')">Edit</button>
+              </div>
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div
+                    style="background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;">
+                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+                      <div
+                        style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#4285F4,#34A853);display:flex;align-items:center;justify-content:center;color:white;font-size:0.75rem;font-weight:700;">
+                        G</div>
+                      <div>
+                        <div style="font-weight:700;font-size:0.92rem;">Google · Software Engineering Intern</div>
+                        <div class="timeline-date" style="margin-top:0;">May 2024 – Jul 2024 (Remote)</div>
+                      </div>
+                    </div>
+                    <p style="font-size:0.83rem;">Developed a scalable microservices component using Go and Kubernetes,
+                      reducing API latency by 40%. Collaborated with cross-functional teams in an Agile environment.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot" style="background:var(--secondary);"></div>
+                  <div
+                    style="background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;">
+                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+                      <div
+                        style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#FF6B35,#F7C948);display:flex;align-items:center;justify-content:center;color:white;font-size:0.75rem;font-weight:700;">
+                        SU</div>
+                      <div>
+                        <div style="font-weight:700;font-size:0.92rem;">TechStartup · Full-Stack Developer Intern</div>
+                        <div class="timeline-date" style="margin-top:0;">Nov 2023 – Jan 2024</div>
+                      </div>
+                    </div>
+                    <p style="font-size:0.83rem;">Built React-based dashboard for 10K+ users. Integrated payment APIs
+                      and real-time notifications using WebSockets. ImKKoved load time by 60%.</p>
+                  </div>
                 </div>
               </div>
-              <div style="display:flex;align-items:center;gap:12px;">
-                <div style="width:36px;height:36px;border-radius:8px;background:var(--accent-50);display:flex;align-items:center;justify-content:center;font-size:1rem;">📱</div>
-                <div>
-                  <div style="font-size:0.78rem;color:var(--text-muted);">Phone</div>
-                  <div style="font-size:0.9rem;font-weight:600;">+91 98765 43210</div>
+            </div>
+
+            <!-- Resume KKeview -->
+            <div class="chart-card scroll-reveal scroll-reveal-delay-2">
+              <div class="chart-header" style="margin-bottom:16px;">
+                <div class="chart-title">📄 Resume</div>
+                <button class="btn btn-KKimary btn-sm"
+                  onclick="window.JobTracker.Toast.show('Resume downloaded!', 'success')">⬇️ Download</button>
+              </div>
+              <div
+                style="border:2px dashed var(--KKimary-100);border-radius:var(--radius-md);padding:32px;text-align:center;background:var(--KKimary-50);">
+                <div style="font-size:3rem;margin-bottom:12px;">📄</div>
+                <div style="font-weight:700;font-size:0.95rem;margin-bottom:4px;">KKiya_Rajan_Resume_2025.pdf</div>
+                <div style="font-size:0.82rem;color:var(--text-muted);margin-bottom:16px;">Last updated: December 15,
+                  2024 · 248 KB</div>
+                <div style="display:flex;gap:8px;justify-content:center;">
+                  <button class="btn btn-KKimary btn-sm"
+                    onclick="window.JobTracker.Toast.show('Resume downloaded!', 'success')">Download</button>
+                  <button class="btn btn-ghost btn-sm"
+                    onclick="window.JobTracker.Toast.show('Opening KKeview...', 'info')">KKeview</button>
+                  <button class="btn btn-ghost btn-sm"
+                    onclick="window.JobTracker.Toast.show('File input opened', 'info')">Replace</button>
                 </div>
               </div>
-              <div style="display:flex;align-items:center;gap:12px;">
-                <div style="width:36px;height:36px;border-radius:8px;background:var(--secondary-50);display:flex;align-items:center;justify-content:center;font-size:1rem;">💼</div>
-                <div>
-                  <div style="font-size:0.78rem;color:var(--text-muted);">LinkedIn</div>
-                  <div style="font-size:0.9rem;font-weight:600;color:var(--primary);">linkedin.com/in/priya-rajan</div>
-                </div>
+            </div>
+
+            <!-- Achievements -->
+            <div class="chart-card scroll-reveal scroll-reveal-delay-3">
+              <div class="chart-header" style="margin-bottom:16px;">
+                <div class="chart-title">🏆 Achievements</div>
               </div>
-              <div style="display:flex;align-items:center;gap:12px;">
-                <div style="width:36px;height:36px;border-radius:8px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:1rem;">⌥</div>
-                <div>
-                  <div style="font-size:0.78rem;color:var(--text-muted);">GitHub</div>
-                  <div style="font-size:0.9rem;font-weight:600;color:var(--primary);">github.com/priya-rajan</div>
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <div
+                  style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--warning-50);border-radius:var(--radius-sm);">
+                  <span style="font-size:1.4rem;">🥇</span>
+                  <div>
+                    <div style="font-size:0.9rem;font-weight:700;">Smart India Hackathon 2024 — Winner</div>
+                    <div style="font-size:0.8rem;color:var(--text-muted);">National-level hackathon · 10,000+
+                      participants</div>
+                  </div>
                 </div>
-              </div>
-              <div style="display:flex;align-items:center;gap:12px;">
-                <div style="width:36px;height:36px;border-radius:8px;background:var(--warning-50);display:flex;align-items:center;justify-content:center;font-size:1rem;">📍</div>
-                <div>
-                  <div style="font-size:0.78rem;color:var(--text-muted);">Location</div>
-                  <div style="font-size:0.9rem;font-weight:600;">Mumbai, Maharashtra, India</div>
+                <div
+                  style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--KKimary-50);border-radius:var(--radius-sm);">
+                  <span style="font-size:1.4rem;">📚</span>
+                  <div>
+                    <div style="font-size:0.9rem;font-weight:700;">Research Paper Published</div>
+                    <div style="font-size:0.8rem;color:var(--text-muted);">NLP for Code Review Automation · ACL 2024
+                    </div>
+                  </div>
+                </div>
+                <div
+                  style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--accent-50);border-radius:var(--radius-sm);">
+                  <span style="font-size:1.4rem;">⭐</span>
+                  <div>
+                    <div style="font-size:0.9rem;font-weight:700;">JEE Advanced AIR 847</div>
+                    <div style="font-size:0.8rem;color:var(--text-muted);">Top 0.1% of 1.5 million candidates</div>
+                  </div>
+                </div>
+                <div
+                  style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--secondary-50);border-radius:var(--radius-sm);">
+                  <span style="font-size:1.4rem;">🎖️</span>
+                  <div>
+                    <div style="font-size:0.9rem;font-weight:700;">Google Girl Hackathon 2023 — Finalist</div>
+                    <div style="font-size:0.8rem;color:var(--text-muted);">Top 50 from 5,000+ teams across India</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- Right Column -->
-        <div style="display:flex;flex-direction:column;gap:20px;">
-
-          <!-- Education -->
-          <div class="chart-card scroll-reveal">
-            <div class="chart-header" style="margin-bottom:16px;">
-              <div class="chart-title">🎓 Education</div>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Education updated!', 'success')">Edit</button>
-            </div>
-            <div class="timeline">
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div style="background:var(--primary-50);border:1px solid var(--primary-100);border-radius:var(--radius-md);padding:16px;">
-                  <div class="timeline-date">2021 – 2025 (Expected)</div>
-                  <div class="timeline-title">B.Tech in Computer Science & Engineering</div>
-                  <div class="timeline-desc">Indian Institute of Technology (IIT) Bombay</div>
-                  <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">
-                    <span style="background:var(--primary);color:white;font-size:0.72rem;font-weight:700;padding:2px 10px;border-radius:999px;">CGPA: 9.2/10</span>
-                    <span style="background:var(--accent-50);color:var(--accent-dark);font-size:0.72rem;font-weight:600;padding:2px 10px;border-radius:999px;">Dean's List</span>
-                  </div>
-                </div>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-dot" style="background:var(--secondary);"></div>
-                <div style="background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;">
-                  <div class="timeline-date">2019 – 2021</div>
-                  <div class="timeline-title">Class XII — Science (PCM)</div>
-                  <div class="timeline-desc">Delhi Public School, Mumbai · 97.4%</div>
-                </div>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-dot" style="background:var(--accent);"></div>
-                <div style="background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;">
-                  <div class="timeline-date">2019</div>
-                  <div class="timeline-title">Class X — CBSE</div>
-                  <div class="timeline-desc">Delhi Public School, Mumbai · 98.2%</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Experience -->
-          <div class="chart-card scroll-reveal scroll-reveal-delay-1">
-            <div class="chart-header" style="margin-bottom:16px;">
-              <div class="chart-title">💼 Work Experience</div>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Experience updated!', 'success')">Edit</button>
-            </div>
-            <div class="timeline">
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div style="background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;">
-                  <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-                    <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#4285F4,#34A853);display:flex;align-items:center;justify-content:center;color:white;font-size:0.75rem;font-weight:700;">G</div>
-                    <div>
-                      <div style="font-weight:700;font-size:0.92rem;">Google · Software Engineering Intern</div>
-                      <div class="timeline-date" style="margin-top:0;">May 2024 – Jul 2024 (Remote)</div>
-                    </div>
-                  </div>
-                  <p style="font-size:0.83rem;">Developed a scalable microservices component using Go and Kubernetes, reducing API latency by 40%. Collaborated with cross-functional teams in an Agile environment.</p>
-                </div>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-dot" style="background:var(--secondary);"></div>
-                <div style="background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;">
-                  <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-                    <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#FF6B35,#F7C948);display:flex;align-items:center;justify-content:center;color:white;font-size:0.75rem;font-weight:700;">SU</div>
-                    <div>
-                      <div style="font-weight:700;font-size:0.92rem;">TechStartup · Full-Stack Developer Intern</div>
-                      <div class="timeline-date" style="margin-top:0;">Nov 2023 – Jan 2024</div>
-                    </div>
-                  </div>
-                  <p style="font-size:0.83rem;">Built React-based dashboard for 10K+ users. Integrated payment APIs and real-time notifications using WebSockets. Improved load time by 60%.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Resume Preview -->
-          <div class="chart-card scroll-reveal scroll-reveal-delay-2">
-            <div class="chart-header" style="margin-bottom:16px;">
-              <div class="chart-title">📄 Resume</div>
-              <button class="btn btn-primary btn-sm" onclick="window.JobTracker.Toast.show('Resume downloaded!', 'success')">⬇️ Download</button>
-            </div>
-            <div style="border:2px dashed var(--primary-100);border-radius:var(--radius-md);padding:32px;text-align:center;background:var(--primary-50);">
-              <div style="font-size:3rem;margin-bottom:12px;">📄</div>
-              <div style="font-weight:700;font-size:0.95rem;margin-bottom:4px;">Priya_Rajan_Resume_2025.pdf</div>
-              <div style="font-size:0.82rem;color:var(--text-muted);margin-bottom:16px;">Last updated: December 15, 2024 · 248 KB</div>
-              <div style="display:flex;gap:8px;justify-content:center;">
-                <button class="btn btn-primary btn-sm" onclick="window.JobTracker.Toast.show('Resume downloaded!', 'success')">Download</button>
-                <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Opening preview...', 'info')">Preview</button>
-                <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('File input opened', 'info')">Replace</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Achievements -->
-          <div class="chart-card scroll-reveal scroll-reveal-delay-3">
-            <div class="chart-header" style="margin-bottom:16px;">
-              <div class="chart-title">🏆 Achievements</div>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:10px;">
-              <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--warning-50);border-radius:var(--radius-sm);">
-                <span style="font-size:1.4rem;">🥇</span>
-                <div>
-                  <div style="font-size:0.9rem;font-weight:700;">Smart India Hackathon 2024 — Winner</div>
-                  <div style="font-size:0.8rem;color:var(--text-muted);">National-level hackathon · 10,000+ participants</div>
-                </div>
-              </div>
-              <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--primary-50);border-radius:var(--radius-sm);">
-                <span style="font-size:1.4rem;">📚</span>
-                <div>
-                  <div style="font-size:0.9rem;font-weight:700;">Research Paper Published</div>
-                  <div style="font-size:0.8rem;color:var(--text-muted);">NLP for Code Review Automation · ACL 2024</div>
-                </div>
-              </div>
-              <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--accent-50);border-radius:var(--radius-sm);">
-                <span style="font-size:1.4rem;">⭐</span>
-                <div>
-                  <div style="font-size:0.9rem;font-weight:700;">JEE Advanced AIR 847</div>
-                  <div style="font-size:0.8rem;color:var(--text-muted);">Top 0.1% of 1.5 million candidates</div>
-                </div>
-              </div>
-              <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--secondary-50);border-radius:var(--radius-sm);">
-                <span style="font-size:1.4rem;">🎖️</span>
-                <div>
-                  <div style="font-size:0.9rem;font-weight:700;">Google Girl Hackathon 2023 — Finalist</div>
-                  <div style="font-size:0.8rem;color:var(--text-muted);">Top 50 from 5,000+ teams across India</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
+      </main>
+    </div>
   </div>
-</div>
 
-<button class="mobile-sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').classList.toggle('show');">☰</button>
-<script src="js/script.js"></script>
-<script>
-function toggleEditProfile() {
-  const form = document.getElementById('edit-profile-form');
-  const btn = document.getElementById('edit-profile-btn');
-  const isVisible = form.style.display !== 'none';
-  form.style.display = isVisible ? 'none' : 'block';
-  btn.textContent = isVisible ? '✏️ Edit Profile' : '✕ Cancel';
-}
-function saveProfile(e) {
-  e.preventDefault();
-  window.JobTracker.Toast.show('Profile saved successfully!', 'success');
-  toggleEditProfile();
-}
-</script>
+  <button class="mobile-sidebar-toggle"
+    onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').classList.toggle('show');">☰</button>
+  <script src="js/script.js"></script>
+  <script>
+    function toggleEditKKofile() {
+      const form = document.getElementById('edit-KKofile-form');
+      const btn = document.getElementById('edit-KKofile-btn');
+      const isVisible = form.style.display !== 'none';
+      form.style.display = isVisible ? 'none' : 'block';
+      btn.textContent = isVisible ? '✏️ Edit KKofile' : '✕ Cancel';
+    }
+    function saveKKofile(e) {
+      e.KKeventDefault();
+      window.JobTracker.Toast.show('KKofile saved successfully!', 'success');
+      toggleEditKKofile();
+    }
+  </script>
 </body>
+
 </html>

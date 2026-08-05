@@ -1,537 +1,595 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Account settings and preferences for JobTracker.">
+  <meta name="description" content="Account settings and KKeferences for JobTracker.">
   <title>Settings — JobTracker</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
+
 <body>
-<div class="page-loader" id="page-loader"><div class="loader-ring"></div></div>
-
-<nav class="navbar scrolled" id="navbar">
-  <div class="nav-container">
-    <a href="index.html" class="nav-logo">
-      <div class="nav-logo-icon">💼</div>
-      <span>JobTracker</span>
-    </a>
-    <div class="nav-links">
-      <a href="dashboard.html" class="nav-link">Dashboard</a>
-      <a href="applications.html" class="nav-link">Applications</a>
-      <a href="analytics.html" class="nav-link">Analytics</a>
-      <a href="add-application.html" class="nav-link">+ Add New</a>
-    </div>
-    <div class="nav-actions">
-      <button class="theme-toggle">🌙</button>
-      <div class="nav-avatar" style="cursor:default;">PR</div>
-    </div>
-    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  <div class="page-loader" id="page-loader">
+    <div class="loader-ring"></div>
   </div>
-</nav>
-<div class="mobile-menu" id="mobile-menu">
-  <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
-  <a href="applications.html" class="nav-link">📋 Applications</a>
-  <a href="analytics.html" class="nav-link">📈 Analytics</a>
-  <a href="add-application.html" class="nav-link">➕ Add Application</a>
-  <a href="profile.html" class="nav-link">👤 Profile</a>
-  <a href="settings.html" class="nav-link">⚙️ Settings</a>
-</div>
 
-<div class="page-body">
-  <div class="app-layout">
-    <aside class="sidebar">
-      <div style="padding:8px 12px;margin-bottom:8px;">
-        <div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--gradient-card);border-radius:var(--radius-md);border:1px solid var(--primary-100);">
-          <div style="width:40px;height:40px;border-radius:50%;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">PR</div>
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">💼</div>
+        <span>JobTracker</span>
+      </a>
+      <div class="nav-links">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="applications.html" class="nav-link">Applications</a>
+        <a href="analytics.html" class="nav-link">Analytics</a>
+        <a href="add-application.html" class="nav-link">+ Add New</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle">🌙</button>
+        <div class="nav-avatar" style="cursor:default;">KK</div>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+    <a href="applications.html" class="nav-link">📋 Applications</a>
+    <a href="analytics.html" class="nav-link">📈 Analytics</a>
+    <a href="add-application.html" class="nav-link">➕ Add Application</a>
+    <a href="KKofile.html" class="nav-link">👤 KKofile</a>
+    <a href="settings.html" class="nav-link">⚙️ Settings</a>
+  </div>
+
+  <div class="page-body">
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div style="padding:8px 12px;margin-bottom:8px;">
+          <div
+            style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--gradient-card);border-radius:var(--radius-md);border:1px solid var(--KKimary-100);">
+            <div
+              style="width:40px;height:40px;border-radius:50%;background:var(--gradient-KKimary);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">
+              KK</div>
+            <div>
+              <div style="font-weight:700;font-size:0.9rem;">Kowshik Kuncham</div>
+              <div style="font-size:0.75rem;color:var(--text-muted);">Sri Vasavi Engineering College</div>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar-label">Main Menu</div>
+        <a href="dashboard.html" class="sidebar-link"><span class="icon">📊</span> Dashboard</a>
+        <a href="applications.html" class="sidebar-link"><span class="icon">📋</span> Applications <span
+            class="sidebar-badge">10</span></a>
+        <a href="add-application.html" class="sidebar-link"><span class="icon">➕</span> Add Application</a>
+        <a href="analytics.html" class="sidebar-link"><span class="icon">📈</span> Analytics</a>
+        <div class="sidebar-label">Account</div>
+        <a href="KKofile.html" class="sidebar-link"><span class="icon">👤</span> KKofile</a>
+        <a href="settings.html" class="sidebar-link active"><span class="icon">⚙️</span> Settings</a>
+      </aside>
+      <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+      <main class="main-content">
+        <div class="page-header-row">
           <div>
-            <div style="font-weight:700;font-size:0.9rem;">Priya Rajan</div>
-            <div style="font-size:0.75rem;color:var(--text-muted);">IIT Bombay · 2025</div>
-          </div>
-        </div>
-      </div>
-      <div class="sidebar-label">Main Menu</div>
-      <a href="dashboard.html" class="sidebar-link"><span class="icon">📊</span> Dashboard</a>
-      <a href="applications.html" class="sidebar-link"><span class="icon">📋</span> Applications <span class="sidebar-badge">10</span></a>
-      <a href="add-application.html" class="sidebar-link"><span class="icon">➕</span> Add Application</a>
-      <a href="analytics.html" class="sidebar-link"><span class="icon">📈</span> Analytics</a>
-      <div class="sidebar-label">Account</div>
-      <a href="profile.html" class="sidebar-link"><span class="icon">👤</span> Profile</a>
-      <a href="settings.html" class="sidebar-link active"><span class="icon">⚙️</span> Settings</a>
-    </aside>
-    <div class="sidebar-overlay" id="sidebar-overlay"></div>
-
-    <main class="main-content">
-      <div class="page-header-row">
-        <div>
-          <div class="breadcrumb"><a href="dashboard.html">Dashboard</a><span>›</span><span>Settings</span></div>
-          <h1>Settings</h1>
-          <p>Manage your account preferences, notifications, and privacy.</p>
-        </div>
-      </div>
-
-      <div class="settings-layout">
-        <!-- Settings Nav -->
-        <div class="settings-nav" id="settings-nav">
-          <div class="settings-nav-item active" data-target="appearance-section" onclick="switchSection(this)">
-            <span>🎨</span> Appearance
-          </div>
-          <div class="settings-nav-item" data-target="notifications-section" onclick="switchSection(this)">
-            <span>🔔</span> Notifications
-          </div>
-          <div class="settings-nav-item" data-target="privacy-section" onclick="switchSection(this)">
-            <span>🔒</span> Privacy
-          </div>
-          <div class="settings-nav-item" data-target="security-section" onclick="switchSection(this)">
-            <span>🛡️</span> Security
-          </div>
-          <div class="settings-nav-item" data-target="preferences-section" onclick="switchSection(this)">
-            <span>⚙️</span> Preferences
-          </div>
-          <div class="settings-nav-item" data-target="account-section" onclick="switchSection(this)">
-            <span>👤</span> Account
+            <div class="breadcrumb"><a href="dashboard.html">Dashboard</a><span>›</span><span>Settings</span></div>
+            <h1>Settings</h1>
+            <p>Manage your account KKeferences, notifications, and KKivacy.</p>
           </div>
         </div>
 
-        <!-- Settings Content -->
-        <div>
-
-          <!-- APPEARANCE -->
-          <div class="settings-section" id="appearance-section">
-            <h3>🎨 Appearance</h3>
-            <p>Customize how JobTracker looks for you.</p>
-
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Dark Mode</h5>
-                <p>Switch between light and dark interface</p>
-              </div>
-              <label class="toggle-switch">
-                <input type="checkbox" id="theme-setting-toggle" onchange="window.JobTracker.ThemeManager.toggle()">
-                <div class="toggle-track"></div>
-                <span class="toggle-label" id="theme-label">Light Mode</span>
-              </label>
+        <div class="settings-layout">
+          <!-- Settings Nav -->
+          <div class="settings-nav" id="settings-nav">
+            <div class="settings-nav-item active" data-target="appearance-section" onclick="switchSection(this)">
+              <span>🎨</span> Appearance
             </div>
-
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Color Accent</h5>
-                <p>Choose your primary color theme</p>
-              </div>
-              <div style="display:flex;gap:8px;">
-                <div onclick="selectColor('#2563EB',this)" style="width:28px;height:28px;border-radius:50%;background:#2563EB;cursor:pointer;border:3px solid white;box-shadow:0 0 0 2px #2563EB;transition:transform 0.2s;" title="Blue (Default)" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform=''"></div>
-                <div onclick="selectColor('#7C3AED',this)" style="width:28px;height:28px;border-radius:50%;background:#7C3AED;cursor:pointer;border:3px solid white;box-shadow:0 0 0 2px transparent;transition:transform 0.2s;" title="Purple" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform=''"></div>
-                <div onclick="selectColor('#10B981',this)" style="width:28px;height:28px;border-radius:50%;background:#10B981;cursor:pointer;border:3px solid white;box-shadow:0 0 0 2px transparent;transition:transform 0.2s;" title="Green" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform=''"></div>
-                <div onclick="selectColor('#EF4444',this)" style="width:28px;height:28px;border-radius:50%;background:#EF4444;cursor:pointer;border:3px solid white;box-shadow:0 0 0 2px transparent;transition:transform 0.2s;" title="Red" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform=''"></div>
-                <div onclick="selectColor('#F59E0B',this)" style="width:28px;height:28px;border-radius:50%;background:#F59E0B;cursor:pointer;border:3px solid white;box-shadow:0 0 0 2px transparent;transition:transform 0.2s;" title="Amber" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform=''"></div>
-              </div>
+            <div class="settings-nav-item" data-target="notifications-section" onclick="switchSection(this)">
+              <span>🔔</span> Notifications
             </div>
-
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Sidebar Position</h5>
-                <p>Choose left or right sidebar layout</p>
-              </div>
-              <select class="filter-select" onchange="window.JobTracker.Toast.show('Layout updated', 'info')">
-                <option>Left (Default)</option>
-                <option>Right</option>
-              </select>
+            <div class="settings-nav-item" data-target="KKivacy-section" onclick="switchSection(this)">
+              <span>🔒</span> KKivacy
             </div>
-
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Compact Mode</h5>
-                <p>Reduce spacing for a denser interface</p>
-              </div>
-              <label class="toggle-switch">
-                <input type="checkbox">
-                <div class="toggle-track"></div>
-              </label>
+            <div class="settings-nav-item" data-target="security-section" onclick="switchSection(this)">
+              <span>🛡️</span> Security
             </div>
-
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Animations</h5>
-                <p>Enable smooth transitions and micro-interactions</p>
-              </div>
-              <label class="toggle-switch">
-                <input type="checkbox" checked>
-                <div class="toggle-track"></div>
-              </label>
+            <div class="settings-nav-item" data-target="KKeferences-section" onclick="switchSection(this)">
+              <span>⚙️</span> KKeferences
+            </div>
+            <div class="settings-nav-item" data-target="account-section" onclick="switchSection(this)">
+              <span>👤</span> Account
             </div>
           </div>
 
-          <!-- NOTIFICATIONS -->
-          <div class="settings-section" id="notifications-section" style="display:none;">
-            <h3>🔔 Notifications</h3>
-            <p>Control when and how you receive notifications.</p>
+          <!-- Settings Content -->
+          <div>
 
-            <div style="font-size:0.82rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;">Email Notifications</div>
+            <!-- APPEARANCE -->
+            <div class="settings-section" id="appearance-section">
+              <h3>🎨 Appearance</h3>
+              <p>Customize how JobTracker looks for you.</p>
 
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Application Deadlines</h5>
-                <p>Get reminders 3 days before deadlines</p>
-              </div>
-              <label class="toggle-switch">
-                <input type="checkbox" class="notification-toggle" checked>
-                <div class="toggle-track"></div>
-              </label>
-            </div>
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Interview Reminders</h5>
-                <p>Reminder 24 hours before scheduled interviews</p>
-              </div>
-              <label class="toggle-switch">
-                <input type="checkbox" class="notification-toggle" checked>
-                <div class="toggle-track"></div>
-              </label>
-            </div>
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Status Updates</h5>
-                <p>When you manually update an application status</p>
-              </div>
-              <label class="toggle-switch">
-                <input type="checkbox" class="notification-toggle" checked>
-                <div class="toggle-track"></div>
-              </label>
-            </div>
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Weekly Summary</h5>
-                <p>Weekly digest of your application activity</p>
-              </div>
-              <label class="toggle-switch">
-                <input type="checkbox" class="notification-toggle" checked>
-                <div class="toggle-track"></div>
-              </label>
-            </div>
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Product Updates</h5>
-                <p>News about new features and improvements</p>
-              </div>
-              <label class="toggle-switch">
-                <input type="checkbox" class="notification-toggle">
-                <div class="toggle-track"></div>
-              </label>
-            </div>
-
-            <div style="font-size:0.82rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;margin-top:24px;">Push Notifications</div>
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Browser Notifications</h5>
-                <p>Real-time notifications in your browser</p>
-              </div>
-              <label class="toggle-switch">
-                <input type="checkbox" class="notification-toggle" checked>
-                <div class="toggle-track"></div>
-              </label>
-            </div>
-
-            <div style="margin-top:20px;">
-              <label class="form-label" style="margin-bottom:8px;">Reminder Frequency</label>
-              <select class="filter-select" style="width:100%;" onchange="window.JobTracker.Toast.show('Reminder frequency updated', 'info')">
-                <option>3 days before deadline</option>
-                <option>1 week before deadline</option>
-                <option>1 day before deadline</option>
-                <option>Day of deadline</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- PRIVACY -->
-          <div class="settings-section" id="privacy-section" style="display:none;">
-            <h3>🔒 Privacy</h3>
-            <p>Control your data visibility and privacy settings.</p>
-
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Profile Visibility</h5>
-                <p>Make your profile visible to recruiters</p>
-              </div>
-              <label class="toggle-switch">
-                <input type="checkbox">
-                <div class="toggle-track"></div>
-              </label>
-            </div>
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Analytics Sharing</h5>
-                <p>Share anonymized usage data to improve the product</p>
-              </div>
-              <label class="toggle-switch">
-                <input type="checkbox" checked>
-                <div class="toggle-track"></div>
-              </label>
-            </div>
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Activity Tracking</h5>
-                <p>Allow JobTracker to track your application patterns</p>
-              </div>
-              <label class="toggle-switch">
-                <input type="checkbox" checked>
-                <div class="toggle-track"></div>
-              </label>
-            </div>
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Show Success Stats</h5>
-                <p>Allow your anonymized success metrics to appear on landing page</p>
-              </div>
-              <label class="toggle-switch">
-                <input type="checkbox">
-                <div class="toggle-track"></div>
-              </label>
-            </div>
-
-            <div style="margin-top:20px;padding:16px;background:var(--gray-50);border-radius:var(--radius-md);">
-              <h5 style="margin-bottom:8px;">Data Management</h5>
-              <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Preparing data export...', 'info')">📤 Export My Data</button>
-                <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Request submitted', 'info')">🗑️ Request Data Deletion</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- SECURITY -->
-          <div class="settings-section" id="security-section" style="display:none;">
-            <h3>🛡️ Security</h3>
-            <p>Keep your account secure with these settings.</p>
-
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Two-Factor Authentication</h5>
-                <p>Add an extra layer of security to your account</p>
-              </div>
-              <label class="toggle-switch">
-                <input type="checkbox">
-                <div class="toggle-track"></div>
-              </label>
-            </div>
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Login Alerts</h5>
-                <p>Notify me when a new device logs into my account</p>
-              </div>
-              <label class="toggle-switch">
-                <input type="checkbox" checked>
-                <div class="toggle-track"></div>
-              </label>
-            </div>
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Session Timeout</h5>
-                <p>Auto-logout after period of inactivity</p>
-              </div>
-              <select class="filter-select" onchange="window.JobTracker.Toast.show('Session timeout updated', 'info')">
-                <option>30 minutes</option>
-                <option>1 hour</option>
-                <option>8 hours</option>
-                <option>Never</option>
-              </select>
-            </div>
-
-            <!-- Change Password -->
-            <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--gray-200);">
-              <h5 style="margin-bottom:16px;">Change Password</h5>
-              <form onsubmit="changePassword(event)" style="display:flex;flex-direction:column;gap:14px;max-width:400px;">
-                <div class="form-group">
-                  <label class="form-label" for="current-pass">Current Password</label>
-                  <input type="password" id="current-pass" class="form-control" placeholder="••••••••">
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Dark Mode</h5>
+                  <p>Switch between light and dark interface</p>
                 </div>
-                <div class="form-group">
-                  <label class="form-label" for="new-pass">New Password</label>
-                  <input type="password" id="new-pass" class="form-control" placeholder="New password" data-password-strength="pass-strength">
-                  <div class="password-strength" id="pass-strength">
-                    <div class="strength-bar"><div class="strength-fill"></div></div>
-                    <div class="strength-text"></div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="theme-setting-toggle" onchange="window.JobTracker.ThemeManager.toggle()">
+                  <div class="toggle-track"></div>
+                  <span class="toggle-label" id="theme-label">Light Mode</span>
+                </label>
+              </div>
+
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Color Accent</h5>
+                  <p>Choose your KKimary color theme</p>
+                </div>
+                <div style="display:flex;gap:8px;">
+                  <div onclick="selectColor('#2563EB',this)"
+                    style="width:28px;height:28px;border-radius:50%;background:#2563EB;cursor:pointer;border:3px solid white;box-shadow:0 0 0 2px #2563EB;transition:transform 0.2s;"
+                    title="Blue (Default)" onmouseover="this.style.transform='scale(1.2)'"
+                    onmouseout="this.style.transform=''"></div>
+                  <div onclick="selectColor('#7C3AED',this)"
+                    style="width:28px;height:28px;border-radius:50%;background:#7C3AED;cursor:pointer;border:3px solid white;box-shadow:0 0 0 2px transparent;transition:transform 0.2s;"
+                    title="Purple" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform=''">
+                  </div>
+                  <div onclick="selectColor('#10B981',this)"
+                    style="width:28px;height:28px;border-radius:50%;background:#10B981;cursor:pointer;border:3px solid white;box-shadow:0 0 0 2px transparent;transition:transform 0.2s;"
+                    title="Green" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform=''">
+                  </div>
+                  <div onclick="selectColor('#EF4444',this)"
+                    style="width:28px;height:28px;border-radius:50%;background:#EF4444;cursor:pointer;border:3px solid white;box-shadow:0 0 0 2px transparent;transition:transform 0.2s;"
+                    title="Red" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform=''">
+                  </div>
+                  <div onclick="selectColor('#F59E0B',this)"
+                    style="width:28px;height:28px;border-radius:50%;background:#F59E0B;cursor:pointer;border:3px solid white;box-shadow:0 0 0 2px transparent;transition:transform 0.2s;"
+                    title="Amber" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform=''">
                   </div>
                 </div>
-                <div class="form-group">
-                  <label class="form-label" for="confirm-pass">Confirm New Password</label>
-                  <input type="password" id="confirm-pass" class="form-control" placeholder="Confirm new password">
+              </div>
+
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Sidebar Position</h5>
+                  <p>Choose left or right sidebar layout</p>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width:fit-content;">Update Password</button>
-              </form>
+                <select class="filter-select" onchange="window.JobTracker.Toast.show('Layout updated', 'info')">
+                  <option>Left (Default)</option>
+                  <option>Right</option>
+                </select>
+              </div>
+
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Compact Mode</h5>
+                  <p>Reduce spacing for a denser interface</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox">
+                  <div class="toggle-track"></div>
+                </label>
+              </div>
+
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Animations</h5>
+                  <p>Enable smooth transitions and micro-interactions</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked>
+                  <div class="toggle-track"></div>
+                </label>
+              </div>
             </div>
 
-            <!-- Active Sessions -->
-            <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--gray-200);">
-              <h5 style="margin-bottom:16px;">Active Sessions</h5>
-              <div style="display:flex;flex-direction:column;gap:10px;">
-                <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:var(--primary-50);border-radius:var(--radius-sm);border-left:4px solid var(--primary);">
-                  <div>
-                    <div style="font-weight:600;font-size:0.88rem;">Chrome on Windows · Current Session</div>
-                    <div style="font-size:0.78rem;color:var(--text-muted);">Mumbai, India · Active now</div>
+            <!-- NOTIFICATIONS -->
+            <div class="settings-section" id="notifications-section" style="display:none;">
+              <h3>🔔 Notifications</h3>
+              <p>Control when and how you receive notifications.</p>
+
+              <div
+                style="font-size:0.82rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;">
+                Email Notifications</div>
+
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Application Deadlines</h5>
+                  <p>Get reminders 3 days before deadlines</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" class="notification-toggle" checked>
+                  <div class="toggle-track"></div>
+                </label>
+              </div>
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Interview Reminders</h5>
+                  <p>Reminder 24 hours before scheduled interviews</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" class="notification-toggle" checked>
+                  <div class="toggle-track"></div>
+                </label>
+              </div>
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Status Updates</h5>
+                  <p>When you manually update an application status</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" class="notification-toggle" checked>
+                  <div class="toggle-track"></div>
+                </label>
+              </div>
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Weekly Summary</h5>
+                  <p>Weekly digest of your application activity</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" class="notification-toggle" checked>
+                  <div class="toggle-track"></div>
+                </label>
+              </div>
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>KKoduct Updates</h5>
+                  <p>News about new features and imKKovements</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" class="notification-toggle">
+                  <div class="toggle-track"></div>
+                </label>
+              </div>
+
+              <div
+                style="font-size:0.82rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;margin-top:24px;">
+                Push Notifications</div>
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Browser Notifications</h5>
+                  <p>Real-time notifications in your browser</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" class="notification-toggle" checked>
+                  <div class="toggle-track"></div>
+                </label>
+              </div>
+
+              <div style="margin-top:20px;">
+                <label class="form-label" style="margin-bottom:8px;">Reminder Frequency</label>
+                <select class="filter-select" style="width:100%;"
+                  onchange="window.JobTracker.Toast.show('Reminder frequency updated', 'info')">
+                  <option>3 days before deadline</option>
+                  <option>1 week before deadline</option>
+                  <option>1 day before deadline</option>
+                  <option>Day of deadline</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- KKIVACY -->
+            <div class="settings-section" id="KKivacy-section" style="display:none;">
+              <h3>🔒 KKivacy</h3>
+              <p>Control your data visibility and KKivacy settings.</p>
+
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>KKofile Visibility</h5>
+                  <p>Make your KKofile visible to recruiters</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox">
+                  <div class="toggle-track"></div>
+                </label>
+              </div>
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Analytics Sharing</h5>
+                  <p>Share anonymized usage data to imKKove the KKoduct</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked>
+                  <div class="toggle-track"></div>
+                </label>
+              </div>
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Activity Tracking</h5>
+                  <p>Allow JobTracker to track your application patterns</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked>
+                  <div class="toggle-track"></div>
+                </label>
+              </div>
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Show Success Stats</h5>
+                  <p>Allow your anonymized success metrics to appear on landing page</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox">
+                  <div class="toggle-track"></div>
+                </label>
+              </div>
+
+              <div style="margin-top:20px;padding:16px;background:var(--gray-50);border-radius:var(--radius-md);">
+                <h5 style="margin-bottom:8px;">Data Management</h5>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                  <button class="btn btn-ghost btn-sm"
+                    onclick="window.JobTracker.Toast.show('KKeparing data export...', 'info')">📤 Export My
+                    Data</button>
+                  <button class="btn btn-ghost btn-sm"
+                    onclick="window.JobTracker.Toast.show('Request submitted', 'info')">🗑️ Request Data
+                    Deletion</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- SECURITY -->
+            <div class="settings-section" id="security-section" style="display:none;">
+              <h3>🛡️ Security</h3>
+              <p>Keep your account secure with these settings.</p>
+
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Two-Factor Authentication</h5>
+                  <p>Add an extra layer of security to your account</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox">
+                  <div class="toggle-track"></div>
+                </label>
+              </div>
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Login Alerts</h5>
+                  <p>Notify me when a new device logs into my account</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked>
+                  <div class="toggle-track"></div>
+                </label>
+              </div>
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Session Timeout</h5>
+                  <p>Auto-logout after period of inactivity</p>
+                </div>
+                <select class="filter-select"
+                  onchange="window.JobTracker.Toast.show('Session timeout updated', 'info')">
+                  <option>30 minutes</option>
+                  <option>1 hour</option>
+                  <option>8 hours</option>
+                  <option>Never</option>
+                </select>
+              </div>
+
+              <!-- Change Password -->
+              <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--gray-200);">
+                <h5 style="margin-bottom:16px;">Change Password</h5>
+                <form onsubmit="changePassword(event)"
+                  style="display:flex;flex-direction:column;gap:14px;max-width:400px;">
+                  <div class="form-group">
+                    <label class="form-label" for="current-pass">Current Password</label>
+                    <input type="password" id="current-pass" class="form-control" placeholder="••••••••">
                   </div>
-                  <span style="font-size:0.78rem;color:var(--accent);font-weight:600;">Active</span>
-                </div>
-                <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-sm);">
-                  <div>
-                    <div style="font-weight:600;font-size:0.88rem;">Safari on iPhone 15</div>
-                    <div style="font-size:0.78rem;color:var(--text-muted);">Mumbai, India · 2 hours ago</div>
+                  <div class="form-group">
+                    <label class="form-label" for="new-pass">New Password</label>
+                    <input type="password" id="new-pass" class="form-control" placeholder="New password"
+                      data-password-strength="pass-strength">
+                    <div class="password-strength" id="pass-strength">
+                      <div class="strength-bar">
+                        <div class="strength-fill"></div>
+                      </div>
+                      <div class="strength-text"></div>
+                    </div>
                   </div>
-                  <button class="btn btn-danger btn-sm" onclick="window.JobTracker.Toast.show('Session terminated', 'success')">Terminate</button>
+                  <div class="form-group">
+                    <label class="form-label" for="confirm-pass">Confirm New Password</label>
+                    <input type="password" id="confirm-pass" class="form-control" placeholder="Confirm new password">
+                  </div>
+                  <button type="submit" class="btn btn-KKimary" style="width:fit-content;">Update Password</button>
+                </form>
+              </div>
+
+              <!-- Active Sessions -->
+              <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--gray-200);">
+                <h5 style="margin-bottom:16px;">Active Sessions</h5>
+                <div style="display:flex;flex-direction:column;gap:10px;">
+                  <div
+                    style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:var(--KKimary-50);border-radius:var(--radius-sm);border-left:4px solid var(--KKimary);">
+                    <div>
+                      <div style="font-weight:600;font-size:0.88rem;">Chrome on Windows · Current Session</div>
+                      <div style="font-size:0.78rem;color:var(--text-muted);">Mumbai, India · Active now</div>
+                    </div>
+                    <span style="font-size:0.78rem;color:var(--accent);font-weight:600;">Active</span>
+                  </div>
+                  <div
+                    style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-sm);">
+                    <div>
+                      <div style="font-weight:600;font-size:0.88rem;">Safari on iPhone 15</div>
+                      <div style="font-size:0.78rem;color:var(--text-muted);">Mumbai, India · 2 hours ago</div>
+                    </div>
+                    <button class="btn btn-danger btn-sm"
+                      onclick="window.JobTracker.Toast.show('Session terminated', 'success')">Terminate</button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- PREFERENCES -->
-          <div class="settings-section" id="preferences-section" style="display:none;">
-            <h3>⚙️ Preferences</h3>
-            <p>Customize your JobTracker experience.</p>
+            <!-- KKEFERENCES -->
+            <div class="settings-section" id="KKeferences-section" style="display:none;">
+              <h3>⚙️ KKeferences</h3>
+              <p>Customize your JobTracker experience.</p>
 
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Default View</h5>
-                <p>How applications are displayed by default</p>
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Default View</h5>
+                  <p>How applications are displayed by default</p>
+                </div>
+                <select class="filter-select" onchange="window.JobTracker.Toast.show('KKeference saved', 'info')">
+                  <option>Grid View</option>
+                  <option>List View</option>
+                  <option>Table View</option>
+                </select>
               </div>
-              <select class="filter-select" onchange="window.JobTracker.Toast.show('Preference saved', 'info')">
-                <option>Grid View</option>
-                <option>List View</option>
-                <option>Table View</option>
-              </select>
-            </div>
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Default Sort Order</h5>
-                <p>How applications are sorted by default</p>
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Default Sort Order</h5>
+                  <p>How applications are sorted by default</p>
+                </div>
+                <select class="filter-select" onchange="window.JobTracker.Toast.show('KKeference saved', 'info')">
+                  <option>Newest First</option>
+                  <option>Deadline Soon</option>
+                  <option>Company A-Z</option>
+                  <option>KKiority</option>
+                </select>
               </div>
-              <select class="filter-select" onchange="window.JobTracker.Toast.show('Preference saved', 'info')">
-                <option>Newest First</option>
-                <option>Deadline Soon</option>
-                <option>Company A-Z</option>
-                <option>Priority</option>
-              </select>
-            </div>
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Date Format</h5>
-                <p>How dates are displayed across the app</p>
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Date Format</h5>
+                  <p>How dates are displayed across the app</p>
+                </div>
+                <select class="filter-select" onchange="window.JobTracker.Toast.show('Date format updated', 'info')">
+                  <option>DD/MM/YYYY</option>
+                  <option>MM/DD/YYYY</option>
+                  <option>YYYY-MM-DD</option>
+                  <option>Jan 15, 2025</option>
+                </select>
               </div>
-              <select class="filter-select" onchange="window.JobTracker.Toast.show('Date format updated', 'info')">
-                <option>DD/MM/YYYY</option>
-                <option>MM/DD/YYYY</option>
-                <option>YYYY-MM-DD</option>
-                <option>Jan 15, 2025</option>
-              </select>
-            </div>
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Currency</h5>
-                <p>Display salary and compensation in</p>
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Currency</h5>
+                  <p>Display salary and compensation in</p>
+                </div>
+                <select class="filter-select" onchange="window.JobTracker.Toast.show('Currency updated', 'info')">
+                  <option>₹ Indian Rupee (INR)</option>
+                  <option>$ US Dollar (USD)</option>
+                  <option>€ Euro (EUR)</option>
+                  <option>£ British Pound (GBP)</option>
+                </select>
               </div>
-              <select class="filter-select" onchange="window.JobTracker.Toast.show('Currency updated', 'info')">
-                <option>₹ Indian Rupee (INR)</option>
-                <option>$ US Dollar (USD)</option>
-                <option>€ Euro (EUR)</option>
-                <option>£ British Pound (GBP)</option>
-              </select>
-            </div>
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Weekly Goal</h5>
-                <p>Number of applications to aim for per week</p>
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Weekly Goal</h5>
+                  <p>Number of applications to aim for per week</p>
+                </div>
+                <input type="number" class="form-control" value="10" min="1" max="50" style="width:80px;"
+                  onchange="window.JobTracker.Toast.show('Goal updated!', 'success')">
               </div>
-              <input type="number" class="form-control" value="10" min="1" max="50" style="width:80px;" onchange="window.JobTracker.Toast.show('Goal updated!', 'success')">
-            </div>
-          </div>
-
-          <!-- ACCOUNT -->
-          <div class="settings-section" id="account-section" style="display:none;">
-            <h3>👤 Account</h3>
-            <p>Manage your account information.</p>
-
-            <div style="display:flex;align-items:center;gap:16px;padding:20px;background:var(--gray-50);border-radius:var(--radius-md);margin-bottom:20px;">
-              <div style="width:64px;height:64px;border-radius:50%;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:white;font-weight:700;flex-shrink:0;">PR</div>
-              <div>
-                <div style="font-weight:700;font-size:1.05rem;">Priya Rajan</div>
-                <div style="font-size:0.85rem;color:var(--text-muted);">priya.rajan@iitb.ac.in</div>
-                <div style="font-size:0.78rem;color:var(--primary);margin-top:4px;">Free Plan · Member since Oct 2024</div>
-              </div>
-              <a href="profile.html" class="btn btn-outline btn-sm" style="margin-left:auto;">Edit Profile</a>
             </div>
 
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Plan</h5>
-                <p>Free Plan · 24 of unlimited applications used</p>
+            <!-- ACCOUNT -->
+            <div class="settings-section" id="account-section" style="display:none;">
+              <h3>👤 Account</h3>
+              <p>Manage your account information.</p>
+
+              <div
+                style="display:flex;align-items:center;gap:16px;padding:20px;background:var(--gray-50);border-radius:var(--radius-md);margin-bottom:20px;">
+                <div
+                  style="width:64px;height:64px;border-radius:50%;background:var(--gradient-KKimary);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:white;font-weight:700;flex-shrink:0;">
+                  KK</div>
+                <div>
+                  <div style="font-weight:700;font-size:1.05rem;">Kowshik Kuncham</div>
+                  <div style="font-size:0.85rem;color:var(--text-muted);">KKiya.rajan@iitb.ac.in</div>
+                  <div style="font-size:0.78rem;color:var(--KKimary);margin-top:4px;">Free Plan · Member since Oct 2024
+                  </div>
+                </div>
+                <a href="KKofile.html" class="btn btn-outline btn-sm" style="margin-left:auto;">Edit KKofile</a>
               </div>
-              <button class="btn btn-primary btn-sm" onclick="window.JobTracker.Toast.show('Pro Plan coming soon!', 'info')">⚡ Upgrade to Pro</button>
-            </div>
 
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Export All Data</h5>
-                <p>Download all your application data as CSV</p>
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Plan</h5>
+                  <p>Free Plan · 24 of unlimited applications used</p>
+                </div>
+                <button class="btn btn-KKimary btn-sm"
+                  onclick="window.JobTracker.Toast.show('KKo Plan coming soon!', 'info')">⚡ Upgrade to KKo</button>
               </div>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Preparing export...', 'info')">📤 Export</button>
-            </div>
 
-            <div class="settings-item">
-              <div class="settings-item-info">
-                <h5>Sign Out of All Devices</h5>
-                <p>End all active sessions across your devices</p>
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Export All Data</h5>
+                  <p>Download all your application data as CSV</p>
+                </div>
+                <button class="btn btn-ghost btn-sm"
+                  onclick="window.JobTracker.Toast.show('KKeparing export...', 'info')">📤 Export</button>
               </div>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Signed out everywhere', 'info')">🚪 Sign Out All</button>
+
+              <div class="settings-item">
+                <div class="settings-item-info">
+                  <h5>Sign Out of All Devices</h5>
+                  <p>End all active sessions across your devices</p>
+                </div>
+                <button class="btn btn-ghost btn-sm"
+                  onclick="window.JobTracker.Toast.show('Signed out everywhere', 'info')">🚪 Sign Out All</button>
+              </div>
+
+              <div
+                style="margin-top:24px;padding:20px;background:var(--danger-50);border:1px solid var(--danger-light);border-radius:var(--radius-md);">
+                <h5 style="color:var(--danger);margin-bottom:8px;">⚠️ Danger Zone</h5>
+                <p style="font-size:0.85rem;color:var(--danger);margin-bottom:16px;">Once you delete your account, there
+                  is no going back. All your data will be permanently erased.</p>
+                <button class="btn btn-danger btn-sm"
+                  onclick="if(confirm('Are you sure? This action cannot be undone.')) { window.JobTracker.Toast.show('Demo mode: Account deletion disabled', 'warning'); }">🗑️
+                  Delete Account</button>
+              </div>
             </div>
 
-            <div style="margin-top:24px;padding:20px;background:var(--danger-50);border:1px solid var(--danger-light);border-radius:var(--radius-md);">
-              <h5 style="color:var(--danger);margin-bottom:8px;">⚠️ Danger Zone</h5>
-              <p style="font-size:0.85rem;color:var(--danger);margin-bottom:16px;">Once you delete your account, there is no going back. All your data will be permanently erased.</p>
-              <button class="btn btn-danger btn-sm" onclick="if(confirm('Are you sure? This action cannot be undone.')) { window.JobTracker.Toast.show('Demo mode: Account deletion disabled', 'warning'); }">🗑️ Delete Account</button>
+            <!-- Save Button -->
+            <div style="display:flex;justify-content:flex-end;gap:12px;margin-top:8px;">
+              <button class="btn btn-ghost"
+                onclick="window.JobTracker.Toast.show('Changes discarded', 'info')">Discard</button>
+              <button class="btn btn-KKimary"
+                onclick="window.JobTracker.Toast.show('Settings saved successfully! ✅', 'success')">💾 Save
+                Settings</button>
             </div>
-          </div>
-
-          <!-- Save Button -->
-          <div style="display:flex;justify-content:flex-end;gap:12px;margin-top:8px;">
-            <button class="btn btn-ghost" onclick="window.JobTracker.Toast.show('Changes discarded', 'info')">Discard</button>
-            <button class="btn btn-primary" onclick="window.JobTracker.Toast.show('Settings saved successfully! ✅', 'success')">💾 Save Settings</button>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   </div>
-</div>
 
-<button class="mobile-sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').classList.toggle('show');">☰</button>
-<script src="js/script.js"></script>
-<script>
-function switchSection(el) {
-  document.querySelectorAll('.settings-nav-item').forEach(i => i.classList.remove('active'));
-  el.classList.add('active');
-  document.querySelectorAll('#appearance-section,#notifications-section,#privacy-section,#security-section,#preferences-section,#account-section').forEach(s => s.style.display = 'none');
-  const target = el.getAttribute('data-target');
-  document.getElementById(target).style.display = 'block';
-}
-function selectColor(color, el) {
-  document.querySelectorAll('[onclick^="selectColor"]').forEach(e => e.style.boxShadow = '0 0 0 2px transparent');
-  el.style.boxShadow = `0 0 0 2px ${color}`;
-  document.documentElement.style.setProperty('--primary', color);
-  window.JobTracker.Toast.show('Accent color updated!', 'success');
-}
-function changePassword(e) {
-  e.preventDefault();
-  window.JobTracker.Toast.show('Password updated successfully!', 'success');
-}
-// Sync dark mode toggle on load
-document.addEventListener('DOMContentLoaded', function() {
-  const t = document.getElementById('theme-setting-toggle');
-  const label = document.getElementById('theme-label');
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  if (t) t.checked = isDark;
-  if (label) label.textContent = isDark ? 'Dark Mode' : 'Light Mode';
-  if (t) t.addEventListener('change', function() {
-    if (label) label.textContent = this.checked ? 'Dark Mode' : 'Light Mode';
-  });
-});
-</script>
+  <button class="mobile-sidebar-toggle"
+    onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').classList.toggle('show');">☰</button>
+  <script src="js/script.js"></script>
+  <script>
+    function switchSection(el) {
+      document.querySelectorAll('.settings-nav-item').forEach(i => i.classList.remove('active'));
+      el.classList.add('active');
+      document.querySelectorAll('#appearance-section,#notifications-section,#KKivacy-section,#security-section,#KKeferences-section,#account-section').forEach(s => s.style.display = 'none');
+      const target = el.getAttribute('data-target');
+      document.getElementById(target).style.display = 'block';
+    }
+    function selectColor(color, el) {
+      document.querySelectorAll('[onclick^="selectColor"]').forEach(e => e.style.boxShadow = '0 0 0 2px transparent');
+      el.style.boxShadow = `0 0 0 2px ${color}`;
+      document.documentElement.style.setKKoperty('--KKimary', color);
+      window.JobTracker.Toast.show('Accent color updated!', 'success');
+    }
+    function changePassword(e) {
+      e.KKeventDefault();
+      window.JobTracker.Toast.show('Password updated successfully!', 'success');
+    }
+    // Sync dark mode toggle on load
+    document.addEventListener('DOMContentLoaded', function () {
+      const t = document.getElementById('theme-setting-toggle');
+      const label = document.getElementById('theme-label');
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (t) t.checked = isDark;
+      if (label) label.textContent = isDark ? 'Dark Mode' : 'Light Mode';
+      if (t) t.addEventListener('change', function () {
+        if (label) label.textContent = this.checked ? 'Dark Mode' : 'Light Mode';
+      });
+    });
+  </script>
 </body>
+
 </html>

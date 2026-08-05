@@ -1,523 +1,566 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="JobTracker — The smartest way to manage your job and internship applications. Track status, analyze patterns, and land your dream role faster.">
+  <meta name="description"
+    content="JobTracker — The smartest way to manage your job and internship applications. Track status, analyze patterns, and land your dream role faster.">
   <meta name="keywords" content="job tracker, internship tracker, application tracker, job search, career management">
-  <meta property="og:title" content="JobTracker — Organize Your Job Search">
-  <meta property="og:description" content="Track every application, nail every interview. The premium job application tracker for ambitious professionals.">
+  <meta KKoperty="og:title" content="JobTracker — Organize Your Job Search">
+  <meta KKoperty="og:description"
+    content="Track every application, nail every interview. The KKemium job application tracker for ambitious KKofessionals.">
   <title>JobTracker — Organize Your Job Search</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
+
 <body>
 
-<!-- Page Loader -->
-<div class="page-loader" id="page-loader">
-  <div class="loader-ring"></div>
-</div>
-
-<!-- NAVBAR -->
-<nav class="navbar" id="navbar">
-  <div class="nav-container">
-    <a href="index.html" class="nav-logo">
-      <div class="nav-logo-icon">💼</div>
-      <span>JobTracker</span>
-    </a>
-    <div class="nav-links">
-      <a href="index.html" class="nav-link active">Home</a>
-      <a href="dashboard.html" class="nav-link">Dashboard</a>
-      <a href="applications.html" class="nav-link">Applications</a>
-      <a href="analytics.html" class="nav-link">Analytics</a>
-    </div>
-    <div class="nav-actions">
-      <button class="theme-toggle" title="Toggle theme">🌙</button>
-      <a href="login.html" class="btn btn-ghost btn-sm">Login</a>
-      <a href="register.html" class="btn btn-primary btn-sm">Get Started Free</a>
-    </div>
-    <button class="hamburger" id="hamburger" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
+  <!-- Page Loader -->
+  <div class="page-loader" id="page-loader">
+    <div class="loader-ring"></div>
   </div>
-</nav>
 
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobile-menu">
-  <a href="index.html" class="nav-link">🏠 Home</a>
-  <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
-  <a href="applications.html" class="nav-link">📋 Applications</a>
-  <a href="analytics.html" class="nav-link">📈 Analytics</a>
-  <a href="profile.html" class="nav-link">👤 Profile</a>
-  <a href="settings.html" class="nav-link">⚙️ Settings</a>
-  <div style="height:1px;background:var(--gray-200);margin:8px 0;"></div>
-  <a href="login.html" class="nav-link">🔑 Login</a>
-  <a href="register.html" class="btn btn-primary w-full" style="margin-top:8px;">Get Started Free</a>
-</div>
-
-<!-- HERO SECTION -->
-<section class="hero" id="home">
-  <div class="hero-container">
-    <div class="hero-content animate-fade-left">
-      <div class="hero-eyebrow">
-        ✨ New: AI-powered application insights
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">💼</div>
+        <span>JobTracker</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="applications.html" class="nav-link">Applications</a>
+        <a href="analytics.html" class="nav-link">Analytics</a>
       </div>
-      <h1>
-        Track Every Application,<br>
-        <span>Land Your Dream Job</span>
-      </h1>
-      <p>
-        Stop losing track of your applications in spreadsheets. JobTracker gives you a powerful dashboard to organize, monitor, and analyze your entire job search journey in one beautiful place.
-      </p>
-      <div class="hero-actions">
-        <a href="register.html" class="btn-hero-primary">
-          🚀 Start Tracking Free
-        </a>
-        <a href="dashboard.html" class="btn-hero-outline">
-          👁️ View Demo
-        </a>
+      <div class="nav-actions">
+        <button class="theme-toggle" title="Toggle theme">🌙</button>
+        <a href="login.html" class="btn btn-ghost btn-sm">Login</a>
+        <a href="register.html" class="btn btn-KKimary btn-sm">Get Started Free</a>
       </div>
-      <div class="hero-stats">
-        <div>
-          <div class="hero-stat-value" data-count="50" data-suffix="K+">0</div>
-          <div class="hero-stat-label">Active Users</div>
-        </div>
-        <div>
-          <div class="hero-stat-value" data-count="2.4" data-suffix="M+">0</div>
-          <div class="hero-stat-label">Apps Tracked</div>
-        </div>
-        <div>
-          <div class="hero-stat-value" data-count="89" data-suffix="%">0</div>
-          <div class="hero-stat-label">Success Rate</div>
-        </div>
-      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </nav>
 
-    <!-- Hero Visual -->
-    <div class="hero-visual animate-fade-right" style="position:relative;">
-      <!-- Floating badge top-left -->
-      <div class="hero-badge-float top-left">
-        <span class="hero-badge-icon">🎉</span>
-        <div>
-          <div style="font-size:0.75rem;color:var(--accent-dark);">Offer Received!</div>
-          <div style="font-size:0.68rem;color:var(--text-muted);">Google · SWE Intern</div>
-        </div>
-      </div>
-
-      <!-- Dashboard mock -->
-      <div class="hero-dashboard-mock">
-        <div class="mock-header">
-          <div class="mock-dots">
-            <div class="mock-dot"></div>
-            <div class="mock-dot"></div>
-            <div class="mock-dot"></div>
-          </div>
-          <div class="mock-title">JobTracker Dashboard</div>
-          <div style="font-size:0.7rem;color:rgba(255,255,255,0.5);">● Live</div>
-        </div>
-        <div class="mock-cards">
-          <div class="mock-card">
-            <div class="mock-card-value">24</div>
-            <div class="mock-card-label">Total Applied</div>
-          </div>
-          <div class="mock-card" style="background:rgba(16,185,129,0.2);">
-            <div class="mock-card-value" style="color:#34D399;">3</div>
-            <div class="mock-card-label">Offers</div>
-          </div>
-          <div class="mock-card" style="background:rgba(124,58,237,0.2);">
-            <div class="mock-card-value" style="color:#A78BFA;">8</div>
-            <div class="mock-card-label">Interviews</div>
-          </div>
-          <div class="mock-card" style="background:rgba(245,158,11,0.2);">
-            <div class="mock-card-value" style="color:#FCD34D;">5</div>
-            <div class="mock-card-label">Pending</div>
-          </div>
-        </div>
-        <div class="mock-chart">
-          <div class="mock-bar" style="height:40%;background:rgba(99,179,237,0.7);"></div>
-          <div class="mock-bar" style="height:65%;background:rgba(99,179,237,0.7);"></div>
-          <div class="mock-bar" style="height:50%;background:rgba(99,179,237,0.7);"></div>
-          <div class="mock-bar" style="height:80%;background:rgba(99,179,237,0.7);"></div>
-          <div class="mock-bar" style="height:60%;background:rgba(99,179,237,0.7);"></div>
-          <div class="mock-bar" style="height:100%;background:rgba(255,255,255,0.9);"></div>
-          <div class="mock-bar" style="height:75%;background:rgba(99,179,237,0.7);"></div>
-        </div>
-        <div class="mock-items">
-          <div class="mock-item">
-            <div class="mock-item-logo" style="background:linear-gradient(135deg,#4285F4,#34A853);"></div>
-            <div class="mock-item-text">
-              <div class="mock-item-title" style="width:80%;"></div>
-              <div class="mock-item-sub"></div>
-            </div>
-            <div class="mock-item-badge" style="background:rgba(124,58,237,0.6);"></div>
-          </div>
-          <div class="mock-item">
-            <div class="mock-item-logo" style="background:linear-gradient(135deg,#00A4EF,#7FBA00);"></div>
-            <div class="mock-item-text">
-              <div class="mock-item-title" style="width:70%;"></div>
-              <div class="mock-item-sub"></div>
-            </div>
-            <div class="mock-item-badge" style="background:rgba(16,185,129,0.6);"></div>
-          </div>
-          <div class="mock-item">
-            <div class="mock-item-logo" style="background:linear-gradient(135deg,#FF9900,#146EB4);"></div>
-            <div class="mock-item-text">
-              <div class="mock-item-title" style="width:75%;"></div>
-              <div class="mock-item-sub"></div>
-            </div>
-            <div class="mock-item-badge" style="background:rgba(245,158,11,0.6);"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Floating badge bottom-right -->
-      <div class="hero-badge-float bottom-right">
-        <span class="hero-badge-icon">📈</span>
-        <div>
-          <div style="font-size:0.75rem;color:var(--primary);">+23% Response Rate</div>
-          <div style="font-size:0.68rem;color:var(--text-muted);">This month</div>
-        </div>
-      </div>
-    </div>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html" class="nav-link">🏠 Home</a>
+    <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+    <a href="applications.html" class="nav-link">📋 Applications</a>
+    <a href="analytics.html" class="nav-link">📈 Analytics</a>
+    <a href="KKofile.html" class="nav-link">👤 KKofile</a>
+    <a href="settings.html" class="nav-link">⚙️ Settings</a>
+    <div style="height:1px;background:var(--gray-200);margin:8px 0;"></div>
+    <a href="login.html" class="nav-link">🔑 Login</a>
+    <a href="register.html" class="btn btn-KKimary w-full" style="margin-top:8px;">Get Started Free</a>
   </div>
-</section>
 
-<!-- TRUSTED BY SECTION -->
-<section style="padding:40px 0;background:var(--bg-card);border-bottom:1px solid var(--gray-200);">
-  <div class="container">
-    <p style="text-align:center;font-size:0.85rem;font-weight:600;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:28px;">Trusted by job seekers at top companies</p>
-    <div style="display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;opacity:0.5;">
-      <div style="font-weight:800;font-size:1.2rem;color:var(--text-primary);">Google</div>
-      <div style="font-weight:800;font-size:1.2rem;color:var(--text-primary);">Microsoft</div>
-      <div style="font-weight:800;font-size:1.2rem;color:var(--text-primary);">Amazon</div>
-      <div style="font-weight:800;font-size:1.2rem;color:var(--text-primary);">Adobe</div>
-      <div style="font-weight:800;font-size:1.2rem;color:var(--text-primary);">Deloitte</div>
-      <div style="font-weight:800;font-size:1.2rem;color:var(--text-primary);">Infosys</div>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURES SECTION -->
-<section class="section" id="features" style="background:var(--bg-primary);">
-  <div class="container">
-    <div class="section-header scroll-reveal">
-      <div class="section-eyebrow">✨ Features</div>
-      <h2>Everything you need to succeed</h2>
-      <p>Powerful tools designed to streamline your job search — from tracking applications to analyzing your performance trends.</p>
-    </div>
-    <div class="features-grid">
-      <div class="feature-card scroll-reveal scroll-reveal-delay-1">
-        <div class="feature-icon" style="background:var(--primary-50);color:var(--primary);">📋</div>
-        <h3>Smart Application Tracking</h3>
-        <p>Track every application with detailed status updates. Never miss a deadline or follow-up with smart reminders and organized dashboards.</p>
-      </div>
-      <div class="feature-card scroll-reveal scroll-reveal-delay-2">
-        <div class="feature-icon" style="background:var(--secondary-50);color:var(--secondary);">📊</div>
-        <h3>Advanced Analytics</h3>
-        <p>Visualize your job search performance with beautiful charts. Understand response rates, peak application times, and industry trends.</p>
-      </div>
-      <div class="feature-card scroll-reveal scroll-reveal-delay-3">
-        <div class="feature-icon" style="background:var(--accent-50);color:var(--accent);">⚡</div>
-        <h3>One-Click Add</h3>
-        <p>Add new applications in seconds with our intuitive form. Attach resumes, notes, and contact information all in one place.</p>
-      </div>
-      <div class="feature-card scroll-reveal scroll-reveal-delay-1">
-        <div class="feature-icon" style="background:var(--warning-50);color:var(--warning);">🔔</div>
-        <h3>Smart Notifications</h3>
-        <p>Get timely reminders for upcoming deadlines, scheduled interviews, and follow-up actions — customized to your workflow.</p>
-      </div>
-      <div class="feature-card scroll-reveal scroll-reveal-delay-2">
-        <div class="feature-icon" style="background:var(--info-50);color:var(--info);">📱</div>
-        <h3>Mobile Responsive</h3>
-        <p>Track your applications from anywhere. Our fully responsive design ensures a seamless experience on any device or screen size.</p>
-      </div>
-      <div class="feature-card scroll-reveal scroll-reveal-delay-3">
-        <div class="feature-icon" style="background:#FFF7ED;color:#EA580C;">🔒</div>
-        <h3>Privacy First</h3>
-        <p>Your data stays yours. We use industry-standard encryption and never sell your personal information to third parties.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHY CHOOSE US SECTION -->
-<section class="section" style="background:var(--bg-secondary);">
-  <div class="container">
-    <div class="why-grid">
-      <!-- Visual side -->
-      <div class="why-visual scroll-reveal scroll-reveal-delay-1">
-        <div class="why-visual-card">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
-            <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#4285F4,#34A853);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">G</div>
-            <div>
-              <div style="font-weight:700;font-size:0.9rem;">Google</div>
-              <div style="font-size:0.78rem;color:var(--text-muted);">Software Engineer Intern</div>
-            </div>
-            <div style="margin-left:auto;"><span class="badge badge-interview">Interview</span></div>
-          </div>
-          <div style="display:flex;gap:8px;font-size:0.8rem;color:var(--text-muted);">
-            <span>📅 Applied Dec 10</span>
-            <span>·</span>
-            <span>⏰ Jan 15 deadline</span>
-          </div>
-          <div class="progress-bar" style="margin-top:12px;">
-            <div class="progress-fill" data-width="65" style="width:65%;"></div>
-          </div>
-          <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">65% process completed</div>
+  <!-- HERO SECTION -->
+  <section class="hero" id="home">
+    <div class="hero-container">
+      <div class="hero-content animate-fade-left">
+        <div class="hero-eyebrow">
+          ✨ New: AI-powered application insights
         </div>
-
-        <div class="why-visual-card">
-          <div style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:12px;">📊 This Week's Stats</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
-            <div style="text-align:center;padding:12px 8px;background:var(--primary-50);border-radius:10px;">
-              <div style="font-size:1.4rem;font-weight:800;color:var(--primary);">7</div>
-              <div style="font-size:0.72rem;color:var(--text-muted);">Applied</div>
-            </div>
-            <div style="text-align:center;padding:12px 8px;background:var(--secondary-50);border-radius:10px;">
-              <div style="font-size:1.4rem;font-weight:800;color:var(--secondary);">3</div>
-              <div style="font-size:0.72rem;color:var(--text-muted);">Interviews</div>
-            </div>
-            <div style="text-align:center;padding:12px 8px;background:var(--accent-50);border-radius:10px;">
-              <div style="font-size:1.4rem;font-weight:800;color:var(--accent);">1</div>
-              <div style="font-size:0.72rem;color:var(--text-muted);">Offer</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="why-visual-card">
-          <div style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:12px;">🔔 Recent Notifications</div>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <div style="display:flex;gap:10px;align-items:center;">
-              <span style="font-size:1.1rem;">🎉</span>
-              <div>
-                <div style="font-size:0.82rem;font-weight:600;">Interview Scheduled</div>
-                <div style="font-size:0.75rem;color:var(--text-muted);">Google · Tomorrow 10:00 AM</div>
-              </div>
-            </div>
-            <div style="display:flex;gap:10px;align-items:center;">
-              <span style="font-size:1.1rem;">⏰</span>
-              <div>
-                <div style="font-size:0.82rem;font-weight:600;">Deadline Reminder</div>
-                <div style="font-size:0.75rem;color:var(--text-muted);">Microsoft · 3 days left</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Text side -->
-      <div class="scroll-reveal scroll-reveal-delay-2">
-        <div class="section-eyebrow" style="margin-bottom:16px;">💡 Why JobTracker</div>
-        <h2 style="margin-bottom:24px;">Built for the modern job seeker</h2>
-        <div class="why-feature">
-          <div class="why-icon" style="background:var(--primary-50);color:var(--primary);">🎯</div>
-          <div>
-            <h4>Stay Organized, Stay Ahead</h4>
-            <p>Consolidate all your applications in one place. No more lost emails or forgotten follow-ups — everything is tracked and organized.</p>
-          </div>
-        </div>
-        <div class="why-feature">
-          <div class="why-icon" style="background:var(--secondary-50);color:var(--secondary);">📈</div>
-          <div>
-            <h4>Data-Driven Decisions</h4>
-            <p>Analyze what's working and what's not. Understand which industries, companies, and roles give you the best response rates.</p>
-          </div>
-        </div>
-        <div class="why-feature">
-          <div class="why-icon" style="background:var(--accent-50);color:var(--accent);">🚀</div>
-          <div>
-            <h4>Land Faster, Apply Smarter</h4>
-            <p>Our users land interviews 2x faster. With better tracking and insights, you'll optimize your approach and increase your success rate.</p>
-          </div>
-        </div>
-        <a href="register.html" class="btn btn-primary btn-lg" style="margin-top:8px;">Start for Free Today →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- STATS SECTION -->
-<section class="stats-section">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="scroll-reveal">
-        <div class="stat-item-value" data-count="50" data-suffix="K+">50K+</div>
-        <div class="stat-item-label">Active Job Seekers</div>
-      </div>
-      <div class="scroll-reveal scroll-reveal-delay-1">
-        <div class="stat-item-value" data-count="2.4" data-suffix="M">2.4M</div>
-        <div class="stat-item-label">Applications Tracked</div>
-      </div>
-      <div class="scroll-reveal scroll-reveal-delay-2">
-        <div class="stat-item-value" data-count="89" data-suffix="%">89%</div>
-        <div class="stat-item-label">Offer Success Rate</div>
-      </div>
-      <div class="scroll-reveal scroll-reveal-delay-3">
-        <div class="stat-item-value" data-count="4.9" data-suffix="★">4.9★</div>
-        <div class="stat-item-label">Average Rating</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="section" style="background:var(--bg-primary);">
-  <div class="container">
-    <div class="section-header scroll-reveal">
-      <div class="section-eyebrow">🛠️ How It Works</div>
-      <h2>Get started in 3 easy steps</h2>
-      <p>JobTracker is designed to get you up and running in minutes, not hours.</p>
-    </div>
-    <div class="three-col-grid">
-      <div class="scroll-reveal scroll-reveal-delay-1" style="text-align:center;padding:32px 24px;">
-        <div style="width:72px;height:72px;background:var(--gradient-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 20px;box-shadow:var(--shadow-primary);">1️⃣</div>
-        <h3 style="margin-bottom:12px;">Create Your Account</h3>
-        <p>Sign up for free in under 60 seconds. No credit card required. Just your email and you're ready to go.</p>
-      </div>
-      <div class="scroll-reveal scroll-reveal-delay-2" style="text-align:center;padding:32px 24px;">
-        <div style="width:72px;height:72px;background:var(--gradient-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 20px;box-shadow:var(--shadow-primary);">2️⃣</div>
-        <h3 style="margin-bottom:12px;">Add Applications</h3>
-        <p>Quickly add your job applications with company details, role, status, and deadlines. Import from multiple sources.</p>
-      </div>
-      <div class="scroll-reveal scroll-reveal-delay-3" style="text-align:center;padding:32px 24px;">
-        <div style="width:72px;height:72px;background:var(--gradient-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 20px;box-shadow:var(--shadow-primary);">3️⃣</div>
-        <h3 style="margin-bottom:12px;">Track & Analyze</h3>
-        <p>Monitor your progress in real-time, get smart insights, and land your dream job faster with data-driven decisions.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS SECTION -->
-<section class="section" style="background:var(--bg-secondary);">
-  <div class="container">
-    <div class="section-header scroll-reveal">
-      <div class="section-eyebrow">💬 Testimonials</div>
-      <h2>Loved by thousands of job seekers</h2>
-      <p>Don't take our word for it — hear from people who've landed their dream jobs using JobTracker.</p>
-    </div>
-    <div class="testimonials-grid">
-      <div class="testimonial-card scroll-reveal scroll-reveal-delay-1">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"JobTracker completely transformed my job search. I went from chaotically applying everywhere to a strategic, organized approach. Got 3 offers within 6 weeks!"</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar" style="background:var(--gradient-primary);">PR</div>
-          <div>
-            <div class="testimonial-name">Priya Rajan</div>
-            <div class="testimonial-role">SWE at Google · IIT Bombay</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card scroll-reveal scroll-reveal-delay-2">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"The analytics dashboard is incredible. I discovered I had a much better response rate on Tuesdays, so I started sending applications then. Simple insight, huge impact."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar" style="background:var(--gradient-accent);">AK</div>
-          <div>
-            <div class="testimonial-name">Arjun Kumar</div>
-            <div class="testimonial-role">Product Manager at Microsoft</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card scroll-reveal scroll-reveal-delay-3">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"As a final-year student juggling 50+ applications, JobTracker was a lifesaver. The deadline reminders alone saved me from missing 3 critical applications."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar" style="background:linear-gradient(135deg,#F59E0B,#EF4444);">SM</div>
-          <div>
-            <div class="testimonial-name">Sneha Mehta</div>
-            <div class="testimonial-role">Data Analyst at Amazon</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA SECTION -->
-<section class="section" style="background:var(--bg-primary);">
-  <div class="container">
-    <div style="background:var(--gradient-primary);border-radius:var(--radius-2xl);padding:64px 48px;text-align:center;position:relative;overflow:hidden;">
-      <div style="position:absolute;top:-50%;left:-20%;width:300px;height:300px;background:radial-gradient(circle,rgba(255,255,255,0.1) 0%,transparent 70%);border-radius:50%;"></div>
-      <div style="position:absolute;bottom:-50%;right:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(16,185,129,0.2) 0%,transparent 70%);border-radius:50%;"></div>
-      <div style="position:relative;z-index:1;">
-        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;padding:6px 16px;border-radius:999px;font-size:0.82rem;font-weight:600;margin-bottom:20px;backdrop-filter:blur(10px);">
-          🎯 Free forever plan available
-        </div>
-        <h2 style="color:white;font-size:2.4rem;margin-bottom:16px;">Ready to land your dream job?</h2>
-        <p style="color:rgba(255,255,255,0.85);font-size:1.05rem;max-width:520px;margin:0 auto 36px;">Join 50,000+ professionals who use JobTracker to organize their search and land offers at top companies.</p>
-        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-          <a href="register.html" class="btn-hero-primary">
-            🚀 Get Started Free — No Credit Card
+        <h1>
+          Track Every Application,<br>
+          <span>Land Your Dream Job</span>
+        </h1>
+        <p>
+          Stop losing track of your applications in sKKeadsheets. JobTracker gives you a powerful dashboard to organize,
+          monitor, and analyze your entire job search journey in one beautiful place.
+        </p>
+        <div class="hero-actions">
+          <a href="register.html" class="btn-hero-KKimary">
+            🚀 Start Tracking Free
           </a>
           <a href="dashboard.html" class="btn-hero-outline">
-            📊 Explore Dashboard
+            👁️ View Demo
           </a>
         </div>
-        <p style="color:rgba(255,255,255,0.6);font-size:0.82rem;margin-top:20px;">Setup takes under 2 minutes · No credit card needed</p>
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-value" data-count="50" data-suffix="K+">0</div>
+            <div class="hero-stat-label">Active Users</div>
+          </div>
+          <div>
+            <div class="hero-stat-value" data-count="2.4" data-suffix="M+">0</div>
+            <div class="hero-stat-label">Apps Tracked</div>
+          </div>
+          <div>
+            <div class="hero-stat-value" data-count="89" data-suffix="%">0</div>
+            <div class="hero-stat-label">Success Rate</div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-logo">
-          <div class="footer-logo-icon">💼</div>
-          <span class="footer-brand">JobTracker</span>
+      <!-- Hero Visual -->
+      <div class="hero-visual animate-fade-right" style="position:relative;">
+        <!-- Floating badge top-left -->
+        <div class="hero-badge-float top-left">
+          <span class="hero-badge-icon">🎉</span>
+          <div>
+            <div style="font-size:0.75rem;color:var(--accent-dark);">Offer Received!</div>
+            <div style="font-size:0.68rem;color:var(--text-muted);">Google · SWE Intern</div>
+          </div>
         </div>
-        <p class="footer-desc">The smartest way to manage your job search. Track applications, analyze trends, and land your dream role faster with powerful insights.</p>
-        <div class="footer-social">
-          <a href="#" class="social-btn" aria-label="Twitter">𝕏</a>
-          <a href="#" class="social-btn" aria-label="LinkedIn">in</a>
-          <a href="#" class="social-btn" aria-label="GitHub">⌥</a>
-          <a href="#" class="social-btn" aria-label="Instagram">📷</a>
-        </div>
-      </div>
-      <div>
-        <h5>Product</h5>
-        <div class="footer-links">
-          <a href="dashboard.html" class="footer-link">Dashboard</a>
-          <a href="applications.html" class="footer-link">Applications</a>
-          <a href="analytics.html" class="footer-link">Analytics</a>
-          <a href="add-application.html" class="footer-link">Add Application</a>
-        </div>
-      </div>
-      <div>
-        <h5>Account</h5>
-        <div class="footer-links">
-          <a href="login.html" class="footer-link">Login</a>
-          <a href="register.html" class="footer-link">Sign Up</a>
-          <a href="profile.html" class="footer-link">Profile</a>
-          <a href="settings.html" class="footer-link">Settings</a>
-        </div>
-      </div>
-      <div>
-        <h5>Company</h5>
-        <div class="footer-links">
-          <a href="#" class="footer-link">About Us</a>
-          <a href="#" class="footer-link">Blog</a>
-          <a href="#" class="footer-link">Careers</a>
-          <a href="#" class="footer-link">Contact</a>
-          <a href="#" class="footer-link">Privacy Policy</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2025 JobTracker. All rights reserved.</p>
-      <div class="footer-bottom-links">
-        <a href="#" class="footer-link">Terms</a>
-        <a href="#" class="footer-link">Privacy</a>
-        <a href="#" class="footer-link">Cookies</a>
-      </div>
-    </div>
-  </div>
-</footer>
 
-<script src="js/script.js"></script>
+        <!-- Dashboard mock -->
+        <div class="hero-dashboard-mock">
+          <div class="mock-header">
+            <div class="mock-dots">
+              <div class="mock-dot"></div>
+              <div class="mock-dot"></div>
+              <div class="mock-dot"></div>
+            </div>
+            <div class="mock-title">JobTracker Dashboard</div>
+            <div style="font-size:0.7rem;color:rgba(255,255,255,0.5);">● Live</div>
+          </div>
+          <div class="mock-cards">
+            <div class="mock-card">
+              <div class="mock-card-value">24</div>
+              <div class="mock-card-label">Total Applied</div>
+            </div>
+            <div class="mock-card" style="background:rgba(16,185,129,0.2);">
+              <div class="mock-card-value" style="color:#34D399;">3</div>
+              <div class="mock-card-label">Offers</div>
+            </div>
+            <div class="mock-card" style="background:rgba(124,58,237,0.2);">
+              <div class="mock-card-value" style="color:#A78BFA;">8</div>
+              <div class="mock-card-label">Interviews</div>
+            </div>
+            <div class="mock-card" style="background:rgba(245,158,11,0.2);">
+              <div class="mock-card-value" style="color:#FCD34D;">5</div>
+              <div class="mock-card-label">Pending</div>
+            </div>
+          </div>
+          <div class="mock-chart">
+            <div class="mock-bar" style="height:40%;background:rgba(99,179,237,0.7);"></div>
+            <div class="mock-bar" style="height:65%;background:rgba(99,179,237,0.7);"></div>
+            <div class="mock-bar" style="height:50%;background:rgba(99,179,237,0.7);"></div>
+            <div class="mock-bar" style="height:80%;background:rgba(99,179,237,0.7);"></div>
+            <div class="mock-bar" style="height:60%;background:rgba(99,179,237,0.7);"></div>
+            <div class="mock-bar" style="height:100%;background:rgba(255,255,255,0.9);"></div>
+            <div class="mock-bar" style="height:75%;background:rgba(99,179,237,0.7);"></div>
+          </div>
+          <div class="mock-items">
+            <div class="mock-item">
+              <div class="mock-item-logo" style="background:linear-gradient(135deg,#4285F4,#34A853);"></div>
+              <div class="mock-item-text">
+                <div class="mock-item-title" style="width:80%;"></div>
+                <div class="mock-item-sub"></div>
+              </div>
+              <div class="mock-item-badge" style="background:rgba(124,58,237,0.6);"></div>
+            </div>
+            <div class="mock-item">
+              <div class="mock-item-logo" style="background:linear-gradient(135deg,#00A4EF,#7FBA00);"></div>
+              <div class="mock-item-text">
+                <div class="mock-item-title" style="width:70%;"></div>
+                <div class="mock-item-sub"></div>
+              </div>
+              <div class="mock-item-badge" style="background:rgba(16,185,129,0.6);"></div>
+            </div>
+            <div class="mock-item">
+              <div class="mock-item-logo" style="background:linear-gradient(135deg,#FF9900,#146EB4);"></div>
+              <div class="mock-item-text">
+                <div class="mock-item-title" style="width:75%;"></div>
+                <div class="mock-item-sub"></div>
+              </div>
+              <div class="mock-item-badge" style="background:rgba(245,158,11,0.6);"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating badge bottom-right -->
+        <div class="hero-badge-float bottom-right">
+          <span class="hero-badge-icon">📈</span>
+          <div>
+            <div style="font-size:0.75rem;color:var(--KKimary);">+23% Response Rate</div>
+            <div style="font-size:0.68rem;color:var(--text-muted);">This month</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUSTED BY SECTION -->
+  <section style="padding:40px 0;background:var(--bg-card);border-bottom:1px solid var(--gray-200);">
+    <div class="container">
+      <p
+        style="text-align:center;font-size:0.85rem;font-weight:600;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:28px;">
+        Trusted by job seekers at top companies</p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;opacity:0.5;">
+        <div style="font-weight:800;font-size:1.2rem;color:var(--text-KKimary);">Google</div>
+        <div style="font-weight:800;font-size:1.2rem;color:var(--text-KKimary);">Microsoft</div>
+        <div style="font-weight:800;font-size:1.2rem;color:var(--text-KKimary);">Amazon</div>
+        <div style="font-weight:800;font-size:1.2rem;color:var(--text-KKimary);">Adobe</div>
+        <div style="font-weight:800;font-size:1.2rem;color:var(--text-KKimary);">Deloitte</div>
+        <div style="font-weight:800;font-size:1.2rem;color:var(--text-KKimary);">Infosys</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section class="section" id="features" style="background:var(--bg-KKimary);">
+    <div class="container">
+      <div class="section-header scroll-reveal">
+        <div class="section-eyebrow">✨ Features</div>
+        <h2>Everything you need to succeed</h2>
+        <p>Powerful tools designed to streamline your job search — from tracking applications to analyzing your
+          performance trends.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card scroll-reveal scroll-reveal-delay-1">
+          <div class="feature-icon" style="background:var(--KKimary-50);color:var(--KKimary);">📋</div>
+          <h3>Smart Application Tracking</h3>
+          <p>Track every application with detailed status updates. Never miss a deadline or follow-up with smart
+            reminders and organized dashboards.</p>
+        </div>
+        <div class="feature-card scroll-reveal scroll-reveal-delay-2">
+          <div class="feature-icon" style="background:var(--secondary-50);color:var(--secondary);">📊</div>
+          <h3>Advanced Analytics</h3>
+          <p>Visualize your job search performance with beautiful charts. Understand response rates, peak application
+            times, and industry trends.</p>
+        </div>
+        <div class="feature-card scroll-reveal scroll-reveal-delay-3">
+          <div class="feature-icon" style="background:var(--accent-50);color:var(--accent);">⚡</div>
+          <h3>One-Click Add</h3>
+          <p>Add new applications in seconds with our intuitive form. Attach resumes, notes, and contact information all
+            in one place.</p>
+        </div>
+        <div class="feature-card scroll-reveal scroll-reveal-delay-1">
+          <div class="feature-icon" style="background:var(--warning-50);color:var(--warning);">🔔</div>
+          <h3>Smart Notifications</h3>
+          <p>Get timely reminders for upcoming deadlines, scheduled interviews, and follow-up actions — customized to
+            your workflow.</p>
+        </div>
+        <div class="feature-card scroll-reveal scroll-reveal-delay-2">
+          <div class="feature-icon" style="background:var(--info-50);color:var(--info);">📱</div>
+          <h3>Mobile Responsive</h3>
+          <p>Track your applications from anywhere. Our fully responsive design ensures a seamless experience on any
+            device or screen size.</p>
+        </div>
+        <div class="feature-card scroll-reveal scroll-reveal-delay-3">
+          <div class="feature-icon" style="background:#FFF7ED;color:#EA580C;">🔒</div>
+          <h3>KKivacy First</h3>
+          <p>Your data stays yours. We use industry-standard encryption and never sell your personal information to
+            third parties.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US SECTION -->
+  <section class="section" style="background:var(--bg-secondary);">
+    <div class="container">
+      <div class="why-grid">
+        <!-- Visual side -->
+        <div class="why-visual scroll-reveal scroll-reveal-delay-1">
+          <div class="why-visual-card">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+              <div
+                style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#4285F4,#34A853);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">
+                G</div>
+              <div>
+                <div style="font-weight:700;font-size:0.9rem;">Google</div>
+                <div style="font-size:0.78rem;color:var(--text-muted);">Software Engineer Intern</div>
+              </div>
+              <div style="margin-left:auto;"><span class="badge badge-interview">Interview</span></div>
+            </div>
+            <div style="display:flex;gap:8px;font-size:0.8rem;color:var(--text-muted);">
+              <span>📅 Applied Dec 10</span>
+              <span>·</span>
+              <span>⏰ Jan 15 deadline</span>
+            </div>
+            <div class="KKogress-bar" style="margin-top:12px;">
+              <div class="KKogress-fill" data-width="65" style="width:65%;"></div>
+            </div>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">65% KKocess completed</div>
+          </div>
+
+          <div class="why-visual-card">
+            <div style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:12px;">📊 This
+              Week's Stats</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+              <div style="text-align:center;padding:12px 8px;background:var(--KKimary-50);border-radius:10px;">
+                <div style="font-size:1.4rem;font-weight:800;color:var(--KKimary);">7</div>
+                <div style="font-size:0.72rem;color:var(--text-muted);">Applied</div>
+              </div>
+              <div style="text-align:center;padding:12px 8px;background:var(--secondary-50);border-radius:10px;">
+                <div style="font-size:1.4rem;font-weight:800;color:var(--secondary);">3</div>
+                <div style="font-size:0.72rem;color:var(--text-muted);">Interviews</div>
+              </div>
+              <div style="text-align:center;padding:12px 8px;background:var(--accent-50);border-radius:10px;">
+                <div style="font-size:1.4rem;font-weight:800;color:var(--accent);">1</div>
+                <div style="font-size:0.72rem;color:var(--text-muted);">Offer</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="why-visual-card">
+            <div style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:12px;">🔔 Recent
+              Notifications</div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="display:flex;gap:10px;align-items:center;">
+                <span style="font-size:1.1rem;">🎉</span>
+                <div>
+                  <div style="font-size:0.82rem;font-weight:600;">Interview Scheduled</div>
+                  <div style="font-size:0.75rem;color:var(--text-muted);">Google · Tomorrow 10:00 AM</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:10px;align-items:center;">
+                <span style="font-size:1.1rem;">⏰</span>
+                <div>
+                  <div style="font-size:0.82rem;font-weight:600;">Deadline Reminder</div>
+                  <div style="font-size:0.75rem;color:var(--text-muted);">Microsoft · 3 days left</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text side -->
+        <div class="scroll-reveal scroll-reveal-delay-2">
+          <div class="section-eyebrow" style="margin-bottom:16px;">💡 Why JobTracker</div>
+          <h2 style="margin-bottom:24px;">Built for the modern job seeker</h2>
+          <div class="why-feature">
+            <div class="why-icon" style="background:var(--KKimary-50);color:var(--KKimary);">🎯</div>
+            <div>
+              <h4>Stay Organized, Stay Ahead</h4>
+              <p>Consolidate all your applications in one place. No more lost emails or forgotten follow-ups —
+                everything is tracked and organized.</p>
+            </div>
+          </div>
+          <div class="why-feature">
+            <div class="why-icon" style="background:var(--secondary-50);color:var(--secondary);">📈</div>
+            <div>
+              <h4>Data-Driven Decisions</h4>
+              <p>Analyze what's working and what's not. Understand which industries, companies, and roles give you the
+                best response rates.</p>
+            </div>
+          </div>
+          <div class="why-feature">
+            <div class="why-icon" style="background:var(--accent-50);color:var(--accent);">🚀</div>
+            <div>
+              <h4>Land Faster, Apply Smarter</h4>
+              <p>Our users land interviews 2x faster. With better tracking and insights, you'll optimize your apKKoach
+                and increase your success rate.</p>
+            </div>
+          </div>
+          <a href="register.html" class="btn btn-KKimary btn-lg" style="margin-top:8px;">Start for Free Today →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS SECTION -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="scroll-reveal">
+          <div class="stat-item-value" data-count="50" data-suffix="K+">50K+</div>
+          <div class="stat-item-label">Active Job Seekers</div>
+        </div>
+        <div class="scroll-reveal scroll-reveal-delay-1">
+          <div class="stat-item-value" data-count="2.4" data-suffix="M">2.4M</div>
+          <div class="stat-item-label">Applications Tracked</div>
+        </div>
+        <div class="scroll-reveal scroll-reveal-delay-2">
+          <div class="stat-item-value" data-count="89" data-suffix="%">89%</div>
+          <div class="stat-item-label">Offer Success Rate</div>
+        </div>
+        <div class="scroll-reveal scroll-reveal-delay-3">
+          <div class="stat-item-value" data-count="4.9" data-suffix="★">4.9★</div>
+          <div class="stat-item-label">Average Rating</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" style="background:var(--bg-KKimary);">
+    <div class="container">
+      <div class="section-header scroll-reveal">
+        <div class="section-eyebrow">🛠️ How It Works</div>
+        <h2>Get started in 3 easy steps</h2>
+        <p>JobTracker is designed to get you up and running in minutes, not hours.</p>
+      </div>
+      <div class="three-col-grid">
+        <div class="scroll-reveal scroll-reveal-delay-1" style="text-align:center;padding:32px 24px;">
+          <div
+            style="width:72px;height:72px;background:var(--gradient-KKimary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 20px;box-shadow:var(--shadow-KKimary);">
+            1️⃣</div>
+          <h3 style="margin-bottom:12px;">Create Your Account</h3>
+          <p>Sign up for free in under 60 seconds. No credit card required. Just your email and you're ready to go.</p>
+        </div>
+        <div class="scroll-reveal scroll-reveal-delay-2" style="text-align:center;padding:32px 24px;">
+          <div
+            style="width:72px;height:72px;background:var(--gradient-KKimary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 20px;box-shadow:var(--shadow-KKimary);">
+            2️⃣</div>
+          <h3 style="margin-bottom:12px;">Add Applications</h3>
+          <p>Quickly add your job applications with company details, role, status, and deadlines. Import from multiple
+            sources.</p>
+        </div>
+        <div class="scroll-reveal scroll-reveal-delay-3" style="text-align:center;padding:32px 24px;">
+          <div
+            style="width:72px;height:72px;background:var(--gradient-KKimary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 20px;box-shadow:var(--shadow-KKimary);">
+            3️⃣</div>
+          <h3 style="margin-bottom:12px;">Track & Analyze</h3>
+          <p>Monitor your KKogress in real-time, get smart insights, and land your dream job faster with data-driven
+            decisions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section class="section" style="background:var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header scroll-reveal">
+        <div class="section-eyebrow">💬 Testimonials</div>
+        <h2>Loved by thousands of job seekers</h2>
+        <p>Don't take our word for it — hear from people who've landed their dream jobs using JobTracker.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card scroll-reveal scroll-reveal-delay-1">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"JobTracker completely transformed my job search. I went from chaotically applying
+            everywhere to a strategic, organized apKKoach. Got 3 offers within 6 weeks!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" style="background:var(--gradient-KKimary);">KK</div>
+            <div>
+              <div class="testimonial-name">Kowshik Kuncham</div>
+              <div class="testimonial-role">SWE at Google · IIT Bombay</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card scroll-reveal scroll-reveal-delay-2">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"The analytics dashboard is incredible. I discovered I had a much better response
+            rate on Tuesdays, so I started sending applications then. Simple insight, huge impact."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" style="background:var(--gradient-accent);">AK</div>
+            <div>
+              <div class="testimonial-name">Arjun Kumar</div>
+              <div class="testimonial-role">KKoduct Manager at Microsoft</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card scroll-reveal scroll-reveal-delay-3">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"As a final-year student juggling 50+ applications, JobTracker was a lifesaver.
+            The deadline reminders alone saved me from missing 3 critical applications."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" style="background:linear-gradient(135deg,#F59E0B,#EF4444);">SM</div>
+            <div>
+              <div class="testimonial-name">Sneha Mehta</div>
+              <div class="testimonial-role">Data Analyst at Amazon</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="section" style="background:var(--bg-KKimary);">
+    <div class="container">
+      <div
+        style="background:var(--gradient-KKimary);border-radius:var(--radius-2xl);padding:64px 48px;text-align:center;position:relative;overflow:hidden;">
+        <div
+          style="position:absolute;top:-50%;left:-20%;width:300px;height:300px;background:radial-gradient(circle,rgba(255,255,255,0.1) 0%,transparent 70%);border-radius:50%;">
+        </div>
+        <div
+          style="position:absolute;bottom:-50%;right:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(16,185,129,0.2) 0%,transparent 70%);border-radius:50%;">
+        </div>
+        <div style="position:relative;z-index:1;">
+          <div
+            style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;padding:6px 16px;border-radius:999px;font-size:0.82rem;font-weight:600;margin-bottom:20px;backdrop-filter:blur(10px);">
+            🎯 Free forever plan available
+          </div>
+          <h2 style="color:white;font-size:2.4rem;margin-bottom:16px;">Ready to land your dream job?</h2>
+          <p style="color:rgba(255,255,255,0.85);font-size:1.05rem;max-width:520px;margin:0 auto 36px;">Join 50,000+
+            KKofessionals who use JobTracker to organize their search and land offers at top companies.</p>
+          <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+            <a href="register.html" class="btn-hero-KKimary">
+              🚀 Get Started Free — No Credit Card
+            </a>
+            <a href="dashboard.html" class="btn-hero-outline">
+              📊 Explore Dashboard
+            </a>
+          </div>
+          <p style="color:rgba(255,255,255,0.6);font-size:0.82rem;margin-top:20px;">Setup takes under 2 minutes · No
+            credit card needed</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <div class="footer-logo-icon">💼</div>
+            <span class="footer-brand">JobTracker</span>
+          </div>
+          <p class="footer-desc">The smartest way to manage your job search. Track applications, analyze trends, and
+            land your dream role faster with powerful insights.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn" aria-label="Twitter">𝕏</a>
+            <a href="#" class="social-btn" aria-label="LinkedIn">in</a>
+            <a href="#" class="social-btn" aria-label="GitHub">⌥</a>
+            <a href="#" class="social-btn" aria-label="Instagram">📷</a>
+          </div>
+        </div>
+        <div>
+          <h5>KKoduct</h5>
+          <div class="footer-links">
+            <a href="dashboard.html" class="footer-link">Dashboard</a>
+            <a href="applications.html" class="footer-link">Applications</a>
+            <a href="analytics.html" class="footer-link">Analytics</a>
+            <a href="add-application.html" class="footer-link">Add Application</a>
+          </div>
+        </div>
+        <div>
+          <h5>Account</h5>
+          <div class="footer-links">
+            <a href="login.html" class="footer-link">Login</a>
+            <a href="register.html" class="footer-link">Sign Up</a>
+            <a href="KKofile.html" class="footer-link">KKofile</a>
+            <a href="settings.html" class="footer-link">Settings</a>
+          </div>
+        </div>
+        <div>
+          <h5>Company</h5>
+          <div class="footer-links">
+            <a href="#" class="footer-link">About Us</a>
+            <a href="#" class="footer-link">Blog</a>
+            <a href="#" class="footer-link">Careers</a>
+            <a href="#" class="footer-link">Contact</a>
+            <a href="#" class="footer-link">KKivacy Policy</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 JobTracker. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#" class="footer-link">Terms</a>
+          <a href="#" class="footer-link">KKivacy</a>
+          <a href="#" class="footer-link">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
 </body>
+
 </html>

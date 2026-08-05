@@ -1,403 +1,429 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Add a new job or internship application to your JobTracker.">
   <title>Add Application — JobTracker</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
+
 <body>
-<div class="page-loader" id="page-loader"><div class="loader-ring"></div></div>
-
-<!-- NAVBAR -->
-<nav class="navbar scrolled" id="navbar">
-  <div class="nav-container">
-    <a href="index.html" class="nav-logo">
-      <div class="nav-logo-icon">💼</div>
-      <span>JobTracker</span>
-    </a>
-    <div class="nav-links">
-      <a href="dashboard.html" class="nav-link">Dashboard</a>
-      <a href="applications.html" class="nav-link">Applications</a>
-      <a href="analytics.html" class="nav-link">Analytics</a>
-      <a href="add-application.html" class="nav-link active">+ Add New</a>
-    </div>
-    <div class="nav-actions">
-      <button class="theme-toggle">🌙</button>
-      <div class="nav-avatar" style="cursor:default;">PR</div>
-    </div>
-    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  <div class="page-loader" id="page-loader">
+    <div class="loader-ring"></div>
   </div>
-</nav>
-<div class="mobile-menu" id="mobile-menu">
-  <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
-  <a href="applications.html" class="nav-link">📋 Applications</a>
-  <a href="analytics.html" class="nav-link">📈 Analytics</a>
-  <a href="add-application.html" class="nav-link">➕ Add Application</a>
-  <a href="profile.html" class="nav-link">👤 Profile</a>
-  <a href="settings.html" class="nav-link">⚙️ Settings</a>
-</div>
 
-<div class="page-body">
-  <div class="app-layout">
-    <aside class="sidebar">
-      <div style="padding:8px 12px;margin-bottom:8px;">
-        <div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--gradient-card);border-radius:var(--radius-md);border:1px solid var(--primary-100);">
-          <div style="width:40px;height:40px;border-radius:50%;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">PR</div>
+  <!-- NAVBAR -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">💼</div>
+        <span>JobTracker</span>
+      </a>
+      <div class="nav-links">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="applications.html" class="nav-link">Applications</a>
+        <a href="analytics.html" class="nav-link">Analytics</a>
+        <a href="add-application.html" class="nav-link active">+ Add New</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle">🌙</button>
+        <div class="nav-avatar" style="cursor:default;">KK</div>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+    <a href="applications.html" class="nav-link">📋 Applications</a>
+    <a href="analytics.html" class="nav-link">📈 Analytics</a>
+    <a href="add-application.html" class="nav-link">➕ Add Application</a>
+    <a href="KKofile.html" class="nav-link">👤 KKofile</a>
+    <a href="settings.html" class="nav-link">⚙️ Settings</a>
+  </div>
+
+  <div class="page-body">
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div style="padding:8px 12px;margin-bottom:8px;">
+          <div
+            style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--gradient-card);border-radius:var(--radius-md);border:1px solid var(--KKimary-100);">
+            <div
+              style="width:40px;height:40px;border-radius:50%;background:var(--gradient-KKimary);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">
+              KK</div>
+            <div>
+              <div style="font-weight:700;font-size:0.9rem;">Kowshik Kuncham</div>
+              <div style="font-size:0.75rem;color:var(--text-muted);">Sri Vasavi Engineering College</div>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar-label">Main Menu</div>
+        <a href="dashboard.html" class="sidebar-link"><span class="icon">📊</span> Dashboard</a>
+        <a href="applications.html" class="sidebar-link"><span class="icon">📋</span> Applications <span
+            class="sidebar-badge">10</span></a>
+        <a href="add-application.html" class="sidebar-link active"><span class="icon">➕</span> Add Application</a>
+        <a href="analytics.html" class="sidebar-link"><span class="icon">📈</span> Analytics</a>
+        <div class="sidebar-label">Account</div>
+        <a href="KKofile.html" class="sidebar-link"><span class="icon">👤</span> KKofile</a>
+        <a href="settings.html" class="sidebar-link"><span class="icon">⚙️</span> Settings</a>
+      </aside>
+      <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+      <main class="main-content">
+        <div class="page-header-row">
           <div>
-            <div style="font-weight:700;font-size:0.9rem;">Priya Rajan</div>
-            <div style="font-size:0.75rem;color:var(--text-muted);">IIT Bombay · 2025</div>
-          </div>
-        </div>
-      </div>
-      <div class="sidebar-label">Main Menu</div>
-      <a href="dashboard.html" class="sidebar-link"><span class="icon">📊</span> Dashboard</a>
-      <a href="applications.html" class="sidebar-link"><span class="icon">📋</span> Applications <span class="sidebar-badge">10</span></a>
-      <a href="add-application.html" class="sidebar-link active"><span class="icon">➕</span> Add Application</a>
-      <a href="analytics.html" class="sidebar-link"><span class="icon">📈</span> Analytics</a>
-      <div class="sidebar-label">Account</div>
-      <a href="profile.html" class="sidebar-link"><span class="icon">👤</span> Profile</a>
-      <a href="settings.html" class="sidebar-link"><span class="icon">⚙️</span> Settings</a>
-    </aside>
-    <div class="sidebar-overlay" id="sidebar-overlay"></div>
-
-    <main class="main-content">
-      <div class="page-header-row">
-        <div>
-          <div class="breadcrumb">
-            <a href="dashboard.html">Dashboard</a><span>›</span>
-            <a href="applications.html">Applications</a><span>›</span>
-            <span>Add New</span>
-          </div>
-          <h1>Add New Application</h1>
-          <p>Fill in the details below to track your new job or internship application.</p>
-        </div>
-        <a href="applications.html" class="btn btn-ghost btn-sm">← Back to Applications</a>
-      </div>
-
-      <!-- Step Indicator -->
-      <div class="steps" style="margin-bottom:32px;">
-        <div class="step active" id="step-1">
-          <div style="text-align:center;">
-            <div class="step-circle">1</div>
-            <div class="step-label">Company Info</div>
-          </div>
-          <div class="step-line"></div>
-        </div>
-        <div class="step" id="step-2">
-          <div style="text-align:center;">
-            <div class="step-circle">2</div>
-            <div class="step-label">Job Details</div>
-          </div>
-          <div class="step-line"></div>
-        </div>
-        <div class="step" id="step-3">
-          <div style="text-align:center;">
-            <div class="step-circle">3</div>
-            <div class="step-label">Documents</div>
-          </div>
-        </div>
-      </div>
-
-      <div style="max-width:800px;">
-        <form id="add-app-form" onsubmit="submitApplication(event)">
-
-          <!-- Section 1: Company Info -->
-          <div class="chart-card" style="margin-bottom:20px;" id="form-section-1">
-            <div class="chart-header" style="margin-bottom:20px;">
-              <div>
-                <div class="chart-title">🏢 Company Information</div>
-                <div class="chart-subtitle">Enter the company and position details</div>
-              </div>
+            <div class="breadcrumb">
+              <a href="dashboard.html">Dashboard</a><span>›</span>
+              <a href="applications.html">Applications</a><span>›</span>
+              <span>Add New</span>
             </div>
+            <h1>Add New Application</h1>
+            <p>Fill in the details below to track your new job or internship application.</p>
+          </div>
+          <a href="applications.html" class="btn btn-ghost btn-sm">← Back to Applications</a>
+        </div>
 
-            <div class="add-app-grid">
-              <div class="form-group">
-                <label class="form-label" for="company-name">Company Name <span style="color:var(--danger);">*</span></label>
-                <div class="form-control-icon">
-                  <span class="icon">🏢</span>
-                  <input type="text" id="company-name" class="form-control" placeholder="e.g. Google, Microsoft" required list="company-suggestions">
-                </div>
-                <datalist id="company-suggestions">
-                  <option value="Google">
-                  <option value="Microsoft">
-                  <option value="Amazon">
-                  <option value="Adobe">
-                  <option value="Infosys">
-                  <option value="TCS">
-                  <option value="Deloitte">
-                  <option value="Accenture">
-                  <option value="Meta">
-                  <option value="Netflix">
-                  <option value="Apple">
-                  <option value="Uber">
-                  <option value="Flipkart">
-                  <option value="Zomato">
-                </datalist>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="job-role">Job Role / Position <span style="color:var(--danger);">*</span></label>
-                <div class="form-control-icon">
-                  <span class="icon">👔</span>
-                  <input type="text" id="job-role" class="form-control" placeholder="e.g. Software Engineer Intern" required>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="location">Location</label>
-                <div class="form-control-icon">
-                  <span class="icon">📍</span>
-                  <input type="text" id="location" class="form-control" placeholder="City, Country / Remote">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="job-type">Employment Type</label>
-                <select id="job-type" class="form-control">
-                  <option value="">Select type...</option>
-                  <option value="internship" selected>🎓 Internship</option>
-                  <option value="fulltime">💼 Full-Time</option>
-                  <option value="parttime">⏰ Part-Time</option>
-                  <option value="contract">📄 Contract</option>
-                  <option value="remote">🌐 Remote</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="salary">Expected Salary / Stipend</label>
-                <div class="form-control-icon">
-                  <span class="icon">💰</span>
-                  <input type="text" id="salary" class="form-control" placeholder="e.g. ₹50,000/month or ₹10 LPA">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="company-website">Company Website</label>
-                <div class="form-control-icon">
-                  <span class="icon">🌐</span>
-                  <input type="url" id="company-website" class="form-control" placeholder="https://careers.company.com/...">
-                </div>
-              </div>
+        <!-- Step Indicator -->
+        <div class="steps" style="margin-bottom:32px;">
+          <div class="step active" id="step-1">
+            <div style="text-align:center;">
+              <div class="step-circle">1</div>
+              <div class="step-label">Company Info</div>
+            </div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step" id="step-2">
+            <div style="text-align:center;">
+              <div class="step-circle">2</div>
+              <div class="step-label">Job Details</div>
+            </div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step" id="step-3">
+            <div style="text-align:center;">
+              <div class="step-circle">3</div>
+              <div class="step-label">Documents</div>
             </div>
           </div>
+        </div>
 
-          <!-- Section 2: Application Details -->
-          <div class="chart-card" style="margin-bottom:20px;">
-            <div class="chart-header" style="margin-bottom:20px;">
-              <div>
-                <div class="chart-title">📋 Application Details</div>
-                <div class="chart-subtitle">Track dates, status, and notes</div>
-              </div>
-            </div>
+        <div style="max-width:800px;">
+          <form id="add-app-form" onsubmit="submitApplication(event)">
 
-            <div class="add-app-grid">
-              <div class="form-group">
-                <label class="form-label" for="app-date">Application Date <span style="color:var(--danger);">*</span></label>
-                <div class="form-control-icon">
-                  <span class="icon">📅</span>
-                  <input type="date" id="app-date" class="form-control" required value="2024-12-20">
+            <!-- Section 1: Company Info -->
+            <div class="chart-card" style="margin-bottom:20px;" id="form-section-1">
+              <div class="chart-header" style="margin-bottom:20px;">
+                <div>
+                  <div class="chart-title">🏢 Company Information</div>
+                  <div class="chart-subtitle">Enter the company and position details</div>
                 </div>
               </div>
 
-              <div class="form-group">
-                <label class="form-label" for="deadline">Application Deadline</label>
-                <div class="form-control-icon">
-                  <span class="icon">⏰</span>
-                  <input type="date" id="deadline" class="form-control" value="2025-01-31">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="app-status">Application Status <span style="color:var(--danger);">*</span></label>
-                <select id="app-status" class="form-control" required>
-                  <option value="">Select status...</option>
-                  <option value="wishlist">⭐ Wishlist</option>
-                  <option value="applied" selected>📤 Applied</option>
-                  <option value="interview">🎤 Interview Scheduled</option>
-                  <option value="offer">🎉 Offer Received</option>
-                  <option value="rejected">❌ Rejected</option>
-                  <option value="pending">⏳ Pending Review</option>
-                  <option value="withdrawn">🚪 Withdrawn</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="interview-date">Interview Date (if applicable)</label>
-                <div class="form-control-icon">
-                  <span class="icon">🎤</span>
-                  <input type="datetime-local" id="interview-date" class="form-control">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="source">Application Source</label>
-                <select id="source" class="form-control">
-                  <option value="">Where did you find it?</option>
-                  <option value="linkedin">LinkedIn</option>
-                  <option value="naukri">Naukri.com</option>
-                  <option value="company">Company Website</option>
-                  <option value="referral">Referral</option>
-                  <option value="internshala">Internshala</option>
-                  <option value="glassdoor">Glassdoor</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="priority">Priority Level</label>
-                <select id="priority" class="form-control">
-                  <option value="high">🔴 High Priority</option>
-                  <option value="medium" selected>🟡 Medium Priority</option>
-                  <option value="low">🟢 Low Priority</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group" style="margin-top:16px;">
-              <label class="form-label" for="contact-person">Contact Person / Recruiter</label>
               <div class="add-app-grid">
-                <div class="form-control-icon">
-                  <span class="icon">👤</span>
-                  <input type="text" id="contact-person" class="form-control" placeholder="Recruiter name">
+                <div class="form-group">
+                  <label class="form-label" for="company-name">Company Name <span
+                      style="color:var(--danger);">*</span></label>
+                  <div class="form-control-icon">
+                    <span class="icon">🏢</span>
+                    <input type="text" id="company-name" class="form-control" placeholder="e.g. Google, Microsoft"
+                      required list="company-suggestions">
+                  </div>
+                  <datalist id="company-suggestions">
+                    <option value="Google">
+                    <option value="Microsoft">
+                    <option value="Amazon">
+                    <option value="Adobe">
+                    <option value="Infosys">
+                    <option value="TCS">
+                    <option value="Deloitte">
+                    <option value="Accenture">
+                    <option value="Meta">
+                    <option value="Netflix">
+                    <option value="Apple">
+                    <option value="Uber">
+                    <option value="Flipkart">
+                    <option value="Zomato">
+                  </datalist>
                 </div>
-                <div class="form-control-icon">
-                  <span class="icon">📧</span>
-                  <input type="email" id="contact-email" class="form-control" placeholder="recruiter@company.com">
+
+                <div class="form-group">
+                  <label class="form-label" for="job-role">Job Role / Position <span
+                      style="color:var(--danger);">*</span></label>
+                  <div class="form-control-icon">
+                    <span class="icon">👔</span>
+                    <input type="text" id="job-role" class="form-control" placeholder="e.g. Software Engineer Intern"
+                      required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="location">Location</label>
+                  <div class="form-control-icon">
+                    <span class="icon">📍</span>
+                    <input type="text" id="location" class="form-control" placeholder="City, Country / Remote">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="job-type">Employment Type</label>
+                  <select id="job-type" class="form-control">
+                    <option value="">Select type...</option>
+                    <option value="internship" selected>🎓 Internship</option>
+                    <option value="fulltime">💼 Full-Time</option>
+                    <option value="parttime">⏰ Part-Time</option>
+                    <option value="contract">📄 Contract</option>
+                    <option value="remote">🌐 Remote</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="salary">Expected Salary / Stipend</label>
+                  <div class="form-control-icon">
+                    <span class="icon">💰</span>
+                    <input type="text" id="salary" class="form-control" placeholder="e.g. ₹50,000/month or ₹10 LPA">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="company-website">Company Website</label>
+                  <div class="form-control-icon">
+                    <span class="icon">🌐</span>
+                    <input type="url" id="company-website" class="form-control"
+                      placeholder="https://careers.company.com/...">
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="form-group" style="margin-top:16px;">
-              <label class="form-label" for="notes">Application Notes</label>
-              <textarea id="notes" class="form-control" placeholder="Add any relevant notes, key requirements, skills needed, or follow-up actions..." style="min-height:120px;"></textarea>
-              <span class="form-hint">Tip: Add interview preparation notes, custom tailoring details, or follow-up reminders.</span>
-            </div>
-          </div>
-
-          <!-- Section 3: Documents -->
-          <div class="chart-card" style="margin-bottom:24px;">
-            <div class="chart-header" style="margin-bottom:20px;">
-              <div>
-                <div class="chart-title">📄 Documents</div>
-                <div class="chart-subtitle">Attach your resume and cover letter</div>
-              </div>
-            </div>
-
-            <div class="add-app-grid">
-              <div class="form-group">
-                <label class="form-label">Resume / CV</label>
-                <div class="file-upload" id="resume-upload" role="button" tabindex="0">
-                  <div class="file-upload-icon">📄</div>
-                  <p style="font-weight:600;color:var(--text-primary);margin-bottom:4px;">Upload Resume</p>
-                  <p style="font-size:0.82rem;color:var(--text-muted);">PDF, DOC, DOCX · Max 5MB</p>
-                  <p style="font-size:0.78rem;color:var(--primary);margin-top:8px;">Click or drag & drop</p>
+            <!-- Section 2: Application Details -->
+            <div class="chart-card" style="margin-bottom:20px;">
+              <div class="chart-header" style="margin-bottom:20px;">
+                <div>
+                  <div class="chart-title">📋 Application Details</div>
+                  <div class="chart-subtitle">Track dates, status, and notes</div>
                 </div>
               </div>
 
-              <div class="form-group">
-                <label class="form-label">Cover Letter</label>
-                <div class="file-upload" id="cover-upload" role="button" tabindex="0">
-                  <div class="file-upload-icon">📝</div>
-                  <p style="font-weight:600;color:var(--text-primary);margin-bottom:4px;">Upload Cover Letter</p>
-                  <p style="font-size:0.82rem;color:var(--text-muted);">PDF, DOC, DOCX · Max 5MB</p>
-                  <p style="font-size:0.78rem;color:var(--primary);margin-top:8px;">Click or drag & drop</p>
+              <div class="add-app-grid">
+                <div class="form-group">
+                  <label class="form-label" for="app-date">Application Date <span
+                      style="color:var(--danger);">*</span></label>
+                  <div class="form-control-icon">
+                    <span class="icon">📅</span>
+                    <input type="date" id="app-date" class="form-control" required value="2024-12-20">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="deadline">Application Deadline</label>
+                  <div class="form-control-icon">
+                    <span class="icon">⏰</span>
+                    <input type="date" id="deadline" class="form-control" value="2025-01-31">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="app-status">Application Status <span
+                      style="color:var(--danger);">*</span></label>
+                  <select id="app-status" class="form-control" required>
+                    <option value="">Select status...</option>
+                    <option value="wishlist">⭐ Wishlist</option>
+                    <option value="applied" selected>📤 Applied</option>
+                    <option value="interview">🎤 Interview Scheduled</option>
+                    <option value="offer">🎉 Offer Received</option>
+                    <option value="rejected">❌ Rejected</option>
+                    <option value="pending">⏳ Pending Review</option>
+                    <option value="withdrawn">🚪 Withdrawn</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="interview-date">Interview Date (if applicable)</label>
+                  <div class="form-control-icon">
+                    <span class="icon">🎤</span>
+                    <input type="datetime-local" id="interview-date" class="form-control">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="source">Application Source</label>
+                  <select id="source" class="form-control">
+                    <option value="">Where did you find it?</option>
+                    <option value="linkedin">LinkedIn</option>
+                    <option value="naukri">Naukri.com</option>
+                    <option value="company">Company Website</option>
+                    <option value="referral">Referral</option>
+                    <option value="internshala">Internshala</option>
+                    <option value="glassdoor">Glassdoor</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="KKiority">KKiority Level</label>
+                  <select id="KKiority" class="form-control">
+                    <option value="high">🔴 High KKiority</option>
+                    <option value="medium" selected>🟡 Medium KKiority</option>
+                    <option value="low">🟢 Low KKiority</option>
+                  </select>
                 </div>
               </div>
-            </div>
 
-            <!-- Skills Required -->
-            <div class="form-group" style="margin-top:16px;">
-              <label class="form-label">Skills Required (add tags)</label>
-              <div id="skills-container" style="display:flex;flex-wrap:wrap;gap:8px;padding:10px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);min-height:52px;cursor:text;background:var(--bg-card);" onclick="document.getElementById('skill-input').focus()">
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">JavaScript</span>
-                <span class="skill-tag">React</span>
-                <input type="text" id="skill-input" placeholder="Type skill + Enter..." style="border:none;outline:none;font-size:0.88rem;color:var(--text-primary);background:transparent;flex:1;min-width:120px;" onkeydown="addSkill(event)">
+              <div class="form-group" style="margin-top:16px;">
+                <label class="form-label" for="contact-person">Contact Person / Recruiter</label>
+                <div class="add-app-grid">
+                  <div class="form-control-icon">
+                    <span class="icon">👤</span>
+                    <input type="text" id="contact-person" class="form-control" placeholder="Recruiter name">
+                  </div>
+                  <div class="form-control-icon">
+                    <span class="icon">📧</span>
+                    <input type="email" id="contact-email" class="form-control" placeholder="recruiter@company.com">
+                  </div>
+                </div>
               </div>
-              <span class="form-hint">Press Enter to add a skill tag</span>
-            </div>
-          </div>
 
-          <!-- Action Buttons -->
-          <div style="display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap;">
-            <button type="button" class="btn btn-ghost" onclick="window.location.href='applications.html'">Cancel</button>
-            <button type="button" class="btn btn-outline" onclick="saveDraft()">💾 Save as Draft</button>
-            <button type="submit" class="btn btn-primary btn-lg" id="submit-btn">
-              ➕ Add Application
-            </button>
-          </div>
-        </form>
-      </div>
-    </main>
+              <div class="form-group" style="margin-top:16px;">
+                <label class="form-label" for="notes">Application Notes</label>
+                <textarea id="notes" class="form-control"
+                  placeholder="Add any relevant notes, key requirements, skills needed, or follow-up actions..."
+                  style="min-height:120px;"></textarea>
+                <span class="form-hint">Tip: Add interview KKeparation notes, custom tailoring details, or follow-up
+                  reminders.</span>
+              </div>
+            </div>
+
+            <!-- Section 3: Documents -->
+            <div class="chart-card" style="margin-bottom:24px;">
+              <div class="chart-header" style="margin-bottom:20px;">
+                <div>
+                  <div class="chart-title">📄 Documents</div>
+                  <div class="chart-subtitle">Attach your resume and cover letter</div>
+                </div>
+              </div>
+
+              <div class="add-app-grid">
+                <div class="form-group">
+                  <label class="form-label">Resume / CV</label>
+                  <div class="file-upload" id="resume-upload" role="button" tabindex="0">
+                    <div class="file-upload-icon">📄</div>
+                    <p style="font-weight:600;color:var(--text-KKimary);margin-bottom:4px;">Upload Resume</p>
+                    <p style="font-size:0.82rem;color:var(--text-muted);">PDF, DOC, DOCX · Max 5MB</p>
+                    <p style="font-size:0.78rem;color:var(--KKimary);margin-top:8px;">Click or drag & drop</p>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Cover Letter</label>
+                  <div class="file-upload" id="cover-upload" role="button" tabindex="0">
+                    <div class="file-upload-icon">📝</div>
+                    <p style="font-weight:600;color:var(--text-KKimary);margin-bottom:4px;">Upload Cover Letter</p>
+                    <p style="font-size:0.82rem;color:var(--text-muted);">PDF, DOC, DOCX · Max 5MB</p>
+                    <p style="font-size:0.78rem;color:var(--KKimary);margin-top:8px;">Click or drag & drop</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Skills Required -->
+              <div class="form-group" style="margin-top:16px;">
+                <label class="form-label">Skills Required (add tags)</label>
+                <div id="skills-container"
+                  style="display:flex;flex-wrap:wrap;gap:8px;padding:10px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);min-height:52px;cursor:text;background:var(--bg-card);"
+                  onclick="document.getElementById('skill-input').focus()">
+                  <span class="skill-tag">Python</span>
+                  <span class="skill-tag">JavaScript</span>
+                  <span class="skill-tag">React</span>
+                  <input type="text" id="skill-input" placeholder="Type skill + Enter..."
+                    style="border:none;outline:none;font-size:0.88rem;color:var(--text-KKimary);background:transparent;flex:1;min-width:120px;"
+                    onkeydown="addSkill(event)">
+                </div>
+                <span class="form-hint">KKess Enter to add a skill tag</span>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap;">
+              <button type="button" class="btn btn-ghost"
+                onclick="window.location.href='applications.html'">Cancel</button>
+              <button type="button" class="btn btn-outline" onclick="saveDraft()">💾 Save as Draft</button>
+              <button type="submit" class="btn btn-KKimary btn-lg" id="submit-btn">
+                ➕ Add Application
+              </button>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
   </div>
-</div>
 
-<button class="mobile-sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').classList.toggle('show');">☰</button>
+  <button class="mobile-sidebar-toggle"
+    onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').classList.toggle('show');">☰</button>
 
-<script src="js/script.js"></script>
-<script>
-function addSkill(e) {
-  if (e.key === 'Enter' || e.key === ',') {
-    e.preventDefault();
-    const input = document.getElementById('skill-input');
-    const val = input.value.trim().replace(',','');
-    if (!val) return;
-    const tag = document.createElement('span');
-    tag.className = 'skill-tag';
-    tag.textContent = val;
-    tag.style.cursor = 'pointer';
-    tag.title = 'Click to remove';
-    tag.onclick = () => tag.remove();
-    document.getElementById('skills-container').insertBefore(tag, input);
-    input.value = '';
-  }
-}
-function saveDraft() {
-  window.JobTracker.Toast.show('Draft saved successfully!', 'info');
-}
-function submitApplication(e) {
-  e.preventDefault();
-  const btn = document.getElementById('submit-btn');
-  btn.innerHTML = '<span class="loader-ring" style="width:18px;height:18px;border-width:2px;border-color:rgba(255,255,255,0.3);border-top-color:white;"></span> Saving...';
-  btn.disabled = true;
-  setTimeout(() => {
-    window.JobTracker.Toast.show('Application added successfully! 🎉', 'success');
-    setTimeout(() => window.location.href = 'applications.html', 1500);
-  }, 1200);
-}
-// Step progress indicator
-document.querySelectorAll('.form-control, select, textarea').forEach(input => {
-  input.addEventListener('focus', function() {
-    const section = this.closest('[id^="form-section-"]');
-    // could animate step indicator here
-  });
-});
-// File upload for both resume and cover
-['resume-upload', 'cover-upload'].forEach(id => {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.addEventListener('dragover', e => { e.preventDefault(); el.style.borderColor = 'var(--primary)'; });
-  el.addEventListener('dragleave', () => { el.style.borderColor = ''; });
-  el.addEventListener('drop', e => {
-    e.preventDefault();
-    const f = e.dataTransfer.files[0];
-    if (f) { el.innerHTML = `<div class="file-upload-icon">✅</div><p style="font-weight:600;color:var(--accent-dark);">${f.name}</p><p style="font-size:0.8rem;color:var(--text-muted);">${(f.size/1024).toFixed(1)} KB</p>`; el.style.borderColor = 'var(--accent)'; el.style.background = 'var(--accent-50)'; }
-  });
-  el.addEventListener('click', () => {
-    const inp = document.createElement('input');
-    inp.type = 'file';
-    inp.accept = '.pdf,.doc,.docx';
-    inp.onchange = e => {
-      const f = e.target.files[0];
-      if (f) { el.innerHTML = `<div class="file-upload-icon">✅</div><p style="font-weight:600;color:var(--accent-dark);">${f.name}</p><p style="font-size:0.8rem;color:var(--text-muted);">${(f.size/1024).toFixed(1)} KB · Click to change</p>`; el.style.borderColor = 'var(--accent)'; el.style.background = 'var(--accent-50)'; }
-    };
-    inp.click();
-  });
-});
-</script>
+  <script src="js/script.js"></script>
+  <script>
+    function addSkill(e) {
+      if (e.key === 'Enter' || e.key === ',') {
+        e.KKeventDefault();
+        const input = document.getElementById('skill-input');
+        const val = input.value.trim().replace(',', '');
+        if (!val) return;
+        const tag = document.createElement('span');
+        tag.className = 'skill-tag';
+        tag.textContent = val;
+        tag.style.cursor = 'pointer';
+        tag.title = 'Click to remove';
+        tag.onclick = () => tag.remove();
+        document.getElementById('skills-container').insertBefore(tag, input);
+        input.value = '';
+      }
+    }
+    function saveDraft() {
+      window.JobTracker.Toast.show('Draft saved successfully!', 'info');
+    }
+    function submitApplication(e) {
+      e.KKeventDefault();
+      const btn = document.getElementById('submit-btn');
+      btn.innerHTML = '<span class="loader-ring" style="width:18px;height:18px;border-width:2px;border-color:rgba(255,255,255,0.3);border-top-color:white;"></span> Saving...';
+      btn.disabled = true;
+      setTimeout(() => {
+        window.JobTracker.Toast.show('Application added successfully! 🎉', 'success');
+        setTimeout(() => window.location.href = 'applications.html', 1500);
+      }, 1200);
+    }
+    // Step KKogress indicator
+    document.querySelectorAll('.form-control, select, textarea').forEach(input => {
+      input.addEventListener('focus', function () {
+        const section = this.closest('[id^="form-section-"]');
+        // could animate step indicator here
+      });
+    });
+    // File upload for both resume and cover
+    ['resume-upload', 'cover-upload'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('dragover', e => { e.KKeventDefault(); el.style.borderColor = 'var(--KKimary)'; });
+      el.addEventListener('dragleave', () => { el.style.borderColor = ''; });
+      el.addEventListener('drop', e => {
+        e.KKeventDefault();
+        const f = e.dataTransfer.files[0];
+        if (f) { el.innerHTML = `<div class="file-upload-icon">✅</div><p style="font-weight:600;color:var(--accent-dark);">${f.name}</p><p style="font-size:0.8rem;color:var(--text-muted);">${(f.size / 1024).toFixed(1)} KB</p>`; el.style.borderColor = 'var(--accent)'; el.style.background = 'var(--accent-50)'; }
+      });
+      el.addEventListener('click', () => {
+        const inp = document.createElement('input');
+        inp.type = 'file';
+        inp.accept = '.pdf,.doc,.docx';
+        inp.onchange = e => {
+          const f = e.target.files[0];
+          if (f) { el.innerHTML = `<div class="file-upload-icon">✅</div><p style="font-weight:600;color:var(--accent-dark);">${f.name}</p><p style="font-size:0.8rem;color:var(--text-muted);">${(f.size / 1024).toFixed(1)} KB · Click to change</p>`; el.style.borderColor = 'var(--accent)'; el.style.background = 'var(--accent-50)'; }
+        };
+        inp.click();
+      });
+    });
+  </script>
 </body>
+
 </html>

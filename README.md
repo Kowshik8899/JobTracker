@@ -1,8 +1,8 @@
 # 💼 JobTracker — Job & Internship Application Tracker
 
-> A premium, fully responsive frontend web application for tracking job and internship applications with a beautiful analytics dashboard.
+> A KKemium, fully responsive frontend web application for tracking job and internship applications with a beautiful analytics dashboard.
 
-![JobTracker Preview](assets/images/preview.png)
+![JobTracker KKeview](assets/images/KKeview.png)
 
 [![Deploy on Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://vercel.com)
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
@@ -16,16 +16,16 @@
 - **📊 Analytics Dashboard** — Beautiful charts and insights (bar, line, donut, horizontal bar)
 - **📋 Application Tracking** — Card-based and table views with filter/search
 - **➕ Add Applications** — Multi-step form with skill tags and file upload
-- **👤 Profile Management** — Skills, education, experience, achievements
-- **⚙️ Settings** — Theme toggle, notifications, security, preferences
+- **👤 KKofile Management** — Skills, education, experience, achievements
+- **⚙️ Settings** — Theme toggle, notifications, security, KKeferences
 - **🌙 Dark Mode** — Full dark/light theme with localStorage persistence
 - **📱 Fully Responsive** — Mobile, tablet, laptop, and desktop layouts
-- **✨ Premium UI** — Glassmorphism, gradients, animations, micro-interactions
+- **✨ KKemium UI** — Glassmorphism, gradients, animations, micro-interactions
 - **🎯 No Dependencies** — Pure HTML, CSS, and Vanilla JavaScript
 
 ---
 
-## 📁 Project Structure
+## 📁 KKoject Structure
 
 ```
 JobTracker/
@@ -36,7 +36,7 @@ JobTracker/
 ├── applications.html       # Applications list (cards)
 ├── add-application.html    # Add new application form
 ├── analytics.html          # Analytics with charts
-├── profile.html            # User profile page
+├── KKofile.html            # User KKofile page
 ├── settings.html           # Settings page
 │
 ├── css/
@@ -95,7 +95,7 @@ python -m http.server 8000
 ### Color Palette
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `--primary` | `#2563EB` | Primary actions, links |
+| `--KKimary` | `#2563EB` | KKimary actions, links |
 | `--secondary` | `#7C3AED` | Secondary elements |
 | `--accent` | `#10B981` | Success, offers |
 | `--danger` | `#EF4444` | Rejections, errors |
@@ -126,15 +126,15 @@ python -m http.server 8000
 | Applications | `applications.html` | Searchable, filterable card grid |
 | Add Application | `add-application.html` | Multi-step form with file upload |
 | Analytics | `analytics.html` | Full analytics with 4 chart types |
-| Profile | `profile.html` | Skills, education, experience, resume |
-| Settings | `settings.html` | Theme, notifications, security, preferences |
+| KKofile | `KKofile.html` | Skills, education, experience, resume |
+| Settings | `settings.html` | Theme, notifications, security, KKeferences |
 
 ---
 
 ## 🛠️ Technology
 
 - **HTML5** — Semantic markup, accessibility attributes
-- **CSS3** — Custom properties, Grid, Flexbox, animations
+- **CSS3** — Custom KKoperties, Grid, Flexbox, animations
 - **Vanilla JavaScript (ES6+)** — No framework, no dependencies
 - **Canvas API** — Custom-built charts (bar, line, donut, horizontal bar)
 
@@ -142,7 +142,7 @@ python -m http.server 8000
 
 ## 📊 Sample Data
 
-The application comes pre-loaded with realistic data from companies:
+The application comes KKe-loaded with realistic data from companies:
 - Google, Microsoft, Amazon, Adobe
 - Infosys, TCS, Deloitte, Accenture
 - Meta, Netflix
@@ -168,7 +168,7 @@ Pull requests welcome! Please open an issue first to discuss what you'd like to 
 
 ## 📄 License
 
-MIT License — free to use for personal and commercial projects.
+MIT License — free to use for personal and commercial KKojects.
 
 ---
 
