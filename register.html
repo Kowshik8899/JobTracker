@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create your free JobTracker account and start organizing your job search today.">
+  <title>Create Account — JobTracker</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<div class="page-loader" id="page-loader"><div class="loader-ring"></div></div>
+
+<div class="auth-page">
+  <!-- Left Panel -->
+  <div class="auth-left">
+    <div style="position:relative;z-index:1;text-align:center;">
+      <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;color:white;font-family:var(--font-display);font-size:1.4rem;font-weight:700;margin-bottom:40px;">
+        <div style="width:42px;height:42px;background:rgba(255,255,255,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;border:1px solid rgba(255,255,255,0.3);">💼</div>
+        JobTracker
+      </a>
+
+      <h2 style="color:white;font-size:2rem;margin-bottom:12px;">Start your journey</h2>
+      <p style="color:rgba(255,255,255,0.8);font-size:1rem;max-width:340px;margin:0 auto 40px;">Join thousands of professionals who've landed their dream jobs using JobTracker.</p>
+
+      <!-- Stats -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:340px;margin:0 auto 40px;">
+        <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:12px;padding:20px;">
+          <div style="font-size:1.8rem;font-weight:900;color:white;font-family:var(--font-display);">50K+</div>
+          <div style="font-size:0.8rem;color:rgba(255,255,255,0.7);">Active Users</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:12px;padding:20px;">
+          <div style="font-size:1.8rem;font-weight:900;color:white;font-family:var(--font-display);">89%</div>
+          <div style="font-size:0.8rem;color:rgba(255,255,255,0.7);">Success Rate</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:12px;padding:20px;">
+          <div style="font-size:1.8rem;font-weight:900;color:#34D399;font-family:var(--font-display);">Free</div>
+          <div style="font-size:0.8rem;color:rgba(255,255,255,0.7);">Forever Plan</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:12px;padding:20px;">
+          <div style="font-size:1.8rem;font-weight:900;color:white;font-family:var(--font-display);">4.9★</div>
+          <div style="font-size:0.8rem;color:rgba(255,255,255,0.7);">User Rating</div>
+        </div>
+      </div>
+
+      <!-- Testimonial snippet -->
+      <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:16px;padding:20px;max-width:340px;margin:0 auto;text-align:left;">
+        <p style="color:rgba(255,255,255,0.9);font-size:0.9rem;font-style:italic;margin-bottom:12px;">"I tracked 60+ applications and got 4 offers. JobTracker made the chaos manageable and strategic."</p>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#EF4444);display:flex;align-items:center;justify-content:center;color:white;font-size:0.78rem;font-weight:700;">RV</div>
+          <div>
+            <div style="color:white;font-weight:600;font-size:0.85rem;">Rahul Verma</div>
+            <div style="color:rgba(255,255,255,0.6);font-size:0.75rem;">SDE at Amazon</div>
+          </div>
+          <div style="margin-left:auto;color:#FBBF24;font-size:0.82rem;">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Panel -->
+  <div class="auth-right" style="overflow-y:auto;">
+    <div class="auth-logo">
+      <a href="index.html" style="display:inline-flex;align-items:center;gap:8px;color:var(--text-primary);">
+        <div class="nav-logo-icon">💼</div>
+        <span style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">JobTracker</span>
+      </a>
+    </div>
+
+    <h1 class="auth-title">Create your free account</h1>
+    <p class="auth-subtitle">Start organizing your job search in minutes. No credit card required.</p>
+
+    <!-- Social signup -->
+    <div style="display:flex;gap:12px;margin-bottom:20px;">
+      <button onclick="handleRegisterDemo()" style="flex:1;padding:11px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);background:var(--bg-card);cursor:pointer;font-size:0.9rem;font-family:var(--font-sans);color:var(--text-primary);display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;font-weight:500;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--gray-200)'">
+        <span>🌐</span> Google
+      </button>
+      <button onclick="handleRegisterDemo()" style="flex:1;padding:11px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);background:var(--bg-card);cursor:pointer;font-size:0.9rem;font-family:var(--font-sans);color:var(--text-primary);display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;font-weight:500;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--gray-200)'">
+        <span>🔵</span> LinkedIn
+      </button>
+    </div>
+
+    <div class="auth-divider">or sign up with email</div>
+
+    <form class="auth-form" id="register-form" onsubmit="handleRegister(event)">
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label class="form-label" for="first-name">First Name <span>*</span></label>
+          <div class="form-control-icon">
+            <span class="icon">👤</span>
+            <input type="text" id="first-name" class="form-control" placeholder="Priya" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="last-name">Last Name <span>*</span></label>
+          <input type="text" id="last-name" class="form-control" placeholder="Rajan" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="reg-email">Email Address <span>*</span></label>
+        <div class="form-control-icon">
+          <span class="icon">📧</span>
+          <input type="email" id="reg-email" class="form-control" placeholder="you@example.com" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="job-goal">Current Goal</label>
+        <select id="job-goal" class="form-control">
+          <option value="">Select your goal...</option>
+          <option value="internship">🎓 Seeking Internship</option>
+          <option value="fulltime">💼 Seeking Full-Time Job</option>
+          <option value="switch">🔄 Career Switch</option>
+          <option value="freelance">💻 Freelance Opportunities</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="reg-password">Password <span>*</span></label>
+        <div class="form-control-icon" style="position:relative;">
+          <span class="icon">🔒</span>
+          <input type="password" id="reg-password" class="form-control" placeholder="Create a strong password" required
+            data-password-strength="strength-container" style="padding-right:44px;">
+          <button type="button" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1rem;padding:0;" onclick="toggleRegPassword()">👁️</button>
+        </div>
+        <div class="password-strength" id="strength-container">
+          <div class="strength-bar"><div class="strength-fill" id="strength-fill"></div></div>
+          <div class="strength-text" id="strength-text"></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="confirm-password">Confirm Password <span>*</span></label>
+        <div class="form-control-icon">
+          <span class="icon">🔐</span>
+          <input type="password" id="confirm-password" class="form-control" placeholder="Repeat your password" required>
+        </div>
+      </div>
+
+      <!-- Terms -->
+      <div style="display:flex;align-items:flex-start;gap:10px;">
+        <input type="checkbox" id="terms" required style="width:16px;height:16px;accent-color:var(--primary);cursor:pointer;margin-top:2px;">
+        <label for="terms" style="font-size:0.85rem;color:var(--text-secondary);cursor:pointer;line-height:1.5;">
+          I agree to the <a href="#" class="auth-link">Terms of Service</a> and <a href="#" class="auth-link">Privacy Policy</a>. I consent to receiving product updates.
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-full btn-lg" id="register-btn">
+        🚀 Create Free Account
+      </button>
+    </form>
+
+    <div class="auth-bottom">
+      Already have an account? <a href="login.html" class="auth-link">Sign in →</a>
+    </div>
+
+    <div style="text-align:center;margin-top:20px;">
+      <button class="theme-toggle">🌙</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+<script>
+function handleRegister(e) {
+  e.preventDefault();
+  const pass = document.getElementById('reg-password').value;
+  const confirm = document.getElementById('confirm-password').value;
+  if (pass !== confirm) {
+    alert('Passwords do not match!');
+    return;
+  }
+  const btn = document.getElementById('register-btn');
+  btn.innerHTML = '<span class="loader-ring" style="width:18px;height:18px;border-width:2px;border-color:rgba(255,255,255,0.3);border-top-color:white;"></span> Creating account...';
+  btn.disabled = true;
+  setTimeout(() => { window.location.href = 'dashboard.html'; }, 1500);
+}
+function handleRegisterDemo() {
+  setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
+}
+function toggleRegPassword() {
+  const input = document.getElementById('reg-password');
+  input.type = input.type === 'password' ? 'text' : 'password';
+}
+</script>
+</body>
+</html>

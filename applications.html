@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Manage all your job and internship applications in one place.">
+  <title>Applications — JobTracker</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<div class="page-loader" id="page-loader"><div class="loader-ring"></div></div>
+
+<!-- NAVBAR -->
+<nav class="navbar scrolled" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">💼</div>
+      <span>JobTracker</span>
+    </a>
+    <div class="nav-links">
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="applications.html" class="nav-link active">Applications</a>
+      <a href="analytics.html" class="nav-link">Analytics</a>
+      <a href="add-application.html" class="nav-link">+ Add New</a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-toggle">🌙</button>
+      <div class="dropdown">
+        <div class="nav-avatar" data-dropdown="user-menu2">PR</div>
+        <div class="dropdown-menu" id="user-menu2">
+          <a href="profile.html" class="dropdown-item">👤 My Profile</a>
+          <a href="settings.html" class="dropdown-item">⚙️ Settings</a>
+          <div class="dropdown-divider"></div>
+          <a href="index.html" class="dropdown-item danger">🚪 Sign Out</a>
+        </div>
+      </div>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+  <a href="applications.html" class="nav-link">📋 Applications</a>
+  <a href="analytics.html" class="nav-link">📈 Analytics</a>
+  <a href="add-application.html" class="nav-link">➕ Add Application</a>
+  <a href="profile.html" class="nav-link">👤 Profile</a>
+  <a href="settings.html" class="nav-link">⚙️ Settings</a>
+</div>
+
+<div class="page-body">
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div style="padding:8px 12px;margin-bottom:8px;">
+        <div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--gradient-card);border-radius:var(--radius-md);border:1px solid var(--primary-100);">
+          <div style="width:40px;height:40px;border-radius:50%;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">PR</div>
+          <div>
+            <div style="font-weight:700;font-size:0.9rem;">Priya Rajan</div>
+            <div style="font-size:0.75rem;color:var(--text-muted);">IIT Bombay · 2025</div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-label">Main Menu</div>
+      <a href="dashboard.html" class="sidebar-link"><span class="icon">📊</span> Dashboard</a>
+      <a href="applications.html" class="sidebar-link active"><span class="icon">📋</span> Applications <span class="sidebar-badge">10</span></a>
+      <a href="add-application.html" class="sidebar-link"><span class="icon">➕</span> Add Application</a>
+      <a href="analytics.html" class="sidebar-link"><span class="icon">📈</span> Analytics</a>
+      <div class="sidebar-label">Account</div>
+      <a href="profile.html" class="sidebar-link"><span class="icon">👤</span> Profile</a>
+      <a href="settings.html" class="sidebar-link"><span class="icon">⚙️</span> Settings</a>
+      <div class="sidebar-label">Filter by Status</div>
+      <div style="padding:0 12px;display:flex;flex-direction:column;gap:4px;">
+        <div onclick="filterByStatus('all')" style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:0.85rem;" onmouseover="this.style.background='var(--gray-100)'" onmouseout="this.style.background=''">
+          <span>All Applications</span><span style="background:var(--primary);color:white;font-size:0.72rem;padding:1px 7px;border-radius:999px;">10</span>
+        </div>
+        <div onclick="filterByStatus('applied')" style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:0.85rem;" onmouseover="this.style.background='var(--gray-100)'" onmouseout="this.style.background=''">
+          <span>Applied</span><span style="background:var(--primary-100);color:var(--primary);font-size:0.72rem;padding:1px 7px;border-radius:999px;">3</span>
+        </div>
+        <div onclick="filterByStatus('interview')" style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:0.85rem;" onmouseover="this.style.background='var(--gray-100)'" onmouseout="this.style.background=''">
+          <span>Interview</span><span style="background:var(--secondary-50);color:var(--secondary);font-size:0.72rem;padding:1px 7px;border-radius:999px;">2</span>
+        </div>
+        <div onclick="filterByStatus('offer')" style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:0.85rem;" onmouseover="this.style.background='var(--gray-100)'" onmouseout="this.style.background=''">
+          <span>Offer</span><span style="background:var(--accent-50);color:var(--accent);font-size:0.72rem;padding:1px 7px;border-radius:999px;">1</span>
+        </div>
+        <div onclick="filterByStatus('rejected')" style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:0.85rem;" onmouseover="this.style.background='var(--gray-100)'" onmouseout="this.style.background=''">
+          <span>Rejected</span><span style="background:var(--danger-50);color:var(--danger);font-size:0.72rem;padding:1px 7px;border-radius:999px;">2</span>
+        </div>
+        <div onclick="filterByStatus('pending')" style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:0.85rem;" onmouseover="this.style.background='var(--gray-100)'" onmouseout="this.style.background=''">
+          <span>Pending</span><span style="background:var(--warning-50);color:var(--warning);font-size:0.72rem;padding:1px 7px;border-radius:999px;">2</span>
+        </div>
+      </div>
+    </aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="page-header-row">
+        <div>
+          <div class="breadcrumb"><a href="dashboard.html">Dashboard</a><span>›</span><span>Applications</span></div>
+          <h1>My Applications</h1>
+          <p>Tracking <strong id="app-count">10</strong> applications across all stages.</p>
+        </div>
+        <div style="display:flex;gap:12px;">
+          <button class="btn btn-ghost btn-sm" onclick="toggleView()" id="view-toggle">⊞ Grid View</button>
+          <a href="add-application.html" class="btn btn-primary btn-sm">➕ Add Application</a>
+        </div>
+      </div>
+
+      <!-- Search & Filter -->
+      <div class="search-filter-bar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="app-search" placeholder="Search by company or role...">
+        </div>
+        <select class="filter-select" id="status-filter">
+          <option value="all">All Status</option>
+          <option value="applied">Applied</option>
+          <option value="interview">Interview</option>
+          <option value="offer">Offer</option>
+          <option value="rejected">Rejected</option>
+          <option value="pending">Pending</option>
+          <option value="wishlist">Wishlist</option>
+        </select>
+        <select class="filter-select" id="sort-filter">
+          <option>Newest First</option>
+          <option>Deadline Soon</option>
+          <option>Company A-Z</option>
+          <option>Status</option>
+        </select>
+        <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Filters cleared', 'info')">Clear</button>
+      </div>
+
+      <!-- Application Cards Grid -->
+      <div class="app-cards-grid" id="app-cards-container">
+
+        <!-- Google -->
+        <div class="app-card" data-status="interview">
+          <div class="app-card-header">
+            <div class="app-card-company">
+              <div class="company-logo-lg color-google">G</div>
+              <div>
+                <div class="company-name">Google</div>
+                <div class="company-role">Software Engineer Intern</div>
+              </div>
+            </div>
+            <span class="badge badge-interview">Interview</span>
+          </div>
+          <div class="app-card-meta">
+            <div class="meta-item"><span class="icon">📍</span>Bangalore, India</div>
+            <div class="meta-item"><span class="icon">📅</span>Applied Dec 10</div>
+            <div class="meta-item"><span class="icon">⏰</span>Deadline Jan 15</div>
+            <div class="meta-item"><span class="icon">💼</span>Full-Time</div>
+          </div>
+          <div style="margin-top:12px;padding:10px;background:var(--secondary-50);border-radius:8px;font-size:0.8rem;color:var(--secondary-dark);">
+            🎤 <strong>Technical Interview scheduled</strong> — Jan 8, 2025 at 10:00 AM IST
+          </div>
+          <div class="app-card-actions">
+            <a href="add-application.html" class="btn btn-primary btn-sm">✏️ Update</a>
+            <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Notes saved!', 'success')">📝 Notes</button>
+            <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Reminder set!', 'info')">🔔 Remind</button>
+          </div>
+        </div>
+
+        <!-- Microsoft -->
+        <div class="app-card" data-status="applied">
+          <div class="app-card-header">
+            <div class="app-card-company">
+              <div class="company-logo-lg color-microsoft">MS</div>
+              <div>
+                <div class="company-name">Microsoft</div>
+                <div class="company-role">Frontend Developer</div>
+              </div>
+            </div>
+            <span class="badge badge-applied">Applied</span>
+          </div>
+          <div class="app-card-meta">
+            <div class="meta-item"><span class="icon">📍</span>Hyderabad, India</div>
+            <div class="meta-item"><span class="icon">📅</span>Applied Dec 8</div>
+            <div class="meta-item"><span class="icon">⏰</span>Deadline Jan 20</div>
+            <div class="meta-item"><span class="icon">💰</span>₹18 LPA</div>
+          </div>
+          <div class="app-card-actions">
+            <a href="add-application.html" class="btn btn-primary btn-sm">✏️ Update</a>
+            <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Notes saved!', 'success')">📝 Notes</button>
+            <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Reminder set!', 'info')">🔔 Remind</button>
+          </div>
+        </div>
+
+        <!-- Amazon -->
+        <div class="app-card" data-status="offer">
+          <div class="app-card-header">
+            <div class="app-card-company">
+              <div class="company-logo-lg color-amazon">A</div>
+              <div>
+                <div class="company-name">Amazon</div>
+                <div class="company-role">SDE Intern</div>
+              </div>
+            </div>
+            <span class="badge badge-offer">Offer ✓</span>
+          </div>
+          <div class="app-card-meta">
+            <div class="meta-item"><span class="icon">📍</span>Chennai, India</div>
+            <div class="meta-item"><span class="icon">📅</span>Applied Nov 25</div>
+            <div class="meta-item"><span class="icon">⏰</span>Deadline Dec 30</div>
+            <div class="meta-item"><span class="icon">💰</span>₹90K/month</div>
+          </div>
+          <div style="margin-top:12px;padding:10px;background:var(--accent-50);border-radius:8px;font-size:0.8rem;color:var(--accent-dark);">
+            🎉 <strong>Offer letter received!</strong> Deadline to accept: Jan 12, 2025
+          </div>
+          <div class="app-card-actions">
+            <button class="btn btn-accent btn-sm" onclick="window.JobTracker.Toast.show('Offer accepted! 🎉', 'success')">✅ Accept Offer</button>
+            <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Offer declined', 'error')">❌ Decline</button>
+            <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Notes saved!', 'success')">📝 Notes</button>
+          </div>
+        </div>
+
+        <!-- Adobe -->
+        <div class="app-card" data-status="rejected">
+          <div class="app-card-header">
+            <div class="app-card-company">
+              <div class="company-logo-lg color-adobe">Ad</div>
+              <div>
+                <div class="company-name">Adobe</div>
+                <div class="company-role">UI/UX Design Intern</div>
+              </div>
+            </div>
+            <span class="badge badge-rejected">Rejected</span>
+          </div>
+          <div class="app-card-meta">
+            <div class="meta-item"><span class="icon">📍</span>Noida, India</div>
+            <div class="meta-item"><span class="icon">📅</span>Applied Nov 18</div>
+            <div class="meta-item"><span class="icon">⏰</span>Deadline Dec 15</div>
+            <div class="meta-item"><span class="icon">💼</span>Internship</div>
+          </div>
+          <div style="margin-top:12px;padding:10px;background:var(--danger-50);border-radius:8px;font-size:0.8rem;color:var(--danger);">
+            😞 Application did not progress. Consider applying again next cycle.
+          </div>
+          <div class="app-card-actions">
+            <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Added to notes', 'info')">📝 Add Notes</button>
+            <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Marked for reapply', 'info')">🔄 Reapply Later</button>
+          </div>
+        </div>
+
+        <!-- Infosys -->
+        <div class="app-card" data-status="applied">
+          <div class="app-card-header">
+            <div class="app-card-company">
+              <div class="company-logo-lg color-infosys">I</div>
+              <div>
+                <div class="company-name">Infosys</div>
+                <div class="company-role">Technology Analyst</div>
+              </div>
+            </div>
+            <span class="badge badge-applied">Applied</span>
+          </div>
+          <div class="app-card-meta">
+            <div class="meta-item"><span class="icon">📍</span>Pune, India</div>
+            <div class="meta-item"><span class="icon">📅</span>Applied Dec 15</div>
+            <div class="meta-item"><span class="icon">⏰</span>Deadline Feb 1</div>
+            <div class="meta-item"><span class="icon">💰</span>₹6.5 LPA</div>
+          </div>
+          <div class="app-card-actions">
+            <a href="add-application.html" class="btn btn-primary btn-sm">✏️ Update</a>
+            <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Notes saved!', 'success')">📝 Notes</button>
+            <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Reminder set!', 'info')">🔔 Remind</button>
+          </div>
+        </div>
+
+        <!-- TCS -->
+        <div class="app-card" data-status="pending">
+          <div class="app-card-header">
+            <div class="app-card-company">
+              <div class="company-logo-lg color-tcs">T</div>
+              <div>
+                <div class="company-name">TCS</div>
+                <div class="company-role">Software Developer</div>
+              </div>
+            </div>
+            <span class="badge badge-pending">Pending</span>
+          </div>
+          <div class="app-card-meta">
+            <div class="meta-item"><span class="icon">📍</span>Mumbai, India</div>
+            <div class="meta-item"><span class="icon">📅</span>Applied Dec 12</div>
+            <div class="meta-item"><span class="icon">⏰</span>Deadline Jan 30</div>
+            <div class="meta-item"><span class="icon">💰</span>₹7 LPA</div>
+          </div>
+          <div class="app-card-actions">
+            <a href="add-application.html" class="btn btn-primary btn-sm">✏️ Update</a>
+            <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Notes saved!', 'success')">📝 Notes</button>
+            <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Reminder set!', 'info')">🔔 Remind</button>
+          </div>
+        </div>
+
+        <!-- Deloitte -->
+        <div class="app-card" data-status="interview">
+          <div class="app-card-header">
+            <div class="app-card-company">
+              <div class="company-logo-lg color-deloitte">D</div>
+              <div>
+                <div class="company-name">Deloitte</div>
+                <div class="company-role">Business Analyst Intern</div>
+              </div>
+            </div>
+            <span class="badge badge-interview">Interview</span>
+          </div>
+          <div class="app-card-meta">
+            <div class="meta-item"><span class="icon">📍</span>Gurgaon, India</div>
+            <div class="meta-item"><span class="icon">📅</span>Applied Dec 1</div>
+            <div class="meta-item"><span class="icon">⏰</span>Deadline Jan 10</div>
+            <div class="meta-item"><span class="icon">💼</span>Internship</div>
+          </div>
+          <div style="margin-top:12px;padding:10px;background:var(--secondary-50);border-radius:8px;font-size:0.8rem;color:var(--secondary-dark);">
+            📋 <strong>HR Round scheduled</strong> — Jan 6, 2025 at 2:00 PM IST
+          </div>
+          <div class="app-card-actions">
+            <a href="add-application.html" class="btn btn-primary btn-sm">✏️ Update</a>
+            <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Notes saved!', 'success')">📝 Notes</button>
+            <button class="btn btn-ghost btn-sm">🔔 Remind</button>
+          </div>
+        </div>
+
+        <!-- Accenture -->
+        <div class="app-card" data-status="pending">
+          <div class="app-card-header">
+            <div class="app-card-company">
+              <div class="company-logo-lg color-accenture">Ac</div>
+              <div>
+                <div class="company-name">Accenture</div>
+                <div class="company-role">Cloud Engineer</div>
+              </div>
+            </div>
+            <span class="badge badge-pending">Pending</span>
+          </div>
+          <div class="app-card-meta">
+            <div class="meta-item"><span class="icon">📍</span>Bangalore, India</div>
+            <div class="meta-item"><span class="icon">📅</span>Applied Dec 18</div>
+            <div class="meta-item"><span class="icon">⏰</span>Deadline Feb 10</div>
+            <div class="meta-item"><span class="icon">💰</span>₹8 LPA</div>
+          </div>
+          <div class="app-card-actions">
+            <a href="add-application.html" class="btn btn-primary btn-sm">✏️ Update</a>
+            <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Notes saved!', 'success')">📝 Notes</button>
+            <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Reminder set!', 'info')">🔔 Remind</button>
+          </div>
+        </div>
+
+        <!-- Meta -->
+        <div class="app-card" data-status="applied">
+          <div class="app-card-header">
+            <div class="app-card-company">
+              <div class="company-logo-lg color-meta">M</div>
+              <div>
+                <div class="company-name">Meta</div>
+                <div class="company-role">React Developer</div>
+              </div>
+            </div>
+            <span class="badge badge-applied">Applied</span>
+          </div>
+          <div class="app-card-meta">
+            <div class="meta-item"><span class="icon">🌐</span>Remote</div>
+            <div class="meta-item"><span class="icon">📅</span>Applied Dec 5</div>
+            <div class="meta-item"><span class="icon">⏰</span>Deadline Jan 25</div>
+            <div class="meta-item"><span class="icon">💼</span>Contract</div>
+          </div>
+          <div class="app-card-actions">
+            <a href="add-application.html" class="btn btn-primary btn-sm">✏️ Update</a>
+            <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Notes saved!', 'success')">📝 Notes</button>
+            <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Reminder set!', 'info')">🔔 Remind</button>
+          </div>
+        </div>
+
+        <!-- Netflix -->
+        <div class="app-card" data-status="wishlist">
+          <div class="app-card-header">
+            <div class="app-card-company">
+              <div class="company-logo-lg color-netflix">N</div>
+              <div>
+                <div class="company-name">Netflix</div>
+                <div class="company-role">Data Engineer Intern</div>
+              </div>
+            </div>
+            <span class="badge badge-wishlist">Wishlist</span>
+          </div>
+          <div class="app-card-meta">
+            <div class="meta-item"><span class="icon">🌐</span>Remote</div>
+            <div class="meta-item"><span class="icon">📅</span>Not applied yet</div>
+            <div class="meta-item"><span class="icon">⏰</span>Deadline Feb 28</div>
+            <div class="meta-item"><span class="icon">💼</span>Internship</div>
+          </div>
+          <div class="app-card-actions">
+            <button class="btn btn-primary btn-sm" onclick="window.location.href='add-application.html'">➕ Apply Now</button>
+            <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Notes saved!', 'success')">📝 Notes</button>
+            <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Reminder set!', 'info')">🔔 Remind</button>
+          </div>
+        </div>
+
+      </div><!-- end cards grid -->
+
+    </main>
+  </div>
+</div>
+
+<button class="mobile-sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').classList.toggle('show');">☰</button>
+
+<script src="js/script.js"></script>
+<script>
+function filterByStatus(status) {
+  const filter = document.getElementById('status-filter');
+  if (filter) { filter.value = status; filter.dispatchEvent(new Event('change')); }
+}
+let isGridView = true;
+function toggleView() {
+  isGridView = !isGridView;
+  const container = document.getElementById('app-cards-container');
+  const btn = document.getElementById('view-toggle');
+  if (isGridView) {
+    container.className = 'app-cards-grid';
+    btn.textContent = '⊞ Grid View';
+  } else {
+    container.style.gridTemplateColumns = '1fr';
+    btn.textContent = '☰ List View';
+  }
+}
+</script>
+</body>
+</html>
