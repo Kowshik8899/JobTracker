@@ -6,8 +6,7 @@
 const API = (() => {
   // Base URL for API requests
   const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
-  const BASE_URL = isLocal ? "http://localhost:5000/api" : "https://your-production-backend-url.com/api";
-
+  const BASE_URL = isLocal ? "http://localhost:5000/api" : "https://jobtracker-6nsn.onrender.com/api";
   // --- Token Management ---
 
   function getToken() {
