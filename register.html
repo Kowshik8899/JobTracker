@@ -191,23 +191,54 @@
     </div>
   </div>
 
+  <script src="js/api.js"></script>
   <script src="js/script.js"></script>
   <script>
-    function handleRegister(e) {
+    // Redirect if already logged in
+    if (API.isLoggedIn()) window.location.href = 'dashboard.html';
+
+    async function handleRegister(e) {
       e.preventDefault();
+      const firstName = document.getElementById('first-name').value.trim();
+      const lastName = document.getElementById('last-name').value.trim();
+      const email = document.getElementById('reg-email').value.trim();
+      const goal = document.getElementById('job-goal').value;
       const pass = document.getElementById('reg-password').value;
       const confirm = document.getElementById('confirm-password').value;
-      if (pass !== confirm) {
-        alert('Passwords do not match!');
+
+      if (!firstName || !lastName || !email || !pass) {
+        window.JobTracker && window.JobTracker.Toast.show('Please fill in all required fields', 'error');
         return;
       }
+      if (pass !== confirm) {
+        window.JobTracker && window.JobTracker.Toast.show('Passwords do not match!', 'error');
+        return;
+      }
+      if (pass.length < 6) {
+        window.JobTracker && window.JobTracker.Toast.show('Password must be at least 6 characters', 'error');
+        return;
+      }
+
       const btn = document.getElementById('register-btn');
       btn.innerHTML = '<span class="loader-ring" style="width:18px;height:18px;border-width:2px;border-color:rgba(255,255,255,0.3);border-top-color:white;"></span> Creating account...';
       btn.disabled = true;
-      setTimeout(() => { window.location.href = 'dashboard.html'; }, 1500);
+
+      try {
+        await API.register({
+          name: `${firstName} ${lastName}`,
+          email,
+          password: pass,
+          goal,
+        });
+        window.location.href = 'dashboard.html';
+      } catch (error) {
+        window.JobTracker && window.JobTracker.Toast.show(error.message || 'Registration failed', 'error');
+        btn.innerHTML = '🚀 Create Free Account';
+        btn.disabled = false;
+      }
     }
     function handleRegisterDemo() {
-      setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
+      window.JobTracker && window.JobTracker.Toast.show('Please fill out the form to register', 'info');
     }
     function toggleRegPassword() {
       const input = document.getElementById('reg-password');

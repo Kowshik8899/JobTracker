@@ -403,7 +403,62 @@
 
   <button class="mobile-sidebar-toggle"
     onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').classList.toggle('show');">☰</button>
+  <script src="js/api.js"></script>
   <script src="js/script.js"></script>
+  <script>
+    // Auth guard
+    if (!API.requireAuth()) { /* redirects */ }
+
+    // Load real analytics data into charts
+    (async () => {
+      try {
+        const data = await API.getAnalytics();
+
+        // Update stat cards if they exist
+        const statValues = document.querySelectorAll('.stat-value');
+        if (statValues.length >= 4) {
+          statValues[0].textContent = data.totalApplications || 0;
+          statValues[1].textContent = data.responseRate + '%';
+          statValues[2].textContent = data.offerRate + '%';
+          statValues[3].textContent = data.statusCounts['interview'] || 0;
+        }
+
+        // Re-draw charts with real data after a small delay for canvas to be ready
+        setTimeout(() => {
+          // Monthly Bar Chart
+          if (data.monthlyTrends.length > 0) {
+            const labels = data.monthlyTrends.map(m => m.month);
+            const values = data.monthlyTrends.map(m => m.count);
+            Charts.drawBar('bar-chart', labels, values, { color: '#2563EB' });
+          }
+
+          // Status Donut Chart
+          const sc = data.statusCounts;
+          const donutLabels = ['Applied', 'OA/Test', 'Interview', 'Offer', 'Rejected'];
+          const donutData = [sc['applied'] || 0, sc['oa-test'] || 0, sc['interview'] || 0, sc['offer'] || 0, sc['rejected'] || 0];
+          if (donutData.some(v => v > 0)) {
+            Charts.drawDonut('donut-chart', donutLabels, donutData, {
+              colors: ['#2563EB', '#06B6D4', '#7C3AED', '#10B981', '#EF4444'],
+              centerText: data.totalApplications,
+              centerLabel: 'Total'
+            });
+          }
+
+          // Company horizontal bar
+          if (data.topCompanies.length > 0) {
+            const compLabels = data.topCompanies.map(c => c.company);
+            const compData = data.topCompanies.map(c => c.count);
+            Charts.drawHBar('hbar-chart', compLabels, compData, {
+              colors: ['#2563EB', '#7C3AED', '#10B981', '#F59E0B', '#EF4444', '#06B6D4']
+            });
+          }
+        }, 200);
+
+      } catch (e) {
+        // Fallback: default charts will render from AnalyticsPage.init()
+      }
+    })();
+  </script>
 </body>
 
 </html>

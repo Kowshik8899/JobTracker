@@ -233,6 +233,7 @@
                     <option value="">Select status...</option>
                     <option value="wishlist">⭐ Wishlist</option>
                     <option value="applied" selected>📤 Applied</option>
+                    <option value="oa-test">📝 OA / Online Test</option>
                     <option value="interview">🎤 Interview Scheduled</option>
                     <option value="offer">🎉 Offer Received</option>
                     <option value="rejected">❌ Rejected</option>
@@ -363,8 +364,12 @@
   <button class="mobile-sidebar-toggle"
     onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').classList.toggle('show');">☰</button>
 
+  <script src="js/api.js"></script>
   <script src="js/script.js"></script>
   <script>
+    // Auth guard
+    if (!API.requireAuth()) { /* redirects */ }
+
     function addSkill(e) {
       if (e.key === 'Enter' || e.key === ',') {
         e.preventDefault();
@@ -382,25 +387,50 @@
       }
     }
     function saveDraft() {
-      window.JobTracker.Toast.show('Draft saved successfully!', 'info');
+      window.JobTracker.Toast.show('Draft saved locally!', 'info');
     }
-    function submitApplication(e) {
+
+    async function submitApplication(e) {
       e.preventDefault();
       const btn = document.getElementById('submit-btn');
+
+      // Collect skill tags
+      const skillTags = document.querySelectorAll('#skills-container .skill-tag');
+      const skills = Array.from(skillTags).map(t => t.textContent);
+
+      const appData = {
+        company: document.getElementById('company-name').value.trim(),
+        role: document.getElementById('job-role').value.trim(),
+        location: document.getElementById('location').value.trim(),
+        jobType: document.getElementById('job-type').value,
+        salary: document.getElementById('salary').value.trim(),
+        companyWebsite: document.getElementById('company-website').value.trim(),
+        applicationDate: document.getElementById('app-date').value || undefined,
+        deadline: document.getElementById('deadline').value || undefined,
+        status: document.getElementById('app-status').value || 'applied',
+        interviewDate: document.getElementById('interview-date').value || undefined,
+        source: document.getElementById('source').value,
+        priority: document.getElementById('priority').value,
+        contactPerson: document.getElementById('contact-person').value.trim(),
+        contactEmail: document.getElementById('contact-email').value.trim(),
+        notes: document.getElementById('notes').value.trim(),
+        skills,
+      };
+
       btn.innerHTML = '<span class="loader-ring" style="width:18px;height:18px;border-width:2px;border-color:rgba(255,255,255,0.3);border-top-color:white;"></span> Saving...';
       btn.disabled = true;
-      setTimeout(() => {
+
+      try {
+        await API.createApplication(appData);
         window.JobTracker.Toast.show('Application added successfully! 🎉', 'success');
-        setTimeout(() => window.location.href = 'applications.html', 1500);
-      }, 1200);
+        setTimeout(() => window.location.href = 'applications.html', 1200);
+      } catch (error) {
+        window.JobTracker.Toast.show(error.message || 'Failed to add application', 'error');
+        btn.innerHTML = '➕ Add Application';
+        btn.disabled = false;
+      }
     }
-    // Step progress indicator
-    document.querySelectorAll('.form-control, select, textarea').forEach(input => {
-      input.addEventListener('focus', function () {
-        const section = this.closest('[id^="form-section-"]');
-        // could animate step indicator here
-      });
-    });
+
     // File upload for both resume and cover
     ['resume-upload', 'cover-upload'].forEach(id => {
       const el = document.getElementById(id);

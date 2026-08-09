@@ -466,7 +466,69 @@
   <button class="mobile-sidebar-toggle" id="sidebar-toggle"
     onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').classList.toggle('show');">☰</button>
 
+  <script src="js/api.js"></script>
   <script src="js/script.js"></script>
+  <script>
+    // Auth guard
+    if (!API.requireAuth()) { /* redirects */ }
+
+    // Load user name
+    (async () => {
+      const user = API.getUser();
+      if (user && user.name) {
+        const greeting = document.querySelector('.page-header-row h1');
+        if (greeting) {
+          const hour = new Date().getHours();
+          const timeGreeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+          const firstName = user.name.split(' ')[0];
+          greeting.textContent = `${timeGreeting}, ${firstName}! 👋`;
+        }
+      }
+
+      // Load analytics for stat cards
+      try {
+        const analytics = await API.getAnalytics();
+        const statCards = document.querySelectorAll('.stat-value');
+        if (statCards.length >= 5) {
+          statCards[0].textContent = analytics.totalApplications || 0;
+          statCards[1].textContent = analytics.statusCounts['interview'] || 0;
+          statCards[2].textContent = analytics.statusCounts['offer'] || 0;
+          statCards[3].textContent = analytics.statusCounts['rejected'] || 0;
+          statCards[4].textContent = (analytics.statusCounts['pending'] || 0) + (analytics.statusCounts['applied'] || 0);
+        }
+      } catch (e) { /* silently fail on analytics */ }
+
+      // Load recent applications for table
+      try {
+        const apps = await API.getApplications({});
+        const tbody = document.querySelector('.table-container tbody');
+        if (tbody && apps.length > 0) {
+          const recent = apps.slice(0, 5);
+          const statusBadge = { applied: 'badge-applied', 'oa-test': 'badge-applied', interview: 'badge-interview', offer: 'badge-offer', rejected: 'badge-rejected', pending: 'badge-pending', wishlist: 'badge-pending' };
+          const statusLabel = { applied: 'Applied', 'oa-test': 'OA/Test', interview: 'Interview', offer: 'Offer', rejected: 'Rejected', pending: 'Pending', wishlist: 'Wishlist' };
+          tbody.innerHTML = recent.map(app => {
+            const initials = app.company.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+            const date = new Date(app.applicationDate).toLocaleDateString('en-IN', { month: 'short', day: 'numeric' });
+            return `<tr>
+              <td><div class="company-cell"><div class="company-logo">${initials}</div><span>${app.company}</span></div></td>
+              <td style="color:var(--text-secondary);font-size:0.88rem;">${app.role}</td>
+              <td><span class="badge ${statusBadge[app.status] || 'badge-applied'}">${statusLabel[app.status] || app.status}</span></td>
+              <td style="color:var(--text-muted);font-size:0.85rem;">${date}</td>
+              <td><a href="applications.html" class="btn btn-ghost btn-sm">View</a></td>
+            </tr>`;
+          }).join('');
+        }
+      } catch (e) { /* silently fail */ }
+    })();
+
+    // Wire sign-out links
+    document.querySelectorAll('a[href="index.html"].danger, a[href="index.html"][style*="color:var(--danger)"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        API.logout();
+      });
+    });
+  </script>
 </body>
 
 </html>

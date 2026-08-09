@@ -144,6 +144,7 @@
           <select class="filter-select" id="status-filter">
             <option value="all">All Status</option>
             <option value="applied">Applied</option>
+            <option value="oa-test">OA/Test</option>
             <option value="interview">Interview</option>
             <option value="offer">Offer</option>
             <option value="rejected">Rejected</option>
@@ -458,12 +459,127 @@
   <button class="mobile-sidebar-toggle"
     onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').classList.toggle('show');">☰</button>
 
+  <script src="js/api.js"></script>
   <script src="js/script.js"></script>
   <script>
+    // Auth guard
+    if (!API.requireAuth()) { /* redirects */ }
+
+    const statusBadgeMap = {
+      'applied': 'badge-applied',
+      'oa-test': 'badge-applied',
+      'interview': 'badge-interview',
+      'offer': 'badge-offer',
+      'rejected': 'badge-rejected',
+      'pending': 'badge-pending',
+      'wishlist': 'badge-pending',
+      'withdrawn': 'badge-rejected',
+    };
+    const statusLabelMap = {
+      'applied': 'Applied',
+      'oa-test': 'OA/Test',
+      'interview': 'Interview',
+      'offer': 'Offer',
+      'rejected': 'Rejected',
+      'pending': 'Pending',
+      'wishlist': 'Wishlist',
+      'withdrawn': 'Withdrawn',
+    };
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '—';
+      const d = new Date(dateStr);
+      return d.toLocaleDateString('en-IN', { month: 'short', day: 'numeric' });
+    }
+
+    function getInitials(name) {
+      return name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+    }
+
+    function renderCard(app) {
+      const badgeClass = statusBadgeMap[app.status] || 'badge-applied';
+      const statusLabel = statusLabelMap[app.status] || app.status;
+      const initials = getInitials(app.company);
+
+      return `
+        <div class="app-card" data-status="${app.status}" data-id="${app._id}">
+          <div class="app-card-header">
+            <div class="app-card-company">
+              <div class="company-logo-lg">${initials}</div>
+              <div>
+                <div class="company-name">${app.company}</div>
+                <div class="company-role">${app.role}</div>
+              </div>
+            </div>
+            <span class="badge ${badgeClass}">${statusLabel}</span>
+          </div>
+          <div class="app-card-meta">
+            ${app.location ? `<div class="meta-item"><span class="icon">📍</span>${app.location}</div>` : ''}
+            <div class="meta-item"><span class="icon">📅</span>Applied ${formatDate(app.applicationDate)}</div>
+            ${app.deadline ? `<div class="meta-item"><span class="icon">⏰</span>Deadline ${formatDate(app.deadline)}</div>` : ''}
+            ${app.jobType ? `<div class="meta-item"><span class="icon">💼</span>${app.jobType}</div>` : ''}
+          </div>
+          ${app.notes ? `<div style="margin-top:8px;padding:8px 10px;background:var(--gray-50);border-radius:8px;font-size:0.8rem;color:var(--text-secondary);">📝 ${app.notes.substring(0, 80)}${app.notes.length > 80 ? '...' : ''}</div>` : ''}
+          <div class="app-card-actions">
+            <a href="add-application.html?edit=${app._id}" class="btn btn-primary btn-sm">✏️ Edit</a>
+            <button class="btn btn-ghost btn-sm" onclick="deleteApp('${app._id}')">🗑️ Delete</button>
+          </div>
+        </div>
+      `;
+    }
+
+    async function loadApplications() {
+      const container = document.getElementById('app-cards-container');
+      const search = document.getElementById('app-search')?.value || '';
+      const status = document.getElementById('status-filter')?.value || 'all';
+      const sortVal = document.getElementById('sort-filter')?.value || '';
+
+      let sort = '';
+      if (sortVal === 'Deadline Soon') sort = 'deadline';
+      else if (sortVal === 'Company A-Z') sort = 'company';
+      else if (sortVal === 'Status') sort = 'status';
+
+      try {
+        const apps = await API.getApplications({ search, status, sort });
+        if (apps.length === 0) {
+          container.innerHTML = '<div style="text-align:center;padding:60px 20px;grid-column:1/-1;"><div style="font-size:3rem;margin-bottom:16px;">📭</div><h3 style="margin-bottom:8px;">No applications found</h3><p style="color:var(--text-muted);">Start tracking your job applications!</p><a href="add-application.html" class="btn btn-primary" style="margin-top:16px;">➕ Add Your First Application</a></div>';
+        } else {
+          container.innerHTML = apps.map(renderCard).join('');
+        }
+        const countEl = document.getElementById('app-count');
+        if (countEl) countEl.textContent = apps.length;
+      } catch (error) {
+        container.innerHTML = '<p style="text-align:center;padding:40px;color:var(--danger);grid-column:1/-1;">Failed to load applications. Please try again.</p>';
+      }
+    }
+
+    async function deleteApp(id) {
+      if (!confirm('Are you sure you want to delete this application?')) return;
+      try {
+        await API.deleteApplication(id);
+        window.JobTracker.Toast.show('Application deleted', 'success');
+        loadApplications();
+      } catch (error) {
+        window.JobTracker.Toast.show(error.message || 'Delete failed', 'error');
+      }
+    }
+
     function filterByStatus(status) {
       const filter = document.getElementById('status-filter');
-      if (filter) { filter.value = status; filter.dispatchEvent(new Event('change')); }
+      if (filter) { filter.value = status; }
+      loadApplications();
     }
+
+    // Wire search and filter to API
+    document.getElementById('app-search')?.addEventListener('input', debounce(loadApplications, 300));
+    document.getElementById('status-filter')?.addEventListener('change', loadApplications);
+    document.getElementById('sort-filter')?.addEventListener('change', loadApplications);
+
+    function debounce(fn, ms) {
+      let timer;
+      return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), ms); };
+    }
+
     let isGridView = true;
     function toggleView() {
       isGridView = !isGridView;
@@ -477,6 +593,9 @@
         btn.textContent = '☰ List View';
       }
     }
+
+    // Load on page ready
+    loadApplications();
   </script>
 </body>
 

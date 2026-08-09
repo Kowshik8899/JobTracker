@@ -477,8 +477,11 @@
 
   <button class="mobile-sidebar-toggle"
     onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').classList.toggle('show');">☰</button>
+  <script src="js/api.js"></script>
   <script src="js/script.js"></script>
   <script>
+    if (!API.requireAuth()) { /* redirects */ }
+
     function toggleEditProfile() {
       const form = document.getElementById('edit-profile-form');
       const btn = document.getElementById('edit-profile-btn');
@@ -491,6 +494,11 @@
       window.JobTracker.Toast.show('profile saved successfully!', 'success');
       toggleEditProfile();
     }
+
+    // Wire sign-out
+    document.querySelectorAll('a[href="index.html"].danger, a[href="index.html"][style*="color:var(--danger)"]').forEach(link => {
+      link.addEventListener('click', (e) => { e.preventDefault(); API.logout(); });
+    });
   </script>
 </body>
 
