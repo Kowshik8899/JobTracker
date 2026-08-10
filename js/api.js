@@ -5,7 +5,7 @@
 
 const API = (() => {
   // Base URL for API requests
-  const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+  const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "";
 const BASE_URL = isLocal ? "http://localhost:5000/api" : "https://jobtracker-6nsn.onrender.com/api";
   // --- Token Management ---
 
@@ -107,6 +107,16 @@ const BASE_URL = isLocal ? "http://localhost:5000/api" : "https://jobtracker-6ns
     return await request("/auth/profile");
   }
 
+  async function updateProfile(data) {
+    const res = await request("/auth/profile", {
+      method: "PUT",
+      body: JSON.stringify(data),
+    });
+    // Update local user storage
+    setUser({ _id: res._id, name: res.name, email: res.email, goal: res.goal, education: res.education });
+    return res;
+  }
+
   // --- Applications API ---
 
   async function getApplications(params = {}) {
@@ -148,6 +158,24 @@ const BASE_URL = isLocal ? "http://localhost:5000/api" : "https://jobtracker-6ns
     return await request("/analytics");
   }
 
+  // --- Notifications API ---
+
+  async function getNotifications() {
+    return await request("/notifications");
+  }
+
+  async function markNotificationRead(id) {
+    return await request(`/notifications/${id}/read`, {
+      method: "PUT",
+    });
+  }
+
+  async function markAllNotificationsRead() {
+    return await request(`/notifications/read-all`, {
+      method: "PUT",
+    });
+  }
+
   // --- Auth Guard ---
   // Call on protected pages to redirect unauthenticated users
   function requireAuth() {
@@ -167,12 +195,16 @@ const BASE_URL = isLocal ? "http://localhost:5000/api" : "https://jobtracker-6ns
     login,
     logout,
     getProfile,
+    updateProfile,
     getApplications,
     getApplicationById,
     createApplication,
     updateApplication,
     deleteApplication,
     getAnalytics,
+    getNotifications,
+    markNotificationRead,
+    markAllNotificationsRead,
     requireAuth,
   };
 })();

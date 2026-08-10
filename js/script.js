@@ -171,23 +171,30 @@ const CounterAnimation = {
     counters.forEach(el => observer.observe(el));
   },
   animateCounter(el) {
-    const target = parseFloat(el.getAttribute('data-count'));
+    if (el._animTimer) clearInterval(el._animTimer);
+    const target = parseFloat(el.getAttribute('data-count')) || 0;
     const suffix = el.getAttribute('data-suffix') || '';
     const prefix = el.getAttribute('data-prefix') || '';
     const duration = 1800;
     const steps = 60;
+    
+    if (target === 0) {
+      el.textContent = prefix + '0' + suffix;
+      return;
+    }
+    
     const increment = target / steps;
     let current = 0;
     let step = 0;
 
-    const timer = setInterval(() => {
+    el._animTimer = setInterval(() => {
       step++;
       current = Math.min(current + increment, target);
       const display = Number.isInteger(target) ? Math.floor(current) : current.toFixed(1);
       el.textContent = prefix + display + suffix;
       if (step >= steps) {
         el.textContent = prefix + target + suffix;
-        clearInterval(timer);
+        clearInterval(el._animTimer);
       }
     }, duration / steps);
   }
@@ -493,24 +500,98 @@ const Charts = {
    DUMMY DATA
    ========================================== */
 const AppData = {
-  applications: [
-    { id: 1, company: 'Google', role: 'Software Engineer Intern', status: 'interview', date: '2024-12-10', deadline: '2025-01-15', location: 'Bangalore, India', color: 'color-google', initials: 'G' },
-    { id: 2, company: 'Microsoft', role: 'Frontend Developer', status: 'applied', date: '2024-12-08', deadline: '2025-01-20', location: 'Hyderabad, India', color: 'color-microsoft', initials: 'MS' },
-    { id: 3, company: 'Amazon', role: 'SDE Intern', status: 'offer', date: '2024-11-25', deadline: '2024-12-30', location: 'Chennai, India', color: 'color-amazon', initials: 'A' },
-    { id: 4, company: 'Adobe', role: 'UI/UX Design Intern', status: 'rejected', date: '2024-11-18', deadline: '2024-12-15', location: 'Noida, India', color: 'color-adobe', initials: 'Ad' },
-    { id: 5, company: 'Infosys', role: 'Technology Analyst', status: 'applied', date: '2024-12-15', deadline: '2025-02-01', location: 'Pune, India', color: 'color-infosys', initials: 'I' },
-    { id: 6, company: 'TCS', role: 'Software Developer', status: 'pending', date: '2024-12-12', deadline: '2025-01-30', location: 'Mumbai, India', color: 'color-tcs', initials: 'T' },
-    { id: 7, company: 'Deloitte', role: 'Business Analyst Intern', status: 'interview', date: '2024-12-01', deadline: '2025-01-10', location: 'Gurgaon, India', color: 'color-deloitte', initials: 'D' },
-    { id: 8, company: 'Accenture', role: 'Cloud Engineer', status: 'pending', date: '2024-12-18', deadline: '2025-02-10', location: 'Bangalore, India', color: 'color-accenture', initials: 'Ac' },
-    { id: 9, company: 'Meta', role: 'React Developer', status: 'applied', date: '2024-12-05', deadline: '2025-01-25', location: 'Remote', color: 'color-meta', initials: 'M' },
-    { id: 10, company: 'Netflix', role: 'Data Engineer Intern', status: 'wishlist', date: '2024-12-20', deadline: '2025-02-28', location: 'Remote', color: 'color-netflix', initials: 'N' },
-  ],
-  notifications: [
-    { icon: '🎉', title: 'Interview Scheduled', desc: 'Google has scheduled your technical interview', time: '2 hours ago', color: 'var(--accent-50)', iconColor: 'var(--accent)' },
-    { icon: '📧', title: 'New Application Update', desc: 'Amazon has reviewed your application', time: '5 hours ago', color: 'var(--primary-50)', iconColor: 'var(--primary)' },
-    { icon: '⏰', title: 'Deadline Approaching', desc: 'Microsoft application deadline in 3 days', time: '1 day ago', color: 'var(--warning-50)', iconColor: 'var(--warning)' },
-    { icon: '❌', title: 'Application Update', desc: 'Adobe has updated your application status', time: '2 days ago', color: 'var(--danger-50)', iconColor: 'var(--danger)' },
-  ]
+  applications: [],
+  notifications: []
+};
+
+/* ==========================================
+   REAL NOTIFICATIONS LOGIC
+   ========================================== */
+const NotificationsUI = {
+  async init() {
+    if (!window.API || !window.API.isLoggedIn()) return;
+    try {
+      this.notifications = await window.API.getNotifications();
+      this.render();
+    } catch (e) {
+      console.error('Failed to load notifications', e);
+    }
+  },
+  
+  async markRead(id) {
+    try {
+      await window.API.markNotificationRead(id);
+      this.notifications = this.notifications.map(n => 
+        n._id === id ? { ...n, read: true } : n
+      );
+      this.render();
+    } catch (e) {
+      console.error('Failed to mark notification read', e);
+    }
+  },
+
+  async markAllRead() {
+    try {
+      await window.API.markAllNotificationsRead();
+      this.notifications = this.notifications.map(n => ({ ...n, read: true }));
+      this.render();
+    } catch (e) {
+      console.error('Failed to mark all notifications read', e);
+    }
+  },
+
+  render() {
+    // 1. Update Badge
+    const unreadCount = this.notifications.filter(n => !n.read).length;
+    document.querySelectorAll('.unread-badge').forEach(badge => {
+      badge.style.display = unreadCount > 0 ? 'block' : 'none';
+    });
+
+    // 2. Update Lists
+    const listContainers = document.querySelectorAll('#notifications-list, .notifications-list-container');
+    listContainers.forEach(container => {
+      if (this.notifications.length === 0) {
+        container.innerHTML = '<div style="padding: 16px; text-align: center; color: var(--text-muted);">No notifications yet</div>';
+        return;
+      }
+      container.innerHTML = this.notifications.map(n => {
+        const iconMap = {
+          'info': 'ℹ️',
+          'success': '✅',
+          'warning': '⚠️',
+          'error': '❌'
+        };
+        const colorMap = {
+          'info': 'var(--primary)',
+          'success': 'var(--accent)',
+          'warning': 'var(--warning)',
+          'error': 'var(--danger)'
+        };
+        const bgMap = {
+          'info': 'var(--primary-50)',
+          'success': 'var(--accent-50)',
+          'warning': 'var(--warning-50)',
+          'error': 'var(--danger-50)'
+        };
+        
+        const timeAgo = new Date(n.createdAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        const opacity = n.read ? '0.6' : '1';
+        
+        return `
+          <div class="notification-item" style="padding: 12px 16px; border-bottom: 1px solid var(--gray-100); display: flex; gap: 12px; align-items: flex-start; cursor: pointer; opacity: ${opacity}; transition: background 0.2s;" onclick="window.JobTracker.NotificationsUI.markRead('${n._id}')">
+            <div style="background: ${bgMap[n.type] || bgMap.info}; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;">
+              ${iconMap[n.type] || iconMap.info}
+            </div>
+            <div>
+              <div style="font-weight: 600; color: var(--text-primary); font-size: 0.95rem; margin-bottom: 2px;">${n.title}</div>
+              <div style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 4px;">${n.message}</div>
+              <div style="color: var(--gray-400); font-size: 0.75rem;">${timeAgo}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    });
+  }
 };
 
 /* ==========================================
@@ -545,7 +626,7 @@ const Forms = {
     }
 
     // Form submission prevention (demo)
-    document.querySelectorAll('form').forEach(form => {
+    document.querySelectorAll('form:not([onsubmit])').forEach(form => {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
         const submitBtn = form.querySelector('[type="submit"]');
@@ -759,15 +840,224 @@ const Settings = {
    PROFILE PAGE
    ========================================== */
 const profile = {
-  init() {
-    const editBtn = document.getElementById('edit-profile-btn');
-    const editSection = document.getElementById('edit-profile-form');
-    if (editBtn && editSection) {
-      editBtn.addEventListener('click', () => {
+  async init() {
+    window.toggleEditProfile = () => {
+      const editSection = document.getElementById('edit-profile-form');
+      const editBtn = document.getElementById('edit-profile-btn');
+      if (editBtn && editSection) {
         const isEditing = editSection.style.display !== 'none';
         editSection.style.display = isEditing ? 'none' : 'block';
         editBtn.textContent = isEditing ? '✏️ Edit profile' : '✕ Cancel';
-      });
+      }
+    };
+    
+    window.saveProfile = async (event) => {
+      event.preventDefault();
+      try {
+        const name = document.getElementById('profile-edit-name')?.value;
+        const res = await window.API.updateProfile({ name });
+        Toast.show('Profile updated successfully!', 'success');
+        
+        // Update display
+        const dName = document.getElementById('profile-hero-name');
+        const dAvatar = document.getElementById('profile-hero-avatar');
+        if (dName) dName.textContent = res.name;
+        if (dAvatar) dAvatar.textContent = res.name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+        
+        toggleEditProfile();
+      } catch (err) {
+        Toast.show(err.message, 'error');
+      }
+    };
+
+    const renderEducationTimeline = () => {
+      const container = document.getElementById('education-timeline-container');
+      if (!container) return;
+      const usr = window.API.getUser();
+      const eduList = usr?.education || [];
+
+      if (eduList.length === 0) {
+        container.innerHTML = `
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div style="background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;">
+              <div class="timeline-desc">No education added yet.</div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = eduList.map((edu, index) => {
+        const isFirst = index === 0;
+        const bg = isFirst ? 'var(--primary-50)' : 'var(--bg-card)';
+        const border = isFirst ? 'var(--primary-100)' : 'var(--gray-200)';
+        
+        let tagsHtml = '';
+        if (edu.cgpa) {
+          tagsHtml += `<span style="background:var(--primary);color:white;font-size:0.72rem;font-weight:700;padding:2px 10px;border-radius:999px;">CGPA: ${edu.cgpa}</span>`;
+        }
+        if (edu.achievements) {
+          tagsHtml += `<span style="background:var(--accent-50);color:var(--accent-dark);font-size:0.72rem;font-weight:600;padding:2px 10px;border-radius:999px;margin-left:8px;">${edu.achievements}</span>`;
+        }
+
+        return `
+          <div class="timeline-item">
+            <div class="timeline-dot" ${!isFirst ? 'style="background:var(--secondary);"' : ''}></div>
+            <div style="background:${bg};border:1px solid ${border};border-radius:var(--radius-md);padding:16px;">
+              <div class="timeline-date">${edu.startDate || ''} – ${edu.endDate || 'Present'}</div>
+              <div class="timeline-title">${edu.degree || 'Degree'}</div>
+              <div class="timeline-desc">${edu.institution || 'Institution'}</div>
+              ${tagsHtml ? `<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">${tagsHtml}</div>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    };
+
+    window.addEducationEntry = (edu = {}) => {
+      const container = document.getElementById('education-entries-container');
+      if (!container) return;
+      const div = document.createElement('div');
+      div.className = 'edu-entry';
+      div.style.cssText = 'border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;margin-bottom:16px;background:var(--bg-card);position:relative;';
+      div.innerHTML = `
+        <button type="button" class="btn btn-ghost btn-sm" onclick="this.parentElement.remove()" style="position:absolute;top:10px;right:10px;color:var(--error);">✕ Remove</button>
+        <div class="form-grid-2" style="margin-top:10px;">
+          <div class="form-group">
+            <label class="form-label">Degree/Program</label>
+            <input type="text" class="form-control edu-degree" value="${edu.degree || ''}" placeholder="e.g. B.Tech in CSE" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Institution</label>
+            <input type="text" class="form-control edu-inst" value="${edu.institution || ''}" placeholder="e.g. IIT Bombay" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Start Year</label>
+            <input type="text" class="form-control edu-start" value="${edu.startDate || ''}" placeholder="e.g. 2021" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">End Year</label>
+            <input type="text" class="form-control edu-end" value="${edu.endDate || ''}" placeholder="e.g. 2025 (Expected)" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">CGPA / Percentage</label>
+            <input type="text" class="form-control edu-cgpa" value="${edu.cgpa || ''}" placeholder="e.g. 9.2/10">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Achievements</label>
+            <input type="text" class="form-control edu-achiev" value="${edu.achievements || ''}" placeholder="e.g. Dean's List">
+          </div>
+        </div>
+      `;
+      container.appendChild(div);
+    };
+
+    window.toggleEditEducation = () => {
+      const formDiv = document.getElementById('edit-education-form');
+      const timelineDiv = document.getElementById('education-timeline-container');
+      const editBtn = document.getElementById('edit-education-btn');
+      
+      if (!formDiv || !timelineDiv) return;
+      
+      const isEditing = formDiv.style.display !== 'none';
+      if (isEditing) {
+        // Cancel: hide form, show timeline
+        formDiv.style.display = 'none';
+        timelineDiv.style.display = 'block';
+        if (editBtn) editBtn.textContent = 'Edit';
+      } else {
+        // Edit: show form, hide timeline, populate
+        formDiv.style.display = 'block';
+        timelineDiv.style.display = 'none';
+        if (editBtn) editBtn.textContent = '✕ Cancel';
+        
+        const container = document.getElementById('education-entries-container');
+        container.innerHTML = '';
+        const usr = window.API.getUser();
+        const eduList = usr?.education || [];
+        if (eduList.length > 0) {
+          eduList.forEach(edu => addEducationEntry(edu));
+        } else {
+          addEducationEntry(); // one blank entry
+        }
+      }
+    };
+
+    window.saveEducation = async (event) => {
+      event.preventDefault();
+      
+      // Gather data
+      const entries = document.querySelectorAll('.edu-entry');
+      const newEducation = Array.from(entries).map(entry => ({
+        degree: entry.querySelector('.edu-degree').value,
+        institution: entry.querySelector('.edu-inst').value,
+        startDate: entry.querySelector('.edu-start').value,
+        endDate: entry.querySelector('.edu-end').value,
+        cgpa: entry.querySelector('.edu-cgpa').value,
+        achievements: entry.querySelector('.edu-achiev').value
+      }));
+
+      try {
+        await window.API.updateProfile({ education: newEducation });
+        Toast.show('Education updated successfully!', 'success');
+        
+        // Hide form, render timeline
+        const formDiv = document.getElementById('edit-education-form');
+        const timelineDiv = document.getElementById('education-timeline-container');
+        const editBtn = document.getElementById('edit-education-btn');
+        if (formDiv) formDiv.style.display = 'none';
+        if (timelineDiv) timelineDiv.style.display = 'block';
+        if (editBtn) editBtn.textContent = 'Edit';
+        
+        renderEducationTimeline();
+      } catch (err) {
+        Toast.show(err.message || 'Failed to save education', 'error');
+      }
+    };
+
+    if (window.API && window.API.isLoggedIn()) {
+      const user = window.API.getUser();
+      if (user) {
+        // Form inputs
+        const nameInput = document.getElementById('profile-edit-name');
+        const emailInput = document.getElementById('profile-edit-email');
+        if (nameInput) nameInput.value = user.name;
+        if (emailInput) emailInput.value = user.email;
+
+        // Display elements
+        const dName = document.getElementById('profile-hero-name');
+        const dAvatar = document.getElementById('profile-hero-avatar');
+        const dEmail = document.getElementById('profile-display-email');
+        const dSummary = document.getElementById('profile-display-summary');
+        
+        if (dName) dName.textContent = user.name;
+        if (dAvatar) {
+          const initials = user.name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+          dAvatar.textContent = initials;
+        }
+        if (dEmail) dEmail.textContent = user.email;
+        if (dSummary && user.goal) dSummary.textContent = user.goal;
+        
+        // Initialize education timeline
+        renderEducationTimeline();
+      }
+      
+      // Load and display statistics from real application data
+      try {
+        const data = await window.API.getAnalytics();
+        const sMap = data.statusCounts || {};
+        
+        const elTotal = document.getElementById('profile-total-applications');
+        const elInterviews = document.getElementById('profile-interviews');
+        const elOffers = document.getElementById('profile-offers');
+        
+        if (elTotal) elTotal.textContent = data.totalApplications || 0;
+        if (elInterviews) elInterviews.textContent = sMap['interview'] || 0;
+        if (elOffers) elOffers.textContent = sMap['offer'] || 0;
+      } catch (e) {
+        console.error('Failed to load profile analytics', e);
+      }
     }
   }
 };
@@ -776,42 +1066,111 @@ const profile = {
    ANALYTICS PAGE - INITIALIZE CHARTS
    ========================================== */
 const AnalyticsPage = {
-  init() {
+  async init() {
     if (!document.getElementById('bar-chart')) return;
+    
+    if (!window.API || !window.API.isLoggedIn()) return;
+    try {
+      const data = await window.API.getAnalytics();
+      
+      // Update top level cards if they exist
+      const statTotal = document.getElementById('stat-total-apps');
+      const statResponse = document.getElementById('stat-response-rate');
+      const statInterviews = document.getElementById('stat-interviews');
+      const statOffers = document.getElementById('stat-offers');
+      
+      const updateStat = (el, val) => {
+        if (!el) return;
+        if (el.hasAttribute('data-count')) {
+          el.setAttribute('data-count', val);
+          if (typeof CounterAnimation !== 'undefined') CounterAnimation.animateCounter(el);
+        } else {
+          el.textContent = val;
+        }
+      };
 
-    // Monthly Applications Bar Chart
-    Charts.drawBar('bar-chart',
-      ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      [3, 5, 7, 4, 8, 12, 9, 15, 11, 8, 14, 10],
-      { color: '#2563EB' }
-    );
+      updateStat(statTotal, data.totalApplications || 0);
+      if (statResponse) statResponse.textContent = (data.responseRate || 0) + '%';
+      updateStat(statInterviews, data.statusCounts['interview'] || 0);
+      updateStat(statOffers, data.statusCounts['offer'] || 0);
 
-    // Status Distribution Donut
-    Charts.drawDonut('donut-chart',
-      ['Applied', 'Interview', 'Offer', 'Rejected', 'Pending'],
-      [32, 18, 5, 12, 8],
-      {
-        colors: ['#2563EB', '#7C3AED', '#10B981', '#EF4444', '#F59E0B'],
-        centerText: '75',
-        centerLabel: 'Total'
+      // Monthly Applications Bar Chart
+      const months = data.monthlyTrends.map(m => m.month);
+      const counts = data.monthlyTrends.map(m => m.count);
+      Charts.drawBar('bar-chart',
+        months.length ? months : ['No Data'],
+        counts.length ? counts : [0],
+        { color: '#2563EB' }
+      );
+
+      // Status Distribution Donut
+      const sMap = data.statusCounts;
+      const statusLabels = ['Applied', 'Interview', 'Offer', 'Rejected', 'Pending'];
+      const applied = (sMap['applied']||0) + (sMap['oa-test']||0);
+      const interviews = sMap['interview'] || 0;
+      const offers = sMap['offer'] || 0;
+      const rejections = (sMap['rejected']||0) + (sMap['withdrawn']||0);
+      const pending = (sMap['pending']||0) + (sMap['wishlist']||0);
+      
+      const statusData = [applied, interviews, offers, rejections, pending];
+      const total = data.totalApplications || 0;
+      
+      const setLegend = (id, count) => {
+        const el = document.getElementById(id);
+        if (el) {
+          const pct = total > 0 ? ((count / total) * 100).toFixed(1) : '0';
+          el.innerHTML = `${count} <span style="color:var(--text-muted);font-size:0.78rem;font-weight:400;">(${pct}%)</span>`;
+        }
+      };
+      
+      setLegend('analytics-legend-applied', applied);
+      setLegend('analytics-legend-interview', interviews);
+      setLegend('analytics-legend-offer', offers);
+      setLegend('analytics-legend-rejected', rejections);
+      setLegend('analytics-legend-pending', pending);
+      
+      const allApps = await window.API.getApplications();
+      const now = new Date();
+      const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+      const weeklyApps = allApps.filter(app => new Date(app.applicationDate) >= oneWeekAgo).length;
+      
+      const goalEl = document.getElementById('analytics-goal-text');
+      if (goalEl) {
+        goalEl.textContent = `This week: ${weeklyApps} applications`;
       }
-    );
+      
+      Charts.drawDonut('donut-chart',
+        statusLabels,
+        statusData,
+        {
+          colors: ['#2563EB', '#7C3AED', '#10B981', '#EF4444', '#F59E0B'],
+          centerText: data.totalApplications.toString(),
+          centerLabel: 'Total'
+        }
+      );
 
-    // Response Rate Line Chart
-    Charts.drawLine('line-chart',
-      ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
-      [
-        { data: [15, 25, 32, 28, 45, 52, 48, 65], color: '#2563EB', label: 'Applications' },
-        { data: [8, 12, 18, 14, 22, 28, 25, 35], color: '#10B981', label: 'Responses' }
-      ]
-    );
+      // Response Rate Line Chart
+      // If there are no applications, show a no-data state
+      // Otherwise, assume a basic response rate metric if backend adds it, or leave as No Data.
+      Charts.drawLine('line-chart',
+        ['No Data'],
+        [
+          { data: [0], color: '#2563EB', label: 'Response Rate' }
+        ]
+      );
 
-    // Company breakdown horizontal bar
-    Charts.drawHBar('hbar-chart',
-      ['Google', 'Microsoft', 'Amazon', 'Infosys', 'TCS', 'Deloitte'],
-      [3, 4, 5, 8, 6, 2],
-      { colors: ['#2563EB', '#7C3AED', '#10B981', '#F59E0B', '#EF4444', '#06B6D4'] }
-    );
+      // Company breakdown horizontal bar
+      const topCompanies = data.topCompanies.map(c => c.company);
+      const topCounts = data.topCompanies.map(c => c.count);
+      Charts.drawHBar('hbar-chart',
+        topCompanies.length ? topCompanies : ['No Data'],
+        topCounts.length ? topCounts : [0],
+        { colors: ['#2563EB', '#7C3AED', '#10B981', '#F59E0B', '#EF4444', '#06B6D4'] }
+      );
+
+    } catch (e) {
+      console.error('Failed to load analytics', e);
+    }
 
     // Re-draw on resize
     window.addEventListener('resize', () => {
@@ -825,23 +1184,180 @@ const AnalyticsPage = {
    DASHBOARD PAGE - CHARTS
    ========================================== */
 const DashboardPage = {
-  init() {
+  async init() {
     if (!document.getElementById('dash-line-chart')) return;
+    
+    if (!window.API || !window.API.isLoggedIn()) return;
+    try {
+      const data = await window.API.getAnalytics();
+      const allApps = await window.API.getApplications();
+      
+      // Update header stat counts
+      const dashTotalApps = document.getElementById('dash-total-apps');
+      const dashInterviews = document.getElementById('dash-interviews');
+      const dashOffers = document.getElementById('dash-offers');
+      const dashRejections = document.getElementById('dash-rejections');
+      const dashPending = document.getElementById('dash-pending');
+      
+      const sMap = data.statusCounts || {};
+      const rejections = (sMap['rejected']||0) + (sMap['withdrawn']||0);
+      const pending = (sMap['pending']||0) + (sMap['wishlist']||0);
+      const applied = (sMap['applied']||0) + (sMap['oa-test']||0);
+      const interviews = sMap['interview'] || 0;
+      const offers = sMap['offer'] || 0;
 
-    Charts.drawLine('dash-line-chart',
-      ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
-      [{ data: [2, 4, 3, 7, 5, 9], color: '#2563EB', label: 'Applications' }]
-    );
+      const updateStat = (el, val) => {
+        if (!el) return;
+        if (el.hasAttribute('data-count')) {
+          el.setAttribute('data-count', val);
+          if (typeof CounterAnimation !== 'undefined') CounterAnimation.animateCounter(el);
+        } else {
+          el.textContent = val;
+        }
+      };
 
-    Charts.drawDonut('dash-donut-chart',
-      ['Applied', 'Interview', 'Offer', 'Rejected', 'Pending'],
-      [10, 4, 2, 3, 5],
-      {
-        colors: ['#2563EB', '#7C3AED', '#10B981', '#EF4444', '#F59E0B'],
-        centerText: '24',
-        centerLabel: 'Total'
+      updateStat(dashTotalApps, data.totalApplications || 0);
+      updateStat(dashInterviews, interviews);
+      updateStat(dashOffers, offers);
+      updateStat(dashRejections, rejections);
+      updateStat(dashPending, pending);
+
+      // Applications this week
+      const now = new Date();
+      const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+      const weeklyApps = allApps.filter(app => new Date(app.applicationDate) >= oneWeekAgo).length;
+      
+      const weeklyEl = document.getElementById('dash-weekly-apps');
+      const weeklyBar = document.getElementById('dash-weekly-apps-bar');
+      const user = window.API.getUser();
+      if (weeklyEl) weeklyEl.textContent = weeklyApps;
+      if (weeklyBar) {
+        if (user && user.goal) {
+          let pct = Math.min(100, (weeklyApps / user.goal) * 100);
+          weeklyBar.setAttribute('data-width', pct);
+          weeklyBar.style.width = pct + '%';
+        } else {
+          weeklyBar.style.display = 'none'; // Hide if no goal
+          const parentText = weeklyBar.parentElement.previousElementSibling;
+          if (parentText) parentText.textContent = `Applications this week: ${weeklyApps}`;
+        }
       }
-    );
+
+      // Profile Completeness
+      const dashProfComp = document.getElementById('dash-profile-completeness');
+      const dashProfCompBar = document.getElementById('dash-profile-completeness-bar');
+      if (user) {
+        let fields = ['name', 'email', 'goal'];
+        let filled = fields.filter(f => user[f]).length;
+        let compPct = Math.round((filled / fields.length) * 100);
+        if (dashProfComp) dashProfComp.textContent = compPct + '%';
+        if (dashProfCompBar) {
+          dashProfCompBar.setAttribute('data-width', compPct);
+          dashProfCompBar.style.width = compPct + '%';
+        }
+      }
+
+      // Charts
+      const months = data.monthlyTrends.map(m => m.month);
+      const counts = data.monthlyTrends.map(m => m.count);
+
+      if (typeof Charts !== 'undefined' && Charts.drawLine) {
+        Charts.drawLine('dash-line-chart',
+          months.length ? months : ['No Data'],
+          [{ data: counts.length ? counts : [0], color: '#2563EB', label: 'Applications' }]
+        );
+      }
+
+      const statusLabels = ['Applied', 'Interview', 'Offer', 'Rejected', 'Pending'];
+      const statusData = [applied, interviews, offers, rejections, pending];
+      const colors = ['#2563EB', '#7C3AED', '#10B981', '#EF4444', '#F59E0B'];
+
+      if (typeof Charts !== 'undefined' && Charts.drawDonut) {
+        Charts.drawDonut('dash-donut-chart', statusLabels, statusData, {
+          colors: colors,
+          centerText: (data.totalApplications || 0).toString(),
+          centerLabel: 'Total'
+        });
+      }
+
+      // Status Legend
+      const legendEl = document.getElementById('dash-status-legend');
+      if (legendEl) {
+        legendEl.innerHTML = statusLabels.map((lbl, i) => `
+          <div class="legend-item">
+            <div class="legend-dot" style="background:${colors[i]};"></div>${lbl} (${statusData[i]})
+          </div>
+        `).join('');
+      }
+
+      // Recent Applications (latest 5)
+      const tbody = document.getElementById('recent-apps-tbody');
+      if (tbody) {
+        if (allApps.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-muted);padding:20px;">No recent applications</td></tr>';
+        } else {
+          // Sort by date desc and take 5
+          const sorted = [...allApps].sort((a,b) => new Date(b.applicationDate) - new Date(a.applicationDate)).slice(0, 5);
+          tbody.innerHTML = sorted.map(app => {
+            const initials = app.company.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+            const dateStr = new Date(app.applicationDate).toLocaleDateString('en-US', {month:'short', day:'numeric'});
+            let bClass = 'badge-applied';
+            if(['interview'].includes(app.status)) bClass = 'badge-interview';
+            if(['offer'].includes(app.status)) bClass = 'badge-offer';
+            if(['rejected','withdrawn'].includes(app.status)) bClass = 'badge-rejected';
+            if(['pending','wishlist'].includes(app.status)) bClass = 'badge-pending';
+            
+            return `
+              <tr>
+                <td>
+                  <div class="company-cell">
+                    <div class="company-logo" style="background:var(--primary);color:white;">${initials}</div><span>${app.company}</span>
+                  </div>
+                </td>
+                <td style="color:var(--text-secondary);font-size:0.88rem;">${app.role}</td>
+                <td><span class="badge ${bClass}">${app.status}</span></td>
+                <td style="color:var(--text-muted);font-size:0.85rem;">${dateStr}</td>
+                <td><a href="applications.html" class="btn btn-ghost btn-sm">View</a></td>
+              </tr>
+            `;
+          }).join('');
+        }
+      }
+
+      // Upcoming Deadlines (future dates, nearest first)
+      const deadlinesContainer = document.getElementById('upcoming-deadlines-container');
+      if (deadlinesContainer) {
+        const withDeadlines = allApps.filter(app => app.deadline && new Date(app.deadline) >= new Date(new Date().setHours(0,0,0,0)));
+        withDeadlines.sort((a,b) => new Date(a.deadline) - new Date(b.deadline));
+        
+        if (withDeadlines.length === 0) {
+          deadlinesContainer.innerHTML = '<div style="color:var(--text-muted);padding:20px;">No upcoming deadlines</div>';
+        } else {
+          deadlinesContainer.innerHTML = withDeadlines.map(app => {
+            const daysLeft = Math.ceil((new Date(app.deadline) - new Date()) / (1000 * 60 * 60 * 24));
+            let colorVar = '--primary';
+            let bgVar = 'white';
+            if (daysLeft <= 3) { colorVar = '--danger'; bgVar = 'var(--danger-50)'; }
+            else if (daysLeft <= 7) { colorVar = '--warning'; bgVar = 'var(--warning-50)'; }
+            const dateStr = new Date(app.deadline).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+            
+            return `
+              <div style="padding:16px;border:1.5px solid var(${colorVar});border-radius:var(--radius-md);background:${bgVar};">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+                  <div style="font-weight:700;font-size:0.9rem;">${app.company}</div>
+                  <span style="background:var(${colorVar});color:white;font-size:0.72rem;font-weight:700;padding:2px 8px;border-radius:999px;">${daysLeft} days left</span>
+                </div>
+                <div style="font-size:0.82rem;color:var(--text-secondary);">${app.role}</div>
+                <div style="font-size:0.78rem;color:var(${colorVar});margin-top:6px;font-weight:600;">Deadline: ${dateStr}</div>
+              </div>
+            `;
+          }).join('');
+        }
+      }
+
+    } catch (e) {
+      console.error('Failed to load dashboard analytics', e);
+    }
 
     window.addEventListener('resize', () => {
       clearTimeout(this._resizeTimer);
@@ -908,13 +1424,54 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     AnalyticsPage.init();
     DashboardPage.init();
+    NotificationsUI.init();
   }, 100);
+
+  // Global User and Apps initialization
+  async function runGlobalInit() {
+    if (window.API && window.API.isLoggedIn()) {
+      try {
+        const user = window.API.getUser();
+        if (user) {
+          const greeting = document.getElementById('user-greeting');
+          if (greeting) greeting.innerHTML = `Good morning, ${user.name.split(' ')[0]}! 👋`;
+          
+          const sName = document.getElementById('sidebar-user-name');
+          const sInst = document.getElementById('sidebar-user-inst');
+          if (sName) sName.textContent = user.name;
+          if (sInst) sInst.textContent = user.email; // Fallback to email if no institution
+          
+          // Settings page specific
+          const setAvatar = document.getElementById('settings-user-avatar');
+          const setName = document.getElementById('settings-user-name');
+          const setEmail = document.getElementById('settings-user-email');
+          if (setName) setName.textContent = user.name;
+          if (setEmail) setEmail.textContent = user.email;
+          if (setAvatar) {
+            const initials = user.name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+            setAvatar.textContent = initials;
+          }
+        }
+        
+        const apps = await window.API.getApplications();
+        const badge = document.getElementById('sidebar-total-badge');
+        if (badge) badge.textContent = apps.length;
+        
+        const planUsage = document.getElementById('settings-user-plan-usage');
+        if (planUsage) planUsage.textContent = apps.length;
+      } catch (e) {
+        console.error("Global init failed:", e);
+      }
+    }
+  }
 
   // Add page entrance animation
   document.body.classList.add('page-enter');
+  
+  runGlobalInit();
 
   console.log('🚀 JobTracker initialized');
 });
 
 // Export for external use
-window.JobTracker = { Toast, ThemeManager, Charts, AppData, Modal };
+window.JobTracker = { Toast, ThemeManager, Charts, AppData, Modal, NotificationsUI };

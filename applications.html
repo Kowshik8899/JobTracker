@@ -33,6 +33,21 @@
       <div class="nav-actions">
         <button class="theme-toggle">🌙</button>
         <div class="dropdown">
+          <div class="notification-bell" data-dropdown="notifications-menu"
+            style="cursor:pointer;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;border:1.5px solid var(--gray-200);position:relative;">
+            🔔
+            <span class="badge-dot unread-badge"
+              style="display:none;position:absolute;top:2px;right:2px;width:8px;height:8px;background:var(--danger);border-radius:50%;border:2px solid white;"></span>
+          </div>
+          <div class="dropdown-menu notifications-menu" id="notifications-menu" style="width: 320px; right: -60px; left: auto; max-height: 400px; overflow-y: auto;">
+            <div style="padding: 12px 16px; border-bottom: 1px solid var(--gray-200); font-weight: 600; display:flex; justify-content:space-between; align-items:center;">
+              <span>Notifications</span>
+              <button onclick="window.JobTracker.NotificationsUI.markAllRead()" style="background:none;border:none;color:var(--primary);font-size:0.75rem;cursor:pointer;font-weight:600;">Mark all read</button>
+            </div>
+            <div id="notifications-list"></div>
+          </div>
+        </div>
+        <div class="dropdown">
           <div class="nav-avatar" data-dropdown="user-menu2">KK</div>
           <div class="dropdown-menu" id="user-menu2">
             <a href="profile.html" class="dropdown-item">👤 My profile</a>
@@ -65,15 +80,15 @@
               style="width:40px;height:40px;border-radius:50%;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">
               KK</div>
             <div>
-              <div style="font-weight:700;font-size:0.9rem;">Kowshik Kuncham</div>
-              <div style="font-size:0.75rem;color:var(--text-muted);">Sri Vasavi Engineering College</div>
+              <div style="font-weight:700;font-size:0.9rem;" id="sidebar-user-name">Not provided</div>
+              <div style="font-size:0.75rem;color:var(--text-muted);" id="sidebar-user-inst">Not provided</div>
             </div>
           </div>
         </div>
         <div class="sidebar-label">Main Menu</div>
         <a href="dashboard.html" class="sidebar-link"><span class="icon">📊</span> Dashboard</a>
         <a href="applications.html" class="sidebar-link active"><span class="icon">📋</span> Applications <span
-            class="sidebar-badge">10</span></a>
+            class="sidebar-badge" id="sidebar-total-badge">0</span></a>
         <a href="add-application.html" class="sidebar-link"><span class="icon">➕</span> Add Application</a>
         <a href="analytics.html" class="sidebar-link"><span class="icon">📈</span> Analytics</a>
         <div class="sidebar-label">Account</div>
@@ -84,38 +99,38 @@
           <div onclick="filterByStatus('all')"
             style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:0.85rem;"
             onmouseover="this.style.background='var(--gray-100)'" onmouseout="this.style.background=''">
-            <span>All Applications</span><span
-              style="background:var(--primary);color:white;font-size:0.72rem;padding:1px 7px;border-radius:999px;">10</span>
+            <span>All Applications</span><span id="sidebar-count-all"
+              style="background:var(--primary);color:white;font-size:0.72rem;padding:1px 7px;border-radius:999px;">0</span>
           </div>
           <div onclick="filterByStatus('applied')"
             style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:0.85rem;"
             onmouseover="this.style.background='var(--gray-100)'" onmouseout="this.style.background=''">
-            <span>Applied</span><span
-              style="background:var(--primary-100);color:var(--primary);font-size:0.72rem;padding:1px 7px;border-radius:999px;">3</span>
+            <span>Applied</span><span id="sidebar-count-applied"
+              style="background:var(--primary-100);color:var(--primary);font-size:0.72rem;padding:1px 7px;border-radius:999px;">0</span>
           </div>
           <div onclick="filterByStatus('interview')"
             style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:0.85rem;"
             onmouseover="this.style.background='var(--gray-100)'" onmouseout="this.style.background=''">
-            <span>Interview</span><span
-              style="background:var(--secondary-50);color:var(--secondary);font-size:0.72rem;padding:1px 7px;border-radius:999px;">2</span>
+            <span>Interview</span><span id="sidebar-count-interview"
+              style="background:var(--secondary-50);color:var(--secondary);font-size:0.72rem;padding:1px 7px;border-radius:999px;">0</span>
           </div>
           <div onclick="filterByStatus('offer')"
             style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:0.85rem;"
             onmouseover="this.style.background='var(--gray-100)'" onmouseout="this.style.background=''">
-            <span>Offer</span><span
-              style="background:var(--accent-50);color:var(--accent);font-size:0.72rem;padding:1px 7px;border-radius:999px;">1</span>
+            <span>Offer</span><span id="sidebar-count-offer"
+              style="background:var(--accent-50);color:var(--accent);font-size:0.72rem;padding:1px 7px;border-radius:999px;">0</span>
           </div>
           <div onclick="filterByStatus('rejected')"
             style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:0.85rem;"
             onmouseover="this.style.background='var(--gray-100)'" onmouseout="this.style.background=''">
-            <span>Rejected</span><span
-              style="background:var(--danger-50);color:var(--danger);font-size:0.72rem;padding:1px 7px;border-radius:999px;">2</span>
+            <span>Rejected</span><span id="sidebar-count-rejected"
+              style="background:var(--danger-50);color:var(--danger);font-size:0.72rem;padding:1px 7px;border-radius:999px;">0</span>
           </div>
           <div onclick="filterByStatus('pending')"
             style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:0.85rem;"
             onmouseover="this.style.background='var(--gray-100)'" onmouseout="this.style.background=''">
-            <span>Pending</span><span
-              style="background:var(--warning-50);color:var(--warning);font-size:0.72rem;padding:1px 7px;border-radius:999px;">2</span>
+            <span>Pending</span><span id="sidebar-count-pending"
+              style="background:var(--warning-50);color:var(--warning);font-size:0.72rem;padding:1px 7px;border-radius:999px;">0</span>
           </div>
         </div>
       </aside>
@@ -127,7 +142,7 @@
           <div>
             <div class="breadcrumb"><a href="dashboard.html">Dashboard</a><span>›</span><span>Applications</span></div>
             <h1>My Applications</h1>
-            <p>Tracking <strong id="app-count">10</strong> applications across all stages.</p>
+            <p>Tracking <strong id="app-count">0</strong> applications across all stages.</p>
           </div>
           <div style="display:flex;gap:12px;">
             <button class="btn btn-ghost btn-sm" onclick="toggleView()" id="view-toggle">⊞ Grid View</button>
@@ -163,293 +178,6 @@
 
         <!-- Application Cards Grid -->
         <div class="app-cards-grid" id="app-cards-container">
-
-          <!-- Google -->
-          <div class="app-card" data-status="interview">
-            <div class="app-card-header">
-              <div class="app-card-company">
-                <div class="company-logo-lg color-google">G</div>
-                <div>
-                  <div class="company-name">Google</div>
-                  <div class="company-role">Software Engineer Intern</div>
-                </div>
-              </div>
-              <span class="badge badge-interview">Interview</span>
-            </div>
-            <div class="app-card-meta">
-              <div class="meta-item"><span class="icon">📍</span>Bangalore, India</div>
-              <div class="meta-item"><span class="icon">📅</span>Applied Dec 10</div>
-              <div class="meta-item"><span class="icon">⏰</span>Deadline Jan 15</div>
-              <div class="meta-item"><span class="icon">💼</span>Full-Time</div>
-            </div>
-            <div
-              style="margin-top:12px;padding:10px;background:var(--secondary-50);border-radius:8px;font-size:0.8rem;color:var(--secondary-dark);">
-              🎤 <strong>Technical Interview scheduled</strong> — Jan 8, 2025 at 10:00 AM IST
-            </div>
-            <div class="app-card-actions">
-              <a href="add-application.html" class="btn btn-primary btn-sm">✏️ Update</a>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Notes saved!', 'success')">📝
-                Notes</button>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Reminder set!', 'info')">🔔
-                Remind</button>
-            </div>
-          </div>
-
-          <!-- Microsoft -->
-          <div class="app-card" data-status="applied">
-            <div class="app-card-header">
-              <div class="app-card-company">
-                <div class="company-logo-lg color-microsoft">MS</div>
-                <div>
-                  <div class="company-name">Microsoft</div>
-                  <div class="company-role">Frontend Developer</div>
-                </div>
-              </div>
-              <span class="badge badge-applied">Applied</span>
-            </div>
-            <div class="app-card-meta">
-              <div class="meta-item"><span class="icon">📍</span>Hyderabad, India</div>
-              <div class="meta-item"><span class="icon">📅</span>Applied Dec 8</div>
-              <div class="meta-item"><span class="icon">⏰</span>Deadline Jan 20</div>
-              <div class="meta-item"><span class="icon">💰</span>₹18 LPA</div>
-            </div>
-            <div class="app-card-actions">
-              <a href="add-application.html" class="btn btn-primary btn-sm">✏️ Update</a>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Notes saved!', 'success')">📝
-                Notes</button>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Reminder set!', 'info')">🔔
-                Remind</button>
-            </div>
-          </div>
-
-          <!-- Amazon -->
-          <div class="app-card" data-status="offer">
-            <div class="app-card-header">
-              <div class="app-card-company">
-                <div class="company-logo-lg color-amazon">A</div>
-                <div>
-                  <div class="company-name">Amazon</div>
-                  <div class="company-role">SDE Intern</div>
-                </div>
-              </div>
-              <span class="badge badge-offer">Offer ✓</span>
-            </div>
-            <div class="app-card-meta">
-              <div class="meta-item"><span class="icon">📍</span>Chennai, India</div>
-              <div class="meta-item"><span class="icon">📅</span>Applied Nov 25</div>
-              <div class="meta-item"><span class="icon">⏰</span>Deadline Dec 30</div>
-              <div class="meta-item"><span class="icon">💰</span>₹90K/month</div>
-            </div>
-            <div
-              style="margin-top:12px;padding:10px;background:var(--accent-50);border-radius:8px;font-size:0.8rem;color:var(--accent-dark);">
-              🎉 <strong>Offer letter received!</strong> Deadline to accept: Jan 12, 2025
-            </div>
-            <div class="app-card-actions">
-              <button class="btn btn-accent btn-sm"
-                onclick="window.JobTracker.Toast.show('Offer accepted! 🎉', 'success')">✅ Accept Offer</button>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Offer declined', 'error')">❌
-                Decline</button>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Notes saved!', 'success')">📝
-                Notes</button>
-            </div>
-          </div>
-
-          <!-- Adobe -->
-          <div class="app-card" data-status="rejected">
-            <div class="app-card-header">
-              <div class="app-card-company">
-                <div class="company-logo-lg color-adobe">Ad</div>
-                <div>
-                  <div class="company-name">Adobe</div>
-                  <div class="company-role">UI/UX Design Intern</div>
-                </div>
-              </div>
-              <span class="badge badge-rejected">Rejected</span>
-            </div>
-            <div class="app-card-meta">
-              <div class="meta-item"><span class="icon">📍</span>Noida, India</div>
-              <div class="meta-item"><span class="icon">📅</span>Applied Nov 18</div>
-              <div class="meta-item"><span class="icon">⏰</span>Deadline Dec 15</div>
-              <div class="meta-item"><span class="icon">💼</span>Internship</div>
-            </div>
-            <div
-              style="margin-top:12px;padding:10px;background:var(--danger-50);border-radius:8px;font-size:0.8rem;color:var(--danger);">
-              😞 Application did not progress. Consider applying again next cycle.
-            </div>
-            <div class="app-card-actions">
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Added to notes', 'info')">📝
-                Add Notes</button>
-              <button class="btn btn-ghost btn-sm"
-                onclick="window.JobTracker.Toast.show('Marked for reapply', 'info')">🔄 Reapply Later</button>
-            </div>
-          </div>
-
-          <!-- Infosys -->
-          <div class="app-card" data-status="applied">
-            <div class="app-card-header">
-              <div class="app-card-company">
-                <div class="company-logo-lg color-infosys">I</div>
-                <div>
-                  <div class="company-name">Infosys</div>
-                  <div class="company-role">Technology Analyst</div>
-                </div>
-              </div>
-              <span class="badge badge-applied">Applied</span>
-            </div>
-            <div class="app-card-meta">
-              <div class="meta-item"><span class="icon">📍</span>Pune, India</div>
-              <div class="meta-item"><span class="icon">📅</span>Applied Dec 15</div>
-              <div class="meta-item"><span class="icon">⏰</span>Deadline Feb 1</div>
-              <div class="meta-item"><span class="icon">💰</span>₹6.5 LPA</div>
-            </div>
-            <div class="app-card-actions">
-              <a href="add-application.html" class="btn btn-primary btn-sm">✏️ Update</a>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Notes saved!', 'success')">📝
-                Notes</button>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Reminder set!', 'info')">🔔
-                Remind</button>
-            </div>
-          </div>
-
-          <!-- TCS -->
-          <div class="app-card" data-status="pending">
-            <div class="app-card-header">
-              <div class="app-card-company">
-                <div class="company-logo-lg color-tcs">T</div>
-                <div>
-                  <div class="company-name">TCS</div>
-                  <div class="company-role">Software Developer</div>
-                </div>
-              </div>
-              <span class="badge badge-pending">Pending</span>
-            </div>
-            <div class="app-card-meta">
-              <div class="meta-item"><span class="icon">📍</span>Mumbai, India</div>
-              <div class="meta-item"><span class="icon">📅</span>Applied Dec 12</div>
-              <div class="meta-item"><span class="icon">⏰</span>Deadline Jan 30</div>
-              <div class="meta-item"><span class="icon">💰</span>₹7 LPA</div>
-            </div>
-            <div class="app-card-actions">
-              <a href="add-application.html" class="btn btn-primary btn-sm">✏️ Update</a>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Notes saved!', 'success')">📝
-                Notes</button>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Reminder set!', 'info')">🔔
-                Remind</button>
-            </div>
-          </div>
-
-          <!-- Deloitte -->
-          <div class="app-card" data-status="interview">
-            <div class="app-card-header">
-              <div class="app-card-company">
-                <div class="company-logo-lg color-deloitte">D</div>
-                <div>
-                  <div class="company-name">Deloitte</div>
-                  <div class="company-role">Business Analyst Intern</div>
-                </div>
-              </div>
-              <span class="badge badge-interview">Interview</span>
-            </div>
-            <div class="app-card-meta">
-              <div class="meta-item"><span class="icon">📍</span>Gurgaon, India</div>
-              <div class="meta-item"><span class="icon">📅</span>Applied Dec 1</div>
-              <div class="meta-item"><span class="icon">⏰</span>Deadline Jan 10</div>
-              <div class="meta-item"><span class="icon">💼</span>Internship</div>
-            </div>
-            <div
-              style="margin-top:12px;padding:10px;background:var(--secondary-50);border-radius:8px;font-size:0.8rem;color:var(--secondary-dark);">
-              📋 <strong>HR Round scheduled</strong> — Jan 6, 2025 at 2:00 PM IST
-            </div>
-            <div class="app-card-actions">
-              <a href="add-application.html" class="btn btn-primary btn-sm">✏️ Update</a>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Notes saved!', 'success')">📝
-                Notes</button>
-              <button class="btn btn-ghost btn-sm">🔔 Remind</button>
-            </div>
-          </div>
-
-          <!-- Accenture -->
-          <div class="app-card" data-status="pending">
-            <div class="app-card-header">
-              <div class="app-card-company">
-                <div class="company-logo-lg color-accenture">Ac</div>
-                <div>
-                  <div class="company-name">Accenture</div>
-                  <div class="company-role">Cloud Engineer</div>
-                </div>
-              </div>
-              <span class="badge badge-pending">Pending</span>
-            </div>
-            <div class="app-card-meta">
-              <div class="meta-item"><span class="icon">📍</span>Bangalore, India</div>
-              <div class="meta-item"><span class="icon">📅</span>Applied Dec 18</div>
-              <div class="meta-item"><span class="icon">⏰</span>Deadline Feb 10</div>
-              <div class="meta-item"><span class="icon">💰</span>₹8 LPA</div>
-            </div>
-            <div class="app-card-actions">
-              <a href="add-application.html" class="btn btn-primary btn-sm">✏️ Update</a>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Notes saved!', 'success')">📝
-                Notes</button>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Reminder set!', 'info')">🔔
-                Remind</button>
-            </div>
-          </div>
-
-          <!-- Meta -->
-          <div class="app-card" data-status="applied">
-            <div class="app-card-header">
-              <div class="app-card-company">
-                <div class="company-logo-lg color-meta">M</div>
-                <div>
-                  <div class="company-name">Meta</div>
-                  <div class="company-role">React Developer</div>
-                </div>
-              </div>
-              <span class="badge badge-applied">Applied</span>
-            </div>
-            <div class="app-card-meta">
-              <div class="meta-item"><span class="icon">🌐</span>Remote</div>
-              <div class="meta-item"><span class="icon">📅</span>Applied Dec 5</div>
-              <div class="meta-item"><span class="icon">⏰</span>Deadline Jan 25</div>
-              <div class="meta-item"><span class="icon">💼</span>Contract</div>
-            </div>
-            <div class="app-card-actions">
-              <a href="add-application.html" class="btn btn-primary btn-sm">✏️ Update</a>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Notes saved!', 'success')">📝
-                Notes</button>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Reminder set!', 'info')">🔔
-                Remind</button>
-            </div>
-          </div>
-
-          <!-- Netflix -->
-          <div class="app-card" data-status="wishlist">
-            <div class="app-card-header">
-              <div class="app-card-company">
-                <div class="company-logo-lg color-netflix">N</div>
-                <div>
-                  <div class="company-name">Netflix</div>
-                  <div class="company-role">Data Engineer Intern</div>
-                </div>
-              </div>
-              <span class="badge badge-wishlist">Wishlist</span>
-            </div>
-            <div class="app-card-meta">
-              <div class="meta-item"><span class="icon">🌐</span>Remote</div>
-              <div class="meta-item"><span class="icon">📅</span>Not applied yet</div>
-              <div class="meta-item"><span class="icon">⏰</span>Deadline Feb 28</div>
-              <div class="meta-item"><span class="icon">💼</span>Internship</div>
-            </div>
-            <div class="app-card-actions">
-              <button class="btn btn-primary btn-sm" onclick="window.location.href='add-application.html'">➕ Apply
-                Now</button>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Notes saved!', 'success')">📝
-                Notes</button>
-              <button class="btn btn-ghost btn-sm" onclick="window.JobTracker.Toast.show('Reminder set!', 'info')">🔔
-                Remind</button>
-            </div>
-          </div>
-
         </div><!-- end cards grid -->
 
       </main>
@@ -540,7 +268,41 @@
       else if (sortVal === 'Status') sort = 'status';
 
       try {
-        const apps = await API.getApplications({ search, status, sort });
+        // Always get full list for sidebar counts, so fetch all and filter in JS
+        const allApps = await API.getApplications({});
+        const apps = allApps.filter(app => {
+          if (status !== 'all' && app.status !== status) return false;
+          if (search && !(app.company.toLowerCase().includes(search.toLowerCase()) || app.role.toLowerCase().includes(search.toLowerCase()))) return false;
+          return true;
+        });
+        
+        // Handle sort in JS since we fetched all
+        apps.sort((a, b) => {
+          if (sortVal === 'Deadline Soon') {
+            if (!a.deadline) return 1;
+            if (!b.deadline) return -1;
+            return new Date(a.deadline) - new Date(b.deadline);
+          } else if (sortVal === 'Company A-Z') {
+            return a.company.localeCompare(b.company);
+          } else if (sortVal === 'Status') {
+            return a.status.localeCompare(b.status);
+          }
+          return new Date(b.applicationDate || 0) - new Date(a.applicationDate || 0);
+        });
+
+        // Update counts
+        if (document.getElementById('sidebar-total-badge')) {
+          document.getElementById('sidebar-total-badge').textContent = allApps.length;
+        }
+        if (document.getElementById('sidebar-count-all')) {
+          document.getElementById('sidebar-count-all').textContent = allApps.length;
+          document.getElementById('sidebar-count-applied').textContent = allApps.filter(a => a.status === 'applied' || a.status === 'oa-test').length;
+          document.getElementById('sidebar-count-interview').textContent = allApps.filter(a => a.status === 'interview').length;
+          document.getElementById('sidebar-count-offer').textContent = allApps.filter(a => a.status === 'offer').length;
+          document.getElementById('sidebar-count-rejected').textContent = allApps.filter(a => a.status === 'rejected' || a.status === 'withdrawn').length;
+          document.getElementById('sidebar-count-pending').textContent = allApps.filter(a => a.status === 'pending' || a.status === 'wishlist').length;
+        }
+
         if (apps.length === 0) {
           container.innerHTML = '<div style="text-align:center;padding:60px 20px;grid-column:1/-1;"><div style="font-size:3rem;margin-bottom:16px;">📭</div><h3 style="margin-bottom:8px;">No applications found</h3><p style="color:var(--text-muted);">Start tracking your job applications!</p><a href="add-application.html" class="btn btn-primary" style="margin-top:16px;">➕ Add Your First Application</a></div>';
         } else {

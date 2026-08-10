@@ -1,4 +1,5 @@
 const Application = require("../models/Application");
+const { createNotification } = require("./notificationController");
 
 // @desc    Create a new application
 // @route   POST /api/applications
@@ -52,6 +53,14 @@ const createApplication = async (req, res, next) => {
       coverLetterLink,
       skills: skills || [],
     });
+
+    await createNotification(
+      req.user._id,
+      "New Application Added",
+      `${company} — ${role}`,
+      "info",
+      application._id
+    );
 
     res.status(201).json(application);
   } catch (error) {
@@ -142,11 +151,25 @@ const updateApplication = async (req, res, next) => {
       throw new Error("Not authorized to update this application");
     }
 
+    const oldStatus = application.status;
+
     const updatedApplication = await Application.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true, runValidators: true }
     );
+
+    if (req.body.status && oldStatus !== req.body.status) {
+      // Capitalize statuses for nice display
+      const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+      await createNotification(
+        req.user._id,
+        "Application Status Updated",
+        `${updatedApplication.company} — ${capitalize(oldStatus)} → ${capitalize(updatedApplication.status)}`,
+        "success",
+        updatedApplication._id
+      );
+    }
 
     res.json(updatedApplication);
   } catch (error) {

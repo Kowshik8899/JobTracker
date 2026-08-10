@@ -28,6 +28,16 @@ const userSchema = new mongoose.Schema(
       enum: ["internship", "fulltime", "switch", "freelance", ""],
       default: "",
     },
+    education: [
+      {
+        degree: { type: String, trim: true },
+        institution: { type: String, trim: true },
+        startDate: { type: String, trim: true },
+        endDate: { type: String, trim: true },
+        cgpa: { type: String, trim: true },
+        achievements: { type: String, trim: true },
+      },
+    ],
   },
   {
     timestamps: true,

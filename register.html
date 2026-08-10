@@ -65,10 +65,10 @@
           <div style="display:flex;align-items:center;gap:10px;">
             <div
               style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#EF4444);display:flex;align-items:center;justify-content:center;color:white;font-size:0.78rem;font-weight:700;">
-              RV</div>
+              U</div>
             <div>
-              <div style="color:white;font-weight:600;font-size:0.85rem;">Rahul Verma</div>
-              <div style="color:rgba(255,255,255,0.6);font-size:0.75rem;">SDE at Amazon</div>
+              <div style="color:white;font-weight:600;font-size:0.85rem;" id="register-preview-name"></div>
+              <div style="color:rgba(255,255,255,0.6);font-size:0.75rem;" id="register-preview-role"></div>
             </div>
             <div style="margin-left:auto;color:#FBBF24;font-size:0.82rem;">★★★★★</div>
           </div>
@@ -91,12 +91,14 @@
 
       <!-- Social signup -->
       <div style="display:flex;gap:12px;margin-bottom:20px;">
-        <button onclick="handleRegisterDemo()"
+        <button
+          onclick="window.JobTracker && window.JobTracker.Toast.show('Google signup is not configured yet. Missing credentials.', 'warning')"
           style="flex:1;padding:11px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);background:var(--bg-card);cursor:pointer;font-size:0.9rem;font-family:var(--font-sans);color:var(--text-primary);display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;font-weight:500;"
           onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--gray-200)'">
           <span>🌐</span> Google
         </button>
-        <button onclick="handleRegisterDemo()"
+        <button
+          onclick="window.JobTracker && window.JobTracker.Toast.show('LinkedIn signup is not configured yet. Missing credentials.', 'warning')"
           style="flex:1;padding:11px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);background:var(--bg-card);cursor:pointer;font-size:0.9rem;font-family:var(--font-sans);color:var(--text-primary);display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;font-weight:500;"
           onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--gray-200)'">
           <span>🔵</span> LinkedIn
@@ -111,12 +113,12 @@
             <label class="form-label" for="first-name">First Name <span>*</span></label>
             <div class="form-control-icon">
               <span class="icon">👤</span>
-              <input type="text" id="first-name" class="form-control" placeholder="Priya" required>
+              <input type="text" id="first-name" class="form-control" placeholder="Enter your name" required>
             </div>
           </div>
           <div class="form-group">
             <label class="form-label" for="last-name">Last Name <span>*</span></label>
-            <input type="text" id="last-name" class="form-control" placeholder="Rajan" required>
+            <input type="text" id="last-name" class="form-control" placeholder="Enter last name" required>
           </div>
         </div>
 

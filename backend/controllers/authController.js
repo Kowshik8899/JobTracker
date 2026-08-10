@@ -35,6 +35,7 @@ const registerUser = async (req, res, next) => {
         name: user.name,
         email: user.email,
         goal: user.goal,
+        education: user.education || [],
         token: generateToken(user._id),
       });
     } else {
@@ -68,6 +69,7 @@ const loginUser = async (req, res, next) => {
         name: user.name,
         email: user.email,
         goal: user.goal,
+        education: user.education || [],
         token: generateToken(user._id),
       });
     } else {
@@ -92,6 +94,7 @@ const getUserProfile = async (req, res, next) => {
         name: user.name,
         email: user.email,
         goal: user.goal,
+        education: user.education || [],
         createdAt: user.createdAt,
       });
     } else {
@@ -103,4 +106,39 @@ const getUserProfile = async (req, res, next) => {
   }
 };
 
-module.exports = { registerUser, loginUser, getUserProfile };
+// @desc    Update current user profile
+// @route   PUT /api/auth/profile
+// @access  Private
+const updateUserProfile = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user._id);
+
+    if (user) {
+      user.name = req.body.name || user.name;
+      if (req.body.goal !== undefined) user.goal = req.body.goal;
+      
+      // Update education if provided
+      if (req.body.education) {
+        user.education = req.body.education;
+      }
+
+      const updatedUser = await user.save();
+
+      res.json({
+        _id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        goal: updatedUser.goal,
+        education: updatedUser.education || [],
+        token: generateToken(updatedUser._id),
+      });
+    } else {
+      res.status(404);
+      throw new Error("User not found");
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { registerUser, loginUser, getUserProfile, updateUserProfile };

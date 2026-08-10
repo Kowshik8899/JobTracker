@@ -25,6 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/applications", require("./routes/applicationRoutes"));
 app.use("/api/analytics", require("./routes/analyticsRoutes"));
+app.use("/api/notifications", require("./routes/notificationRoutes"));
 
 // Home Route
 app.get("/", (req, res) => {

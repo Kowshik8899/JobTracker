@@ -32,6 +32,21 @@
       <div class="nav-actions">
         <button class="theme-toggle">🌙</button>
         <div class="dropdown">
+          <div class="notification-bell" data-dropdown="notifications-menu"
+            style="cursor:pointer;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;border:1.5px solid var(--gray-200);position:relative;">
+            🔔
+            <span class="badge-dot unread-badge"
+              style="display:none;position:absolute;top:2px;right:2px;width:8px;height:8px;background:var(--danger);border-radius:50%;border:2px solid white;"></span>
+          </div>
+          <div class="dropdown-menu notifications-menu" id="notifications-menu" style="width: 320px; right: -60px; left: auto; max-height: 400px; overflow-y: auto;">
+            <div style="padding: 12px 16px; border-bottom: 1px solid var(--gray-200); font-weight: 600; display:flex; justify-content:space-between; align-items:center;">
+              <span>Notifications</span>
+              <button onclick="window.JobTracker.NotificationsUI.markAllRead()" style="background:none;border:none;color:var(--primary);font-size:0.75rem;cursor:pointer;font-weight:600;">Mark all read</button>
+            </div>
+            <div id="notifications-list"></div>
+          </div>
+        </div>
+        <div class="dropdown">
           <div class="nav-avatar" data-dropdown="user-menu4">KK</div>
           <div class="dropdown-menu" id="user-menu4">
             <a href="profile.html" class="dropdown-item">👤 My profile</a>
@@ -63,15 +78,15 @@
               style="width:40px;height:40px;border-radius:50%;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">
               KK</div>
             <div>
-              <div style="font-weight:700;font-size:0.9rem;">Kowshik Kuncham</div>
-              <div style="font-size:0.75rem;color:var(--text-muted);">Sri Vasavi Engineering College</div>
+              <div style="font-weight:700;font-size:0.9rem;" id="sidebar-user-name">User Name</div>
+              <div style="font-size:0.75rem;color:var(--text-muted);" id="sidebar-user-inst">Institution</div>
             </div>
           </div>
         </div>
         <div class="sidebar-label">Main Menu</div>
         <a href="dashboard.html" class="sidebar-link"><span class="icon">📊</span> Dashboard</a>
         <a href="applications.html" class="sidebar-link"><span class="icon">📋</span> Applications <span
-            class="sidebar-badge">10</span></a>
+            class="sidebar-badge" id="sidebar-total-badge">0</span></a>
         <a href="add-application.html" class="sidebar-link"><span class="icon">➕</span> Add Application</a>
         <a href="analytics.html" class="sidebar-link"><span class="icon">📈</span> Analytics</a>
         <div class="sidebar-label">Account</div>
@@ -94,10 +109,10 @@
         <!-- profile Hero -->
         <div class="profile-hero scroll-reveal">
           <div class="profile-avatar-wrap">
-            <div class="profile-avatar">KK</div>
+            <div class="profile-avatar" id="profile-hero-avatar">U</div>
             <div>
-              <div class="profile-name">Kowshik Kuncham</div>
-              <div class="profile-role">Computer Science Student · IIT Bombay</div>
+              <div class="profile-name" id="profile-hero-name">User Name</div>
+              <div class="profile-role" id="profile-hero-role">Role not provided</div>
               <div class="profile-badges">
                 <span class="profile-badge">🎓 Final Year</span>
                 <span class="profile-badge">📍 Mumbai, India</span>
@@ -122,33 +137,33 @@
               <div class="add-app-grid" style="margin-bottom:20px;">
                 <div class="form-group">
                   <label class="form-label">Full Name</label>
-                  <input type="text" class="form-control" value="Kowshik Kuncham">
+                  <input type="text" class="form-control" id="profile-edit-name" value="">
                 </div>
                 <div class="form-group">
                   <label class="form-label">Email</label>
-                  <input type="email" class="form-control" value="Priya.rajan@iitb.ac.in">
+                  <input type="email" class="form-control" id="profile-edit-email" value="">
                 </div>
                 <div class="form-group">
                   <label class="form-label">Phone</label>
-                  <input type="tel" class="form-control" value="+91 98765 43210">
+                  <input type="tel" class="form-control" id="profile-edit-phone" value="">
                 </div>
                 <div class="form-group">
                   <label class="form-label">Location</label>
-                  <input type="text" class="form-control" value="Mumbai, India">
+                  <input type="text" class="form-control" id="profile-edit-location" value="">
                 </div>
                 <div class="form-group">
                   <label class="form-label">Institution</label>
-                  <input type="text" class="form-control" value="IIT Bombay">
+                  <input type="text" class="form-control" id="profile-edit-inst" value="">
                 </div>
                 <div class="form-group">
                   <label class="form-label">LinkedIn URL</label>
-                  <input type="url" class="form-control" value="https://linkedin.com/in/Priya-rajan">
+                  <input type="url" class="form-control" id="profile-edit-linkedin" value="">
                 </div>
               </div>
               <div class="form-group" style="margin-bottom:16px;">
                 <label class="form-label">professional Summary</label>
                 <textarea
-                  class="form-control">Passionate Computer Science student at IIT Bombay with expertise in full-stack development, machine learning, and cloud technologies. Seeking challenging opportunities at top-tier tech companies.</textarea>
+                  class="form-control" id="profile-edit-summary"></textarea>
               </div>
               <div style="display:flex;gap:12px;justify-content:flex-end;">
                 <button type="button" class="btn btn-ghost" onclick="toggleEditProfile()">Cancel</button>
@@ -163,18 +178,17 @@
           class="scroll-reveal">
           <div
             style="text-align:center;padding:20px;background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-lg);">
-            <div style="font-size:1.8rem;font-weight:900;color:var(--primary);font-family:var(--font-display);">24</div>
+            <div style="font-size:1.8rem;font-weight:900;color:var(--primary);font-family:var(--font-display);" id="profile-total-applications">0</div>
             <div style="font-size:0.82rem;color:var(--text-muted);">Total Applications</div>
           </div>
           <div
             style="text-align:center;padding:20px;background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-lg);">
-            <div style="font-size:1.8rem;font-weight:900;color:var(--secondary);font-family:var(--font-display);">8
-            </div>
+            <div style="font-size:1.8rem;font-weight:900;color:var(--secondary);font-family:var(--font-display);" id="profile-interviews">0</div>
             <div style="font-size:0.82rem;color:var(--text-muted);">Interviews</div>
           </div>
           <div
             style="text-align:center;padding:20px;background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-lg);">
-            <div style="font-size:1.8rem;font-weight:900;color:var(--accent);font-family:var(--font-display);">2</div>
+            <div style="font-size:1.8rem;font-weight:900;color:var(--accent);font-family:var(--font-display);" id="profile-offers">0</div>
             <div style="font-size:0.82rem;color:var(--text-muted);">Offers Received</div>
           </div>
           <div
@@ -195,12 +209,9 @@
               <div class="chart-header" style="margin-bottom:16px;">
                 <div class="chart-title">👤 About Me</div>
                 <button class="btn btn-ghost btn-sm"
-                  onclick="window.JobTracker.Toast.show('About updated!', 'success')">Edit</button>
+                  onclick="toggleEditProfile()">Edit</button>
               </div>
-              <p style="font-size:0.92rem;line-height:1.7;">Passionate Computer Science student at IIT Bombay with a
-                strong foundation in software engineering, machine learning, and cloud technologies. I have interned at
-                startups, participated in hackathons (won 2 national awards), and published research on NLP. Looking for
-                challenging roles at top-tier tech companies where I can make a meaningful impact.</p>
+              <p style="font-size:0.92rem;line-height:1.7;" id="profile-display-summary">Summary not provided.</p>
             </div>
 
             <!-- Skills -->
@@ -265,7 +276,7 @@
                     📧</div>
                   <div>
                     <div style="font-size:0.78rem;color:var(--text-muted);">Email</div>
-                    <div style="font-size:0.9rem;font-weight:600;">Priya.rajan@iitb.ac.in</div>
+                    <div style="font-size:0.9rem;font-weight:600;" id="profile-display-email">Not provided</div>
                   </div>
                 </div>
                 <div style="display:flex;align-items:center;gap:12px;">
@@ -274,7 +285,7 @@
                     📱</div>
                   <div>
                     <div style="font-size:0.78rem;color:var(--text-muted);">Phone</div>
-                    <div style="font-size:0.9rem;font-weight:600;">+91 98765 43210</div>
+                    <div style="font-size:0.9rem;font-weight:600;" id="profile-display-phone">Not provided</div>
                   </div>
                 </div>
                 <div style="display:flex;align-items:center;gap:12px;">
@@ -283,8 +294,7 @@
                     💼</div>
                   <div>
                     <div style="font-size:0.78rem;color:var(--text-muted);">LinkedIn</div>
-                    <div style="font-size:0.9rem;font-weight:600;color:var(--primary);">linkedin.com/in/Priya-rajan
-                    </div>
+                    <div style="font-size:0.9rem;font-weight:600;color:var(--primary);" id="profile-display-linkedin">Not provided</div>
                   </div>
                 </div>
                 <div style="display:flex;align-items:center;gap:12px;">
@@ -293,7 +303,7 @@
                     ⌥</div>
                   <div>
                     <div style="font-size:0.78rem;color:var(--text-muted);">GitHub</div>
-                    <div style="font-size:0.9rem;font-weight:600;color:var(--primary);">github.com/Priya-rajan</div>
+                    <div style="font-size:0.9rem;font-weight:600;color:var(--primary);" id="profile-display-github">Not provided</div>
                   </div>
                 </div>
                 <div style="display:flex;align-items:center;gap:12px;">
@@ -302,7 +312,7 @@
                     📍</div>
                   <div>
                     <div style="font-size:0.78rem;color:var(--text-muted);">Location</div>
-                    <div style="font-size:0.9rem;font-weight:600;">Mumbai, Maharashtra, India</div>
+                    <div style="font-size:0.9rem;font-weight:600;" id="profile-display-location">Not provided</div>
                   </div>
                 </div>
               </div>
@@ -316,45 +326,32 @@
             <div class="chart-card scroll-reveal">
               <div class="chart-header" style="margin-bottom:16px;">
                 <div class="chart-title">🎓 Education</div>
-                <button class="btn btn-ghost btn-sm"
-                  onclick="window.JobTracker.Toast.show('Education updated!', 'success')">Edit</button>
+                <button class="btn btn-ghost btn-sm" id="edit-education-btn"
+                  onclick="toggleEditEducation()">Edit</button>
               </div>
-              <div class="timeline">
+              
+              <!-- Static Timeline Container (dynamically rendered) -->
+              <div class="timeline" id="education-timeline-container">
                 <div class="timeline-item">
                   <div class="timeline-dot"></div>
-                  <div
-                    style="background:var(--primary-50);border:1px solid var(--primary-100);border-radius:var(--radius-md);padding:16px;">
-                    <div class="timeline-date">2021 – 2025 (Expected)</div>
-                    <div class="timeline-title">B.Tech in Computer Science & Engineering</div>
-                    <div class="timeline-desc">Indian Institute of Technology (IIT) Bombay</div>
-                    <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">
-                      <span
-                        style="background:var(--primary);color:white;font-size:0.72rem;font-weight:700;padding:2px 10px;border-radius:999px;">CGPA:
-                        9.2/10</span>
-                      <span
-                        style="background:var(--accent-50);color:var(--accent-dark);font-size:0.72rem;font-weight:600;padding:2px 10px;border-radius:999px;">Dean's
-                        List</span>
-                    </div>
+                  <div style="background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;">
+                    <div class="timeline-desc">No education added yet.</div>
                   </div>
                 </div>
-                <div class="timeline-item">
-                  <div class="timeline-dot" style="background:var(--secondary);"></div>
-                  <div
-                    style="background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;">
-                    <div class="timeline-date">2019 – 2021</div>
-                    <div class="timeline-title">Class XII — Science (PCM)</div>
-                    <div class="timeline-desc">Delhi Public School, Mumbai · 97.4%</div>
+              </div>
+              
+              <!-- Edit Education Form (hidden by default) -->
+              <div id="edit-education-form" style="display:none;">
+                <form onsubmit="saveEducation(event)">
+                  <div id="education-entries-container">
+                    <!-- Dynamic entries will go here -->
                   </div>
-                </div>
-                <div class="timeline-item">
-                  <div class="timeline-dot" style="background:var(--accent);"></div>
-                  <div
-                    style="background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;">
-                    <div class="timeline-date">2019</div>
-                    <div class="timeline-title">Class X — CBSE</div>
-                    <div class="timeline-desc">Delhi Public School, Mumbai · 98.2%</div>
+                  <button type="button" class="btn btn-ghost btn-sm" onclick="addEducationEntry()" style="margin-bottom:16px;">+ Add Education</button>
+                  <div style="display:flex;justify-content:flex-end;gap:12px;">
+                    <button type="button" class="btn btn-ghost" onclick="toggleEditEducation()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
                   </div>
-                </div>
+                </form>
               </div>
             </div>
 
@@ -366,40 +363,7 @@
                   onclick="window.JobTracker.Toast.show('Experience updated!', 'success')">Edit</button>
               </div>
               <div class="timeline">
-                <div class="timeline-item">
-                  <div class="timeline-dot"></div>
-                  <div
-                    style="background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;">
-                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-                      <div
-                        style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#4285F4,#34A853);display:flex;align-items:center;justify-content:center;color:white;font-size:0.75rem;font-weight:700;">
-                        G</div>
-                      <div>
-                        <div style="font-weight:700;font-size:0.92rem;">Google · Software Engineering Intern</div>
-                        <div class="timeline-date" style="margin-top:0;">May 2024 – Jul 2024 (Remote)</div>
-                      </div>
-                    </div>
-                    <p style="font-size:0.83rem;">Developed a scalable microservices component using Go and Kubernetes,
-                      reducing API latency by 40%. Collaborated with cross-functional teams in an Agile environment.</p>
-                  </div>
-                </div>
-                <div class="timeline-item">
-                  <div class="timeline-dot" style="background:var(--secondary);"></div>
-                  <div
-                    style="background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;">
-                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-                      <div
-                        style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#FF6B35,#F7C948);display:flex;align-items:center;justify-content:center;color:white;font-size:0.75rem;font-weight:700;">
-                        SU</div>
-                      <div>
-                        <div style="font-weight:700;font-size:0.92rem;">TechStartup · Full-Stack Developer Intern</div>
-                        <div class="timeline-date" style="margin-top:0;">Nov 2023 – Jan 2024</div>
-                      </div>
-                    </div>
-                    <p style="font-size:0.83rem;">Built React-based dashboard for 10K+ users. Integrated payment APIs
-                      and real-time notifications using WebSockets. Improved load time by 60%.</p>
-                  </div>
-                </div>
+                <div style="text-align:center;padding:20px;color:var(--text-muted);font-size:0.9rem;">No experience added yet</div>
               </div>
             </div>
 
@@ -410,19 +374,11 @@
                 <button class="btn btn-primary btn-sm"
                   onclick="window.JobTracker.Toast.show('Resume downloaded!', 'success')">⬇️ Download</button>
               </div>
-              <div
-                style="border:2px dashed var(--primary-100);border-radius:var(--radius-md);padding:32px;text-align:center;background:var(--primary-50);">
+              <div style="border:2px dashed var(--primary-100);border-radius:var(--radius-md);padding:32px;text-align:center;background:var(--primary-50);">
                 <div style="font-size:3rem;margin-bottom:12px;">📄</div>
-                <div style="font-weight:700;font-size:0.95rem;margin-bottom:4px;">KKiya_Rajan_Resume_2025.pdf</div>
-                <div style="font-size:0.82rem;color:var(--text-muted);margin-bottom:16px;">Last updated: December 15,
-                  2024 · 248 KB</div>
-                <div style="display:flex;gap:8px;justify-content:center;">
-                  <button class="btn btn-primary btn-sm"
-                    onclick="window.JobTracker.Toast.show('Resume downloaded!', 'success')">Download</button>
-                  <button class="btn btn-ghost btn-sm"
-                    onclick="window.JobTracker.Toast.show('Opening preview...', 'info')">preview</button>
-                  <button class="btn btn-ghost btn-sm"
-                    onclick="window.JobTracker.Toast.show('File input opened', 'info')">Replace</button>
+                <div style="font-weight:700;font-size:0.95rem;margin-bottom:4px;">No resume uploaded</div>
+                <div style="display:flex;gap:8px;justify-content:center;margin-top:16px;">
+                  <button class="btn btn-primary btn-sm" onclick="window.JobTracker.Toast.show('File input opened', 'info')">Upload Resume</button>
                 </div>
               </div>
             </div>
@@ -433,40 +389,7 @@
                 <div class="chart-title">🏆 Achievements</div>
               </div>
               <div style="display:flex;flex-direction:column;gap:10px;">
-                <div
-                  style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--warning-50);border-radius:var(--radius-sm);">
-                  <span style="font-size:1.4rem;">🥇</span>
-                  <div>
-                    <div style="font-size:0.9rem;font-weight:700;">Smart India Hackathon 2024 — Winner</div>
-                    <div style="font-size:0.8rem;color:var(--text-muted);">National-level hackathon · 10,000+
-                      participants</div>
-                  </div>
-                </div>
-                <div
-                  style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--primary-50);border-radius:var(--radius-sm);">
-                  <span style="font-size:1.4rem;">📚</span>
-                  <div>
-                    <div style="font-size:0.9rem;font-weight:700;">Research Paper Published</div>
-                    <div style="font-size:0.8rem;color:var(--text-muted);">NLP for Code Review Automation · ACL 2024
-                    </div>
-                  </div>
-                </div>
-                <div
-                  style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--accent-50);border-radius:var(--radius-sm);">
-                  <span style="font-size:1.4rem;">⭐</span>
-                  <div>
-                    <div style="font-size:0.9rem;font-weight:700;">JEE Advanced AIR 847</div>
-                    <div style="font-size:0.8rem;color:var(--text-muted);">Top 0.1% of 1.5 million candidates</div>
-                  </div>
-                </div>
-                <div
-                  style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--secondary-50);border-radius:var(--radius-sm);">
-                  <span style="font-size:1.4rem;">🎖️</span>
-                  <div>
-                    <div style="font-size:0.9rem;font-weight:700;">Google Girl Hackathon 2023 — Finalist</div>
-                    <div style="font-size:0.8rem;color:var(--text-muted);">Top 50 from 5,000+ teams across India</div>
-                  </div>
-                </div>
+                <div style="text-align:center;padding:20px;color:var(--text-muted);font-size:0.9rem;">No achievements added yet</div>
               </div>
             </div>
           </div>
