@@ -25,7 +25,7 @@
 
 ---
 
-## 📁 KKoject Structure
+## 📁 Project Structure
 
 ```
 JobTracker/
