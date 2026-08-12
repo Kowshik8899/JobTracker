@@ -215,7 +215,7 @@
             </div>
 
             <!-- Section 2: Application Details -->
-            <div class="chart-card" style="margin-bottom:20px;">
+            <div class="chart-card" style="margin-bottom:20px; display:none;" id="form-section-2">
               <div class="chart-header" style="margin-bottom:20px;">
                 <div>
                   <div class="chart-title">📋 Application Details</div>
@@ -314,7 +314,7 @@
             </div>
 
             <!-- Section 3: Documents -->
-            <div class="chart-card" style="margin-bottom:24px;">
+            <div class="chart-card" style="margin-bottom:24px; display:none;" id="form-section-3">
               <div class="chart-header" style="margin-bottom:20px;">
                 <div>
                   <div class="chart-title">📄 Documents</div>
@@ -363,10 +363,9 @@
 
             <!-- Action Buttons -->
             <div style="display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap;">
-              <button type="button" class="btn btn-ghost"
-                onclick="window.location.href='applications.html'">Cancel</button>
-              <button type="button" class="btn btn-outline" onclick="saveDraft()">💾 Save as Draft</button>
-              <button type="submit" class="btn btn-primary btn-lg" id="submit-btn">
+              <button type="button" class="btn btn-ghost" id="prev-btn" onclick="prevStep()" style="display:none;">← Previous</button>
+              <button type="button" class="btn btn-primary btn-lg" id="next-btn" onclick="nextStep()">Next →</button>
+              <button type="submit" class="btn btn-primary btn-lg" id="submit-btn" style="display:none;">
                 ➕ Add Application
               </button>
             </div>
@@ -401,8 +400,65 @@
         input.value = '';
       }
     }
-    function saveDraft() {
-      window.JobTracker.Toast.show('Draft saved locally!', 'info');
+    let currentStep = 1;
+    function nextStep() {
+      // Basic validation
+      if (currentStep === 1) {
+        if (!document.getElementById('company-name').value || !document.getElementById('job-role').value) {
+          window.JobTracker.Toast.show('Please fill required fields in Step 1', 'error');
+          return;
+        }
+      }
+      if (currentStep === 2) {
+        if (!document.getElementById('app-date').value || !document.getElementById('app-status').value) {
+          window.JobTracker.Toast.show('Please fill required fields in Step 2', 'error');
+          return;
+        }
+      }
+
+      if (currentStep < 3) {
+        document.getElementById(`form-section-${currentStep}`).style.display = 'none';
+        document.getElementById(`step-${currentStep}`).classList.add('done');
+        document.getElementById(`step-${currentStep}`).classList.remove('active');
+        
+        currentStep++;
+        document.getElementById(`form-section-${currentStep}`).style.display = 'block';
+        document.getElementById(`step-${currentStep}`).classList.add('active');
+      }
+      updateButtons();
+    }
+
+    function prevStep() {
+      if (currentStep > 1) {
+        document.getElementById(`form-section-${currentStep}`).style.display = 'none';
+        document.getElementById(`step-${currentStep}`).classList.remove('active');
+        
+        currentStep--;
+        document.getElementById(`form-section-${currentStep}`).style.display = 'block';
+        document.getElementById(`step-${currentStep}`).classList.add('active');
+        document.getElementById(`step-${currentStep}`).classList.remove('done');
+      }
+      updateButtons();
+    }
+
+    function updateButtons() {
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+      const submitBtn = document.getElementById('submit-btn');
+
+      if (currentStep === 1) {
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'inline-flex';
+        submitBtn.style.display = 'none';
+      } else if (currentStep === 2) {
+        prevBtn.style.display = 'inline-flex';
+        nextBtn.style.display = 'inline-flex';
+        submitBtn.style.display = 'none';
+      } else if (currentStep === 3) {
+        prevBtn.style.display = 'inline-flex';
+        nextBtn.style.display = 'none';
+        submitBtn.style.display = 'inline-flex';
+      }
     }
 
     async function submitApplication(e) {

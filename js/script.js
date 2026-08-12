@@ -855,16 +855,25 @@ const profile = {
       event.preventDefault();
       try {
         const name = document.getElementById('profile-edit-name')?.value;
-        const res = await window.API.updateProfile({ name });
+        const email = document.getElementById('profile-edit-email')?.value;
+        const phone = document.getElementById('profile-edit-phone')?.value;
+        const location = document.getElementById('profile-edit-location')?.value;
+        const institution = document.getElementById('profile-edit-inst')?.value;
+        const year = document.getElementById('profile-edit-year')?.value;
+        const cgpa = document.getElementById('profile-edit-cgpa')?.value;
+        const goal = document.getElementById('profile-edit-goal')?.value;
+        const weeklyGoal = document.getElementById('profile-edit-weekly-goal')?.value;
+        const professionalSummary = document.getElementById('profile-edit-summary')?.value;
+        
+        const res = await window.API.updateProfile({ 
+          name, email, phone, location, institution, year, cgpa, goal, weeklyGoal, professionalSummary 
+        });
         Toast.show('Profile updated successfully!', 'success');
         
-        // Update display
-        const dName = document.getElementById('profile-hero-name');
-        const dAvatar = document.getElementById('profile-hero-avatar');
-        if (dName) dName.textContent = res.name;
-        if (dAvatar) dAvatar.textContent = res.name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
-        
         toggleEditProfile();
+        
+        // Re-run init to reload ui
+        setTimeout(() => window.location.reload(), 500);
       } catch (err) {
         Toast.show(err.message, 'error');
       }
@@ -1016,31 +1025,301 @@ const profile = {
       }
     };
 
+    // --- SKILLS ---
+    const renderSkills = () => {
+      const container = document.getElementById('skills-display-container');
+      if (!container) return;
+      const usr = window.API.getUser();
+      const tech = usr?.technicalSkills || { languages: [], frameworks: [], concepts: [] };
+      
+      const makeTags = (arr) => arr && arr.length ? arr.map(t => `<span class="skill-tag">${t}</span>`).join('') : '<span style="color:var(--text-muted);font-size:0.85rem;">None</span>';
+      
+      let html = '';
+      if (!tech.languages?.length && !tech.frameworks?.length && !tech.concepts?.length) {
+        html = '<div style="text-align:center;padding:20px;color:var(--text-muted);font-size:0.9rem;">No skills added yet</div>';
+      } else {
+        html = `
+          <div style="margin-bottom:16px;">
+            <div style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">Languages</div>
+            <div class="skills-grid">${makeTags(tech.languages)}</div>
+          </div>
+          <div style="margin-bottom:16px;">
+            <div style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">Frameworks & Tools</div>
+            <div class="skills-grid">${makeTags(tech.frameworks)}</div>
+          </div>
+          <div>
+            <div style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">Concepts</div>
+            <div class="skills-grid">${makeTags(tech.concepts)}</div>
+          </div>
+        `;
+      }
+      container.innerHTML = html;
+    };
+
+    window.toggleEditSkills = () => {
+      const formDiv = document.getElementById('edit-skills-form');
+      const dispDiv = document.getElementById('skills-display-container');
+      const editBtn = document.getElementById('edit-skills-btn');
+      if (!formDiv || !dispDiv) return;
+      
+      const isEditing = formDiv.style.display !== 'none';
+      formDiv.style.display = isEditing ? 'none' : 'block';
+      dispDiv.style.display = isEditing ? 'block' : 'none';
+      if (editBtn) editBtn.textContent = isEditing ? 'Edit' : '✕ Cancel';
+      
+      if (!isEditing) {
+        const usr = window.API.getUser();
+        const tech = usr?.technicalSkills || {};
+        document.getElementById('edit-skills-languages').value = (tech.languages || []).join(', ');
+        document.getElementById('edit-skills-frameworks').value = (tech.frameworks || []).join(', ');
+        document.getElementById('edit-skills-concepts').value = (tech.concepts || []).join(', ');
+      }
+    };
+
+    window.saveSkills = async (e) => {
+      e.preventDefault();
+      const parse = (val) => val.split(',').map(s => s.trim()).filter(s => s);
+      const newSkills = {
+        languages: parse(document.getElementById('edit-skills-languages').value),
+        frameworks: parse(document.getElementById('edit-skills-frameworks').value),
+        concepts: parse(document.getElementById('edit-skills-concepts').value),
+      };
+      
+      try {
+        await window.API.updateProfile({ technicalSkills: newSkills });
+        Toast.show('Skills updated successfully!', 'success');
+        toggleEditSkills();
+        renderSkills();
+      } catch(err) { Toast.show(err.message, 'error'); }
+    };
+
+    // --- EXPERIENCE ---
+    const renderExperience = () => {
+      const container = document.getElementById('experience-display-container');
+      if (!container) return;
+      const usr = window.API.getUser();
+      const expList = usr?.workExperience || [];
+      
+      if (expList.length === 0) {
+        container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);font-size:0.9rem;">No experience added yet</div>';
+        return;
+      }
+      
+      container.innerHTML = expList.map((exp, idx) => {
+        const isFirst = idx === 0;
+        return `
+          <div class="timeline-item">
+            <div class="timeline-dot" ${!isFirst ? 'style="background:var(--secondary);"' : ''}></div>
+            <div style="background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;">
+              <div class="timeline-date">${exp.startDate} – ${exp.current ? 'Present' : exp.endDate}</div>
+              <div class="timeline-title">${exp.role}</div>
+              <div class="timeline-desc" style="font-weight:600;color:var(--text-primary);">${exp.company} ${exp.location ? '- ' + exp.location : ''}</div>
+              <div class="timeline-desc" style="margin-top:8px;">${exp.description || ''}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    };
+
+    window.addExperienceEntry = (exp = {}) => {
+      const container = document.getElementById('experience-entries-container');
+      if (!container) return;
+      const div = document.createElement('div');
+      div.className = 'exp-entry';
+      div.style.cssText = 'border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;margin-bottom:16px;background:var(--bg-card);position:relative;';
+      div.innerHTML = `
+        <button type="button" class="btn btn-ghost btn-sm" onclick="this.parentElement.remove()" style="position:absolute;top:10px;right:10px;color:var(--error);">✕ Remove</button>
+        <div class="form-grid-2" style="margin-top:10px;">
+          <div class="form-group"><label class="form-label">Role</label><input type="text" class="form-control exp-role" value="${exp.role||''}" required></div>
+          <div class="form-group"><label class="form-label">Company</label><input type="text" class="form-control exp-comp" value="${exp.company||''}" required></div>
+          <div class="form-group"><label class="form-label">Location</label><input type="text" class="form-control exp-loc" value="${exp.location||''}"></div>
+          <div class="form-group"><label class="form-label">Start Date</label><input type="text" class="form-control exp-start" value="${exp.startDate||''}" required></div>
+          <div class="form-group"><label class="form-label">End Date</label><input type="text" class="form-control exp-end" value="${exp.endDate||''}"></div>
+          <div class="form-group" style="display:flex;align-items:center;padding-top:28px;">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox" class="exp-curr" ${exp.current?'checked':''}> Current Job</label>
+          </div>
+        </div>
+        <div class="form-group" style="margin-top:12px;">
+          <label class="form-label">Description</label>
+          <textarea class="form-control exp-desc">${exp.description||''}</textarea>
+        </div>
+      `;
+      container.appendChild(div);
+    };
+
+    window.toggleEditExperience = () => {
+      const formDiv = document.getElementById('edit-experience-form');
+      const dispDiv = document.getElementById('experience-display-container');
+      const editBtn = document.getElementById('edit-experience-btn');
+      if (!formDiv || !dispDiv) return;
+      const isEditing = formDiv.style.display !== 'none';
+      formDiv.style.display = isEditing ? 'none' : 'block';
+      dispDiv.style.display = isEditing ? 'block' : 'none';
+      if (editBtn) editBtn.textContent = isEditing ? 'Edit' : '✕ Cancel';
+      
+      if (!isEditing) {
+        const container = document.getElementById('experience-entries-container');
+        container.innerHTML = '';
+        const usr = window.API.getUser();
+        const exps = usr?.workExperience || [];
+        if (exps.length > 0) exps.forEach(ex => addExperienceEntry(ex));
+        else addExperienceEntry();
+      }
+    };
+
+    window.saveExperience = async (e) => {
+      e.preventDefault();
+      const entries = document.querySelectorAll('.exp-entry');
+      const newExps = Array.from(entries).map(entry => ({
+        role: entry.querySelector('.exp-role').value,
+        company: entry.querySelector('.exp-comp').value,
+        location: entry.querySelector('.exp-loc').value,
+        startDate: entry.querySelector('.exp-start').value,
+        endDate: entry.querySelector('.exp-end').value,
+        current: entry.querySelector('.exp-curr').checked,
+        description: entry.querySelector('.exp-desc').value
+      }));
+      try {
+        await window.API.updateProfile({ workExperience: newExps });
+        Toast.show('Experience updated successfully!', 'success');
+        toggleEditExperience();
+        renderExperience();
+      } catch(err) { Toast.show(err.message, 'error'); }
+    };
+
+    // --- CONTACT ---
+    window.toggleEditContact = () => {
+      const formDiv = document.getElementById('edit-contact-form');
+      const dispDiv = document.getElementById('contact-display-container');
+      const editBtn = document.getElementById('edit-contact-btn');
+      if (!formDiv || !dispDiv) return;
+      const isEditing = formDiv.style.display !== 'none';
+      formDiv.style.display = isEditing ? 'none' : 'block';
+      dispDiv.style.display = isEditing ? 'flex' : 'none';
+      if (editBtn) editBtn.textContent = isEditing ? 'Edit' : '✕ Cancel';
+      
+      if (!isEditing) {
+        const usr = window.API.getUser() || {};
+        document.getElementById('contact-edit-email').value = usr.email || '';
+        document.getElementById('contact-edit-phone').value = usr.phone || '';
+        document.getElementById('contact-edit-linkedin').value = usr.linkedin || '';
+        document.getElementById('contact-edit-github').value = usr.github || '';
+        document.getElementById('contact-edit-location').value = usr.location || '';
+      }
+    };
+
+    window.saveContact = async (e) => {
+      e.preventDefault();
+      try {
+        await window.API.updateProfile({
+          email: document.getElementById('contact-edit-email').value,
+          phone: document.getElementById('contact-edit-phone').value,
+          linkedin: document.getElementById('contact-edit-linkedin').value,
+          github: document.getElementById('contact-edit-github').value,
+          location: document.getElementById('contact-edit-location').value,
+        });
+        Toast.show('Contact info updated!', 'success');
+        toggleEditContact();
+        setTimeout(() => window.location.reload(), 500);
+      } catch(err) { Toast.show(err.message, 'error'); }
+    };
+
+    // --- RESUME ---
+    const renderResume = () => {
+      const usr = window.API.getUser();
+      if (!usr) return;
+      const fileNameEl = document.getElementById('resume-file-name');
+      const dBtn = document.getElementById('resume-download-btn');
+      if (usr.resume && usr.resume.fileName) {
+        if (fileNameEl) fileNameEl.textContent = usr.resume.fileName;
+        if (dBtn) dBtn.style.display = 'inline-block';
+      }
+    };
+
+    window.handleResumeUpload = (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      if (file.size > 5 * 1024 * 1024) {
+        Toast.show("File must be smaller than 5MB", "error");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = async (ev) => {
+        const base64Data = ev.target.result;
+        try {
+          await window.API.updateProfile({
+            resume: { fileName: file.name, data: base64Data }
+          });
+          Toast.show('Resume uploaded successfully!', 'success');
+          renderResume();
+        } catch(err) { Toast.show(err.message, 'error'); }
+      };
+      reader.readAsDataURL(file);
+    };
+
+    window.downloadResume = () => {
+      const usr = window.API.getUser();
+      if (usr && usr.resume && usr.resume.data) {
+        const link = document.createElement('a');
+        link.href = usr.resume.data;
+        link.download = usr.resume.fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        Toast.show('Resume downloading...', 'success');
+      }
+    };
+
     if (window.API && window.API.isLoggedIn()) {
       const user = window.API.getUser();
       if (user) {
         // Form inputs
-        const nameInput = document.getElementById('profile-edit-name');
-        const emailInput = document.getElementById('profile-edit-email');
-        if (nameInput) nameInput.value = user.name;
-        if (emailInput) emailInput.value = user.email;
+        const fieldsToPopulate = ['name', 'email', 'phone', 'location', 'inst', 'year', 'cgpa', 'goal', 'weeklyGoal', 'summary', 'linkedin'];
+        fieldsToPopulate.forEach(f => {
+          let val;
+          if (f === 'inst') val = user.institution;
+          else if (f === 'summary') val = user.professionalSummary;
+          else if (f === 'weeklyGoal') val = user.weeklyGoal;
+          else val = user[f];
+          
+          const el = document.getElementById(f === 'weeklyGoal' ? 'profile-edit-weekly-goal' : `profile-edit-${f}`);
+          if (el) el.value = val !== undefined && val !== null ? val : '';
+        });
 
         // Display elements
-        const dName = document.getElementById('profile-hero-name');
-        const dAvatar = document.getElementById('profile-hero-avatar');
-        const dEmail = document.getElementById('profile-display-email');
-        const dSummary = document.getElementById('profile-display-summary');
+        const updateText = (id, val, fallback = 'Not provided') => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = val && val.trim() !== '' ? val : fallback;
+        };
+
+        updateText('profile-hero-name', user.name);
+        updateText('profile-hero-role', user.goal, 'Role not provided');
+        updateText('profile-display-email', user.email);
+        updateText('profile-display-phone', user.phone);
+        updateText('profile-display-location', user.location);
+        updateText('profile-display-linkedin', user.linkedin);
+        updateText('profile-display-github', user.github);
+        updateText('profile-display-summary', user.professionalSummary, 'Summary not provided.');
+        updateText('profile-display-cgpa-stat', user.cgpa, '-');
         
-        if (dName) dName.textContent = user.name;
-        if (dAvatar) {
-          const initials = user.name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
-          dAvatar.textContent = initials;
+        // Badges rendering
+        const badgesContainer = document.getElementById('profile-badges-container');
+        if (badgesContainer) {
+          let badgesHtml = '';
+          if (user.year) badgesHtml += `<span class="profile-badge">🎓 ${user.year}</span>`;
+          if (user.location) badgesHtml += `<span class="profile-badge">📍 ${user.location}</span>`;
+          if (user.goal) badgesHtml += `<span class="profile-badge">💼 ${user.goal}</span>`;
+          if (user.cgpa) badgesHtml += `<span class="profile-badge">⭐ CGPA ${user.cgpa}/10</span>`;
+          badgesContainer.innerHTML = badgesHtml;
         }
-        if (dEmail) dEmail.textContent = user.email;
-        if (dSummary && user.goal) dSummary.textContent = user.goal;
-        
-        // Initialize education timeline
+
+        // Initialize sections
         renderEducationTimeline();
+        renderSkills();
+        renderExperience();
+        renderResume();
       }
       
       // Load and display statistics from real application data
@@ -1135,8 +1414,21 @@ const AnalyticsPage = {
       const weeklyApps = allApps.filter(app => new Date(app.applicationDate) >= oneWeekAgo).length;
       
       const goalEl = document.getElementById('analytics-goal-text');
+      const user = window.API.getUser() || {};
+      const wg = user.weeklyGoal || 10;
       if (goalEl) {
-        goalEl.textContent = `This week: ${weeklyApps} applications`;
+        goalEl.textContent = `This week: ${weeklyApps} / ${wg} applications`;
+      }
+      
+      const fracEl = document.getElementById('weekly-apps-fraction');
+      const progEl = document.getElementById('weekly-apps-progress');
+      const pctEl = document.getElementById('weekly-apps-percent');
+      if (fracEl && progEl && pctEl) {
+        const pct = Math.min(100, Math.round((weeklyApps / wg) * 100)) || 0;
+        fracEl.textContent = `${weeklyApps} / ${wg}`;
+        progEl.style.width = `${pct}%`;
+        progEl.dataset.width = pct;
+        pctEl.textContent = `${pct}% of weekly goal`;
       }
       
       Charts.drawDonut('donut-chart',
@@ -1150,12 +1442,15 @@ const AnalyticsPage = {
       );
 
       // Response Rate Line Chart
-      // If there are no applications, show a no-data state
-      // Otherwise, assume a basic response rate metric if backend adds it, or leave as No Data.
+      const lineLabels = data.monthlyTrends.map(m => m.month);
+      const appsCounts = data.monthlyTrends.map(m => m.count);
+      const respCounts = data.monthlyTrends.map(m => m.responses || 0);
+
       Charts.drawLine('line-chart',
-        ['No Data'],
+        lineLabels.length ? lineLabels : ['No Data'],
         [
-          { data: [0], color: '#2563EB', label: 'Response Rate' }
+          { data: appsCounts.length ? appsCounts : [0], color: '#2563EB', label: 'Applications sent' },
+          { data: respCounts.length ? respCounts : [0], color: '#10B981', label: 'Responses received' }
         ]
       );
 
@@ -1247,9 +1542,7 @@ const DashboardPage = {
       const dashProfComp = document.getElementById('dash-profile-completeness');
       const dashProfCompBar = document.getElementById('dash-profile-completeness-bar');
       if (user) {
-        let fields = ['name', 'email', 'goal'];
-        let filled = fields.filter(f => user[f]).length;
-        let compPct = Math.round((filled / fields.length) * 100);
+        let compPct = UserUtils.getProfileCompleteness(user);
         if (dashProfComp) dashProfComp.textContent = compPct + '%';
         if (dashProfCompBar) {
           dashProfCompBar.setAttribute('data-width', compPct);
@@ -1257,15 +1550,80 @@ const DashboardPage = {
         }
       }
 
-      // Charts
-      const months = data.monthlyTrends.map(m => m.month);
-      const counts = data.monthlyTrends.map(m => m.count);
+      // Account Completeness
+      const dashAccComp = document.getElementById('dash-account-completeness');
+      const dashAccCompBar = document.getElementById('dash-account-completeness-bar');
+      if (user) {
+        let accCompPct = UserUtils.getAccountCompleteness(user, allApps.length);
+        if (dashAccComp) dashAccComp.textContent = accCompPct + '%';
+        if (dashAccCompBar) {
+          dashAccCompBar.setAttribute('data-width', accCompPct);
+          dashAccCompBar.style.width = accCompPct + '%';
+        }
+      }
 
-      if (typeof Charts !== 'undefined' && Charts.drawLine) {
-        Charts.drawLine('dash-line-chart',
-          months.length ? months : ['No Data'],
-          [{ data: counts.length ? counts : [0], color: '#2563EB', label: 'Applications' }]
-        );
+      // Charts Timeline with Filter
+      const renderTimeline = (filterValue) => {
+        const labels = [];
+        const counts = [];
+        const current = new Date();
+        current.setHours(23, 59, 59, 999);
+        
+        if (filterValue === '6weeks') {
+          for (let i = 5; i >= 0; i--) {
+            const end = new Date(current.getTime() - i * 7 * 24 * 60 * 60 * 1000);
+            const start = new Date(end.getTime() - 7 * 24 * 60 * 60 * 1000);
+            labels.push(end.toLocaleDateString('en-US', {month:'short', day:'numeric'}));
+            let count = 0;
+            allApps.forEach(app => {
+              const d = new Date(app.applicationDate);
+              if (d > start && d <= end) count++;
+            });
+            counts.push(count);
+          }
+        } else if (filterValue === '3months') {
+          for (let i = 11; i >= 0; i--) {
+            const end = new Date(current.getTime() - i * 7 * 24 * 60 * 60 * 1000);
+            const start = new Date(end.getTime() - 7 * 24 * 60 * 60 * 1000);
+            labels.push(end.toLocaleDateString('en-US', {month:'short', day:'numeric'}));
+            let count = 0;
+            allApps.forEach(app => {
+              const d = new Date(app.applicationDate);
+              if (d > start && d <= end) count++;
+            });
+            counts.push(count);
+          }
+        } else if (filterValue === 'year') {
+          for (let i = 11; i >= 0; i--) {
+            const d = new Date(current.getFullYear(), current.getMonth() - i, 1);
+            labels.push(d.toLocaleDateString('en-US', {month:'short', year: '2-digit'}));
+            let count = 0;
+            allApps.forEach(app => {
+              const ad = new Date(app.applicationDate);
+              if (ad.getMonth() === d.getMonth() && ad.getFullYear() === d.getFullYear()) count++;
+            });
+            counts.push(count);
+          }
+        }
+
+        if (typeof Charts !== 'undefined' && Charts.drawLine) {
+          Charts.drawLine('dash-line-chart',
+            labels,
+            [{ data: counts, color: '#2563EB', label: 'Applications' }]
+          );
+        }
+      };
+
+      // Initial timeline render
+      renderTimeline('6weeks');
+      
+      const filterEl = document.getElementById('dash-timeline-filter');
+      if (filterEl) {
+        const newFilterEl = filterEl.cloneNode(true);
+        filterEl.parentNode.replaceChild(newFilterEl, filterEl);
+        newFilterEl.addEventListener('change', (e) => {
+          renderTimeline(e.target.value);
+        });
       }
 
       const statusLabels = ['Applied', 'Interview', 'Offer', 'Rejected', 'Pending'];
@@ -1400,6 +1758,78 @@ const progressBars = {
 };
 
 /* ==========================================
+   USER UTILITIES
+   ========================================== */
+const UserUtils = {
+  getInitials(name) {
+    if (!name) return 'U';
+    const words = name.trim().split(/\s+/);
+    if (words.length === 1) return words[0].substring(0, 1).toUpperCase();
+    return (words[0][0] + words[words.length - 1][0]).toUpperCase();
+  },
+  
+  getProfileCompleteness(user) {
+    if (!user) return 0;
+    const fields = [
+      'name', 'email', 'goal', 'location', 'phone', 'year', 'cgpa',
+      'institution', 'linkedin', 'professionalSummary'
+    ];
+    let filled = fields.filter(f => user[f] && user[f].trim() !== '').length;
+    
+    // Arrays / Objects
+    if (user.education && user.education.length > 0) filled++;
+    if (user.workExperience && user.workExperience.length > 0) filled++;
+    if (user.technicalSkills && (user.technicalSkills.languages?.length || user.technicalSkills.frameworks?.length || user.technicalSkills.concepts?.length)) filled++;
+    if (user.resume && user.resume.fileName) filled++;
+    
+    const totalFields = fields.length + 4; // primitives + 4 complex
+    return Math.round((filled / totalFields) * 100);
+  },
+
+  getAccountCompleteness(user, appsCount) {
+    if (!user) return 0;
+    let score = 0;
+    const maxScore = 5;
+    
+    if (user.name && user.email) score++; // Account initialized
+    if (this.getProfileCompleteness(user) > 50) score++; // Basic profile
+    if (user.resume && user.resume.fileName) score++; // Resume uploaded
+    if (user.goal) score++; // Goal set
+    if (appsCount > 0) score++; // Added at least one application
+    
+    return Math.round((score / maxScore) * 100);
+  },
+  
+  updateGlobalUI(user, appsCount = 0) {
+    if (!user) return;
+    const initials = this.getInitials(user.name);
+    
+    // Update all avatars
+    document.querySelectorAll('.nav-avatar, .sidebar-user-avatar, #profile-hero-avatar, #settings-user-avatar').forEach(el => {
+      el.textContent = initials;
+    });
+    
+    // Update names
+    document.querySelectorAll('#sidebar-user-name, #settings-user-name, #profile-hero-name').forEach(el => {
+      el.textContent = user.name || 'Not provided';
+    });
+    
+    // Update emails / subtext
+    document.querySelectorAll('#sidebar-user-inst, #settings-user-email, #profile-display-email').forEach(el => {
+      el.textContent = user.email || 'Not provided';
+    });
+    
+    // Greeting
+    const greeting = document.getElementById('user-greeting');
+    if (greeting && user.name) {
+      const hour = new Date().getHours();
+      const timeGreeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+      greeting.innerHTML = `${timeGreeting}, ${user.name.split(' ')[0]}! 👋`;
+    }
+  }
+};
+
+/* ==========================================
    APP INITIALIZATION
    ========================================== */
 document.addEventListener('DOMContentLoaded', () => {
@@ -1431,29 +1861,13 @@ document.addEventListener('DOMContentLoaded', () => {
   async function runGlobalInit() {
     if (window.API && window.API.isLoggedIn()) {
       try {
+        const apps = await window.API.getApplications();
         const user = window.API.getUser();
+        
         if (user) {
-          const greeting = document.getElementById('user-greeting');
-          if (greeting) greeting.innerHTML = `Good morning, ${user.name.split(' ')[0]}! 👋`;
-          
-          const sName = document.getElementById('sidebar-user-name');
-          const sInst = document.getElementById('sidebar-user-inst');
-          if (sName) sName.textContent = user.name;
-          if (sInst) sInst.textContent = user.email; // Fallback to email if no institution
-          
-          // Settings page specific
-          const setAvatar = document.getElementById('settings-user-avatar');
-          const setName = document.getElementById('settings-user-name');
-          const setEmail = document.getElementById('settings-user-email');
-          if (setName) setName.textContent = user.name;
-          if (setEmail) setEmail.textContent = user.email;
-          if (setAvatar) {
-            const initials = user.name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
-            setAvatar.textContent = initials;
-          }
+          UserUtils.updateGlobalUI(user, apps.length);
         }
         
-        const apps = await window.API.getApplications();
         const badge = document.getElementById('sidebar-total-badge');
         if (badge) badge.textContent = apps.length;
         

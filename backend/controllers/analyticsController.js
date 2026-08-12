@@ -37,6 +37,24 @@ const getAnalytics = async (req, res, next) => {
     const twelveMonthsAgo = new Date();
     twelveMonthsAgo.setMonth(twelveMonthsAgo.getMonth() - 12);
 
+    // Build a complete 12-month array
+    const monthNames = [
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+    ];
+    
+    const monthlyData = [];
+    for (let i = 11; i >= 0; i--) {
+      const d = new Date();
+      d.setMonth(d.getMonth() - i);
+      monthlyData.push({
+        month: monthNames[d.getMonth()],
+        year: d.getFullYear(),
+        count: 0,
+        responses: 0
+      });
+    }
+
     const monthlyTrends = await Application.aggregate([
       {
         $match: {
@@ -51,23 +69,28 @@ const getAnalytics = async (req, res, next) => {
             month: { $month: "$applicationDate" },
           },
           count: { $sum: 1 },
+          responses: {
+            $sum: {
+              $cond: [
+                { $in: ["$status", ["interview", "offer", "rejected"]] },
+                1,
+                0
+              ]
+            }
+          }
         },
       },
-      { $sort: { "_id.year": 1, "_id.month": 1 } },
     ]);
 
-    // Format monthly data with month names
-    const monthNames = [
-      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
-    ];
-    const monthlyData = monthlyTrends.map((item) => ({
-      month: monthNames[item._id.month - 1],
-      year: item._id.year,
-      count: item.count,
-    }));
-
-    // Response rate = (interview + offer + rejected) / total
+    monthlyTrends.forEach((item) => {
+      const targetMonth = monthNames[item._id.month - 1];
+      const targetYear = item._id.year;
+      const dataPoint = monthlyData.find(m => m.month === targetMonth && m.year === targetYear);
+      if (dataPoint) {
+        dataPoint.count = item.count;
+        dataPoint.responses = item.responses;
+      }
+    });
     const responded =
       (statusMap["interview"] || 0) +
       (statusMap["offer"] || 0) +

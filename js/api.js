@@ -83,7 +83,8 @@ const BASE_URL = isLocal ? "http://localhost:5000/api" : "https://jobtracker-6ns
       body: JSON.stringify({ name, email, password, goal }),
     });
     setToken(data.token);
-    setUser({ _id: data._id, name: data.name, email: data.email, goal: data.goal });
+    const { token, ...user } = data;
+    setUser(user);
     return data;
   }
 
@@ -93,7 +94,8 @@ const BASE_URL = isLocal ? "http://localhost:5000/api" : "https://jobtracker-6ns
       body: JSON.stringify({ email, password }),
     });
     setToken(data.token);
-    setUser({ _id: data._id, name: data.name, email: data.email, goal: data.goal });
+    const { token, ...user } = data;
+    setUser(user);
     return data;
   }
 
@@ -104,7 +106,9 @@ const BASE_URL = isLocal ? "http://localhost:5000/api" : "https://jobtracker-6ns
   }
 
   async function getProfile() {
-    return await request("/auth/profile");
+    const res = await request("/auth/profile");
+    setUser(res);
+    return res;
   }
 
   async function updateProfile(data) {
@@ -113,7 +117,8 @@ const BASE_URL = isLocal ? "http://localhost:5000/api" : "https://jobtracker-6ns
       body: JSON.stringify(data),
     });
     // Update local user storage
-    setUser({ _id: res._id, name: res.name, email: res.email, goal: res.goal, education: res.education });
+    const { token, ...user } = res;
+    setUser(user);
     return res;
   }
 

@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema(
       enum: ["internship", "fulltime", "switch", "freelance", ""],
       default: "",
     },
+    weeklyGoal: {
+      type: Number,
+      default: 0,
+    },
     education: [
       {
         degree: { type: String, trim: true },
@@ -38,6 +42,34 @@ const userSchema = new mongoose.Schema(
         achievements: { type: String, trim: true },
       },
     ],
+    year: { type: String, trim: true, default: "" },
+    cgpa: { type: String, trim: true, default: "" },
+    location: { type: String, trim: true, default: "" },
+    institution: { type: String, trim: true, default: "" },
+    phone: { type: String, trim: true, default: "" },
+    linkedin: { type: String, trim: true, default: "" },
+    github: { type: String, trim: true, default: "" },
+    professionalSummary: { type: String, trim: true, default: "" },
+    technicalSkills: {
+      languages: { type: [String], default: [] },
+      frameworks: { type: [String], default: [] },
+      concepts: { type: [String], default: [] }
+    },
+    workExperience: [
+      {
+        company: { type: String, trim: true },
+        role: { type: String, trim: true },
+        location: { type: String, trim: true },
+        startDate: { type: String, trim: true },
+        endDate: { type: String, trim: true },
+        current: { type: Boolean, default: false },
+        description: { type: String, trim: true }
+      }
+    ],
+    resume: {
+      fileName: { type: String, trim: true, default: "" },
+      data: { type: String, default: "" } // Base64 or URL
+    }
   },
   {
     timestamps: true,

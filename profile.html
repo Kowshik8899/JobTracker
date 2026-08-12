@@ -47,7 +47,7 @@
           </div>
         </div>
         <div class="dropdown">
-          <div class="nav-avatar" data-dropdown="user-menu4">KK</div>
+          <div class="nav-avatar" data-dropdown="user-menu4">U</div>
           <div class="dropdown-menu" id="user-menu4">
             <a href="profile.html" class="dropdown-item">👤 My profile</a>
             <a href="settings.html" class="dropdown-item">⚙️ Settings</a>
@@ -75,8 +75,9 @@
           <div
             style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--gradient-card);border-radius:var(--radius-md);border:1px solid var(--primary-100);">
             <div
+              class="sidebar-user-avatar"
               style="width:40px;height:40px;border-radius:50%;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">
-              KK</div>
+              U</div>
             <div>
               <div style="font-weight:700;font-size:0.9rem;" id="sidebar-user-name">User Name</div>
               <div style="font-size:0.75rem;color:var(--text-muted);" id="sidebar-user-inst">Institution</div>
@@ -113,11 +114,7 @@
             <div>
               <div class="profile-name" id="profile-hero-name">User Name</div>
               <div class="profile-role" id="profile-hero-role">Role not provided</div>
-              <div class="profile-badges">
-                <span class="profile-badge">🎓 Final Year</span>
-                <span class="profile-badge">📍 Mumbai, India</span>
-                <span class="profile-badge">💼 Open to Opportunities</span>
-                <span class="profile-badge">⭐ CGPA 9.2/10</span>
+              <div class="profile-badges" id="profile-badges-container">
               </div>
             </div>
             <div style="margin-left:auto;position:relative;z-index:1;display:flex;gap:12px;">
@@ -156,8 +153,20 @@
                   <input type="text" class="form-control" id="profile-edit-inst" value="">
                 </div>
                 <div class="form-group">
-                  <label class="form-label">LinkedIn URL</label>
-                  <input type="url" class="form-control" id="profile-edit-linkedin" value="">
+                  <label class="form-label">Academic Year</label>
+                  <input type="text" class="form-control" id="profile-edit-year" placeholder="e.g. Final Year">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">CGPA / 10</label>
+                  <input type="number" step="0.1" max="10" class="form-control" id="profile-edit-cgpa" placeholder="e.g. 9.2">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Goal / Role</label>
+                  <input type="text" class="form-control" id="profile-edit-goal" placeholder="e.g. Software Engineer">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Weekly App Goal</label>
+                  <input type="number" min="0" class="form-control" id="profile-edit-weekly-goal" placeholder="e.g. 10">
                 </div>
               </div>
               <div class="form-group" style="margin-bottom:16px;">
@@ -193,7 +202,7 @@
           </div>
           <div
             style="text-align:center;padding:20px;background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-lg);">
-            <div style="font-size:1.8rem;font-weight:900;color:var(--warning);font-family:var(--font-display);">9.2
+            <div style="font-size:1.8rem;font-weight:900;color:var(--warning);font-family:var(--font-display);" id="profile-display-cgpa-stat">-
             </div>
             <div style="font-size:0.82rem;color:var(--text-muted);">CGPA / 10</div>
           </div>
@@ -218,47 +227,32 @@
             <div class="chart-card scroll-reveal scroll-reveal-delay-1">
               <div class="chart-header" style="margin-bottom:16px;">
                 <div class="chart-title">🛠️ Technical Skills</div>
-                <button class="btn btn-ghost btn-sm"
-                  onclick="window.JobTracker.Toast.show('Skills updated!', 'success')">Edit</button>
+                <button class="btn btn-ghost btn-sm" id="edit-skills-btn" onclick="toggleEditSkills()">Edit</button>
               </div>
-              <div style="margin-bottom:16px;">
-                <div
-                  style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">
-                  Languages</div>
-                <div class="skills-grid">
-                  <span class="skill-tag">Python</span>
-                  <span class="skill-tag">JavaScript</span>
-                  <span class="skill-tag">TypeScript</span>
-                  <span class="skill-tag">C++</span>
-                  <span class="skill-tag">Java</span>
-                  <span class="skill-tag">SQL</span>
-                </div>
+              
+              <div id="skills-display-container">
+                <div style="text-align:center;padding:20px;color:var(--text-muted);font-size:0.9rem;">No skills added yet</div>
               </div>
-              <div style="margin-bottom:16px;">
-                <div
-                  style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">
-                  Frameworks & Tools</div>
-                <div class="skills-grid">
-                  <span class="skill-tag">React.js</span>
-                  <span class="skill-tag">Node.js</span>
-                  <span class="skill-tag">Django</span>
-                  <span class="skill-tag">TensorFlow</span>
-                  <span class="skill-tag">Git</span>
-                  <span class="skill-tag">Docker</span>
-                  <span class="skill-tag">AWS</span>
-                  <span class="skill-tag">PostgreSQL</span>
-                </div>
-              </div>
-              <div>
-                <div
-                  style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">
-                  Concepts</div>
-                <div class="skills-grid">
-                  <span class="skill-tag">System Design</span>
-                  <span class="skill-tag">Machine Learning</span>
-                  <span class="skill-tag">Data Structures</span>
-                  <span class="skill-tag">Agile</span>
-                </div>
+              
+              <div id="edit-skills-form" style="display:none;">
+                <form onsubmit="saveSkills(event)">
+                  <div class="form-group" style="margin-bottom:12px;">
+                    <label class="form-label">Languages (comma separated)</label>
+                    <input type="text" class="form-control" id="edit-skills-languages" placeholder="Python, JavaScript">
+                  </div>
+                  <div class="form-group" style="margin-bottom:12px;">
+                    <label class="form-label">Frameworks & Tools (comma separated)</label>
+                    <input type="text" class="form-control" id="edit-skills-frameworks" placeholder="React, Node.js">
+                  </div>
+                  <div class="form-group" style="margin-bottom:16px;">
+                    <label class="form-label">Concepts (comma separated)</label>
+                    <input type="text" class="form-control" id="edit-skills-concepts" placeholder="System Design, ML">
+                  </div>
+                  <div style="display:flex;justify-content:flex-end;gap:12px;">
+                    <button type="button" class="btn btn-ghost" onclick="toggleEditSkills()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                  </div>
+                </form>
               </div>
             </div>
 
@@ -266,17 +260,17 @@
             <div class="chart-card scroll-reveal scroll-reveal-delay-2">
               <div class="chart-header" style="margin-bottom:16px;">
                 <div class="chart-title">📬 Contact Information</div>
-                <button class="btn btn-ghost btn-sm"
-                  onclick="window.JobTracker.Toast.show('Saved!', 'success')">Edit</button>
+                <button class="btn btn-ghost btn-sm" id="edit-contact-btn"
+                  onclick="toggleEditContact()">Edit</button>
               </div>
-              <div style="display:flex;flex-direction:column;gap:14px;">
+              <div id="contact-display-container" style="display:flex;flex-direction:column;gap:14px;">
                 <div style="display:flex;align-items:center;gap:12px;">
                   <div
                     style="width:36px;height:36px;border-radius:8px;background:var(--primary-50);display:flex;align-items:center;justify-content:center;font-size:1rem;">
                     📧</div>
                   <div>
                     <div style="font-size:0.78rem;color:var(--text-muted);">Email</div>
-                    <div style="font-size:0.9rem;font-weight:600;" id="profile-display-email">Not provided</div>
+                    <div style="font-size:0.9rem;font-weight:600;word-break:break-all;overflow-wrap:anywhere;" id="profile-display-email">Not provided</div>
                   </div>
                 </div>
                 <div style="display:flex;align-items:center;gap:12px;">
@@ -313,8 +307,36 @@
                   <div>
                     <div style="font-size:0.78rem;color:var(--text-muted);">Location</div>
                     <div style="font-size:0.9rem;font-weight:600;" id="profile-display-location">Not provided</div>
-                  </div>
                 </div>
+              </div>
+              
+              <div id="edit-contact-form" style="display:none;">
+                <form onsubmit="saveContact(event)">
+                  <div class="form-group" style="margin-bottom:12px;">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" id="contact-edit-email" readonly title="Email cannot be changed">
+                  </div>
+                  <div class="form-group" style="margin-bottom:12px;">
+                    <label class="form-label">Phone</label>
+                    <input type="tel" class="form-control" id="contact-edit-phone">
+                  </div>
+                  <div class="form-group" style="margin-bottom:12px;">
+                    <label class="form-label">LinkedIn URL</label>
+                    <input type="url" class="form-control" id="contact-edit-linkedin">
+                  </div>
+                  <div class="form-group" style="margin-bottom:12px;">
+                    <label class="form-label">GitHub URL</label>
+                    <input type="url" class="form-control" id="contact-edit-github">
+                  </div>
+                  <div class="form-group" style="margin-bottom:16px;">
+                    <label class="form-label">Location</label>
+                    <input type="text" class="form-control" id="contact-edit-location">
+                  </div>
+                  <div style="display:flex;justify-content:flex-end;gap:12px;">
+                    <button type="button" class="btn btn-ghost" onclick="toggleEditContact()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
@@ -359,11 +381,23 @@
             <div class="chart-card scroll-reveal scroll-reveal-delay-1">
               <div class="chart-header" style="margin-bottom:16px;">
                 <div class="chart-title">💼 Work Experience</div>
-                <button class="btn btn-ghost btn-sm"
-                  onclick="window.JobTracker.Toast.show('Experience updated!', 'success')">Edit</button>
+                <button class="btn btn-ghost btn-sm" id="edit-experience-btn" onclick="toggleEditExperience()">Edit</button>
               </div>
-              <div class="timeline">
+              <div class="timeline" id="experience-display-container">
                 <div style="text-align:center;padding:20px;color:var(--text-muted);font-size:0.9rem;">No experience added yet</div>
+              </div>
+              
+              <div id="edit-experience-form" style="display:none;">
+                <form onsubmit="saveExperience(event)">
+                  <div id="experience-entries-container">
+                    <!-- Dynamic entries will go here -->
+                  </div>
+                  <button type="button" class="btn btn-ghost btn-sm" onclick="addExperienceEntry()" style="margin-bottom:16px;">+ Add Experience</button>
+                  <div style="display:flex;justify-content:flex-end;gap:12px;">
+                    <button type="button" class="btn btn-ghost" onclick="toggleEditExperience()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                  </div>
+                </form>
               </div>
             </div>
 
@@ -371,14 +405,14 @@
             <div class="chart-card scroll-reveal scroll-reveal-delay-2">
               <div class="chart-header" style="margin-bottom:16px;">
                 <div class="chart-title">📄 Resume</div>
-                <button class="btn btn-primary btn-sm"
-                  onclick="window.JobTracker.Toast.show('Resume downloaded!', 'success')">⬇️ Download</button>
+                <button class="btn btn-primary btn-sm" id="resume-download-btn" style="display:none;" onclick="downloadResume()">⬇️ Download</button>
               </div>
               <div style="border:2px dashed var(--primary-100);border-radius:var(--radius-md);padding:32px;text-align:center;background:var(--primary-50);">
                 <div style="font-size:3rem;margin-bottom:12px;">📄</div>
-                <div style="font-weight:700;font-size:0.95rem;margin-bottom:4px;">No resume uploaded</div>
+                <div style="font-weight:700;font-size:0.95rem;margin-bottom:4px;" id="resume-file-name">No resume uploaded</div>
                 <div style="display:flex;gap:8px;justify-content:center;margin-top:16px;">
-                  <button class="btn btn-primary btn-sm" onclick="window.JobTracker.Toast.show('File input opened', 'info')">Upload Resume</button>
+                  <button class="btn btn-primary btn-sm" onclick="document.getElementById('resume-upload-input').click()">Upload Resume</button>
+                  <input type="file" id="resume-upload-input" accept=".pdf,.doc,.docx" style="display:none;" onchange="handleResumeUpload(event)">
                 </div>
               </div>
             </div>
@@ -405,18 +439,7 @@
   <script>
     if (!API.requireAuth()) { /* redirects */ }
 
-    function toggleEditProfile() {
-      const form = document.getElementById('edit-profile-form');
-      const btn = document.getElementById('edit-profile-btn');
-      const isVisible = form.style.display !== 'none';
-      form.style.display = isVisible ? 'none' : 'block';
-      btn.textContent = isVisible ? '✏️ Edit profile' : '✕ Cancel';
-    }
-    function saveProfile(e) {
-      e.preventDefault();
-      window.JobTracker.Toast.show('profile saved successfully!', 'success');
-      toggleEditProfile();
-    }
+
 
     // Wire sign-out
     document.querySelectorAll('a[href="index.html"].danger, a[href="index.html"][style*="color:var(--danger)"]').forEach(link => {

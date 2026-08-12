@@ -3073,3 +3073,21 @@ tbody tr:last-child td {
   color: var(--text-muted);
   margin-top: 2px;
 }
+
+/* Fix Email Overflow */
+#sidebar-user-inst, 
+#profile-display-email, 
+#settings-user-email {
+  word-break: break-all;
+  overflow-wrap: anywhere;
+}
+
+/* Fix avatar alignment issues */
+.sidebar-user-avatar,
+.nav-avatar,
+#profile-hero-avatar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

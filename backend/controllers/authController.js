@@ -35,6 +35,7 @@ const registerUser = async (req, res, next) => {
         name: user.name,
         email: user.email,
         goal: user.goal,
+        weeklyGoal: user.weeklyGoal,
         education: user.education || [],
         token: generateToken(user._id),
       });
@@ -69,6 +70,7 @@ const loginUser = async (req, res, next) => {
         name: user.name,
         email: user.email,
         goal: user.goal,
+        weeklyGoal: user.weeklyGoal,
         education: user.education || [],
         token: generateToken(user._id),
       });
@@ -94,7 +96,19 @@ const getUserProfile = async (req, res, next) => {
         name: user.name,
         email: user.email,
         goal: user.goal,
+        weeklyGoal: user.weeklyGoal,
         education: user.education || [],
+        year: user.year || "",
+        cgpa: user.cgpa || "",
+        location: user.location || "",
+        institution: user.institution || "",
+        phone: user.phone || "",
+        linkedin: user.linkedin || "",
+        github: user.github || "",
+        professionalSummary: user.professionalSummary || "",
+        technicalSkills: user.technicalSkills || { languages: [], frameworks: [], concepts: [] },
+        workExperience: user.workExperience || [],
+        resume: user.resume || { fileName: "", data: "" },
         createdAt: user.createdAt,
       });
     } else {
@@ -114,13 +128,17 @@ const updateUserProfile = async (req, res, next) => {
     const user = await User.findById(req.user._id);
 
     if (user) {
-      user.name = req.body.name || user.name;
-      if (req.body.goal !== undefined) user.goal = req.body.goal;
-      
-      // Update education if provided
-      if (req.body.education) {
-        user.education = req.body.education;
-      }
+      const updatableFields = [
+        "name", "goal", "weeklyGoal", "education", "year", "cgpa", "location", 
+        "institution", "phone", "linkedin", "github", 
+        "professionalSummary", "technicalSkills", "workExperience", "resume"
+      ];
+
+      updatableFields.forEach(field => {
+        if (req.body[field] !== undefined) {
+          user[field] = req.body[field];
+        }
+      });
 
       const updatedUser = await user.save();
 
@@ -129,7 +147,19 @@ const updateUserProfile = async (req, res, next) => {
         name: updatedUser.name,
         email: updatedUser.email,
         goal: updatedUser.goal,
+        weeklyGoal: updatedUser.weeklyGoal,
         education: updatedUser.education || [],
+        year: updatedUser.year || "",
+        cgpa: updatedUser.cgpa || "",
+        location: updatedUser.location || "",
+        institution: updatedUser.institution || "",
+        phone: updatedUser.phone || "",
+        linkedin: updatedUser.linkedin || "",
+        github: updatedUser.github || "",
+        professionalSummary: updatedUser.professionalSummary || "",
+        technicalSkills: updatedUser.technicalSkills || { languages: [], frameworks: [], concepts: [] },
+        workExperience: updatedUser.workExperience || [],
+        resume: updatedUser.resume || { fileName: "", data: "" },
         token: generateToken(updatedUser._id),
       });
     } else {
