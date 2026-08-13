@@ -95,19 +95,8 @@
       <h1 class="auth-title">Sign in to your account</h1>
       <p class="auth-subtitle">Enter your credentials below to access your dashboard.</p>
 
-      <!-- Social login -->
-      <div style="display:flex;gap:12px;margin-bottom:20px;">
-        <button onclick="window.JobTracker && window.JobTracker.Toast.show('Google login is not configured yet. Missing credentials.', 'warning')"
-          style="flex:1;padding:11px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);background:var(--bg-card);cursor:pointer;font-size:0.9rem;font-family:var(--font-sans);color:var(--text-primary);display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;font-weight:500;"
-          onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--gray-200)'">
-          <span>🌐</span> Google
-        </button>
-        <button onclick="window.JobTracker && window.JobTracker.Toast.show('LinkedIn login is not configured yet. Missing credentials.', 'warning')"
-          style="flex:1;padding:11px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);background:var(--bg-card);cursor:pointer;font-size:0.9rem;font-family:var(--font-sans);color:var(--text-primary);display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;font-weight:500;"
-          onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--gray-200)'">
-          <span>🔵</span> LinkedIn
-        </button>
-      </div>
+      <!-- Social login removed due to security policy -->
+      <div style="margin-bottom:20px;"></div>
 
       <div class="auth-divider">or continue with email</div>
 
@@ -116,7 +105,7 @@
           <label class="form-label" for="email">Email Address</label>
           <div class="form-control-icon">
             <span class="icon">📧</span>
-            <input type="email" id="email" class="form-control" placeholder="you@example.com" required>
+            <input type="email" id="email" class="form-control" placeholder="you@example.com" required autocomplete="username">
           </div>
         </div>
         <div class="form-group">
@@ -127,7 +116,7 @@
           <div class="form-control-icon" style="position:relative;">
             <span class="icon">🔒</span>
             <input type="password" id="password" class="form-control" placeholder="Enter your password"
-              required style="padding-right:44px;">
+              required autocomplete="current-password" style="padding-right:44px;">
             <button type="button" id="toggle-pass"
               style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1rem;padding:0;"
               onclick="togglePassword()">👁️</button>

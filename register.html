@@ -89,21 +89,8 @@
       <h1 class="auth-title">Create your free account</h1>
       <p class="auth-subtitle">Start organizing your job search in minutes. No credit card required.</p>
 
-      <!-- Social signup -->
-      <div style="display:flex;gap:12px;margin-bottom:20px;">
-        <button
-          onclick="window.JobTracker && window.JobTracker.Toast.show('Google signup is not configured yet. Missing credentials.', 'warning')"
-          style="flex:1;padding:11px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);background:var(--bg-card);cursor:pointer;font-size:0.9rem;font-family:var(--font-sans);color:var(--text-primary);display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;font-weight:500;"
-          onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--gray-200)'">
-          <span>🌐</span> Google
-        </button>
-        <button
-          onclick="window.JobTracker && window.JobTracker.Toast.show('LinkedIn signup is not configured yet. Missing credentials.', 'warning')"
-          style="flex:1;padding:11px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);background:var(--bg-card);cursor:pointer;font-size:0.9rem;font-family:var(--font-sans);color:var(--text-primary);display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;font-weight:500;"
-          onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--gray-200)'">
-          <span>🔵</span> LinkedIn
-        </button>
-      </div>
+      <!-- Social signup removed due to security policy -->
+      <div style="margin-bottom:20px;"></div>
 
       <div class="auth-divider">or sign up with email</div>
 
@@ -126,7 +113,7 @@
           <label class="form-label" for="reg-email">Email Address <span>*</span></label>
           <div class="form-control-icon">
             <span class="icon">📧</span>
-            <input type="email" id="reg-email" class="form-control" placeholder="you@example.com" required>
+            <input type="email" id="reg-email" class="form-control" placeholder="you@example.com" required autocomplete="username">
           </div>
         </div>
 
@@ -146,7 +133,7 @@
           <div class="form-control-icon" style="position:relative;">
             <span class="icon">🔒</span>
             <input type="password" id="reg-password" class="form-control" placeholder="Create a strong password"
-              required data-password-strength="strength-container" style="padding-right:44px;">
+              required autocomplete="new-password" data-password-strength="strength-container" style="padding-right:44px;">
             <button type="button"
               style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1rem;padding:0;"
               onclick="toggleRegPassword()">👁️</button>
