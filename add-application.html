@@ -390,16 +390,70 @@
         const input = document.getElementById('skill-input');
         const val = input.value.trim().replace(',', '');
         if (!val) return;
-        const tag = document.createElement('span');
-        tag.className = 'skill-tag';
-        tag.textContent = val;
-        tag.style.cursor = 'pointer';
-        tag.title = 'Click to remove';
-        tag.onclick = () => tag.remove();
-        document.getElementById('skills-container').insertBefore(tag, input);
+        addSkillTag(val);
         input.value = '';
       }
     }
+
+    function addSkillTag(val) {
+      const tag = document.createElement('span');
+      tag.className = 'skill-tag';
+      tag.textContent = val;
+      tag.style.cursor = 'pointer';
+      tag.title = 'Click to remove';
+      tag.onclick = () => tag.remove();
+      const input = document.getElementById('skill-input');
+      document.getElementById('skills-container').insertBefore(tag, input);
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const editId = urlParams.get('edit');
+
+    if (editId) {
+      document.querySelector('h1').textContent = 'Edit Application';
+      document.querySelector('.breadcrumb span:last-child').textContent = 'Edit';
+      document.querySelector('.page-header-row p').textContent = 'Update the details for your existing application.';
+      
+      // Load existing application data
+      API.getApplicationById(editId).then(app => {
+        document.getElementById('company-name').value = app.company || '';
+        document.getElementById('job-role').value = app.role || '';
+        document.getElementById('location').value = app.location || '';
+        document.getElementById('job-type').value = app.jobType || '';
+        document.getElementById('salary').value = app.salary || '';
+        document.getElementById('company-website').value = app.companyWebsite || '';
+        
+        if (app.applicationDate) {
+          document.getElementById('app-date').value = app.applicationDate.substring(0, 10);
+        }
+        if (app.deadline) {
+          document.getElementById('deadline').value = app.deadline.substring(0, 10);
+        }
+        
+        document.getElementById('app-status').value = app.status || 'applied';
+        
+        if (app.interviewDate) {
+          document.getElementById('interview-date').value = app.interviewDate.substring(0, 16);
+        }
+        
+        document.getElementById('source').value = app.source || '';
+        document.getElementById('priority').value = app.priority || 'medium';
+        document.getElementById('contact-person').value = app.contactPerson || '';
+        document.getElementById('contact-email').value = app.contactEmail || '';
+        document.getElementById('notes').value = app.notes || '';
+
+        // Clear existing default tags
+        document.querySelectorAll('#skills-container .skill-tag').forEach(tag => tag.remove());
+        if (app.skills && Array.isArray(app.skills)) {
+          app.skills.forEach(skill => addSkillTag(skill));
+        }
+
+        document.getElementById('submit-btn').innerHTML = '💾 Update Application';
+      }).catch(err => {
+        window.JobTracker.Toast.show('Failed to load application details', 'error');
+      });
+    }
+
     let currentStep = 1;
     function nextStep() {
       // Basic validation
@@ -492,12 +546,17 @@
       btn.disabled = true;
 
       try {
-        await API.createApplication(appData);
-        window.JobTracker.Toast.show('Application added successfully! 🎉', 'success');
+        if (editId) {
+          await API.updateApplication(editId, appData);
+          window.JobTracker.Toast.show('Application updated successfully! 🎉', 'success');
+        } else {
+          await API.createApplication(appData);
+          window.JobTracker.Toast.show('Application added successfully! 🎉', 'success');
+        }
         setTimeout(() => window.location.href = 'applications.html', 1200);
       } catch (error) {
-        window.JobTracker.Toast.show(error.message || 'Failed to add application', 'error');
-        btn.innerHTML = '➕ Add Application';
+        window.JobTracker.Toast.show(error.message || 'Failed to save application', 'error');
+        btn.innerHTML = editId ? '💾 Update Application' : '➕ Add Application';
         btn.disabled = false;
       }
     }

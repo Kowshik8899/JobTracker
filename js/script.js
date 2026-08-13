@@ -120,12 +120,15 @@ const Loader = {
   init() {
     const loader = document.querySelector('.page-loader');
     if (loader) {
-      window.addEventListener('load', () => {
-        setTimeout(() => {
-          loader.classList.add('hidden');
-          setTimeout(() => loader.remove(), 400);
-        }, 400);
-      });
+      const hideLoader = () => {
+        loader.classList.add('hidden');
+        setTimeout(() => loader.remove(), 400);
+      };
+      if (document.readyState === 'complete') {
+        hideLoader();
+      } else {
+        window.addEventListener('load', hideLoader);
+      }
     }
   }
 };
@@ -836,510 +839,6 @@ const Settings = {
   }
 };
 
-/* ==========================================
-   PROFILE PAGE
-   ========================================== */
-const profile = {
-  async init() {
-    window.toggleEditProfile = () => {
-      const editSection = document.getElementById('edit-profile-form');
-      const editBtn = document.getElementById('edit-profile-btn');
-      if (editBtn && editSection) {
-        const isEditing = editSection.style.display !== 'none';
-        editSection.style.display = isEditing ? 'none' : 'block';
-        editBtn.textContent = isEditing ? '✏️ Edit profile' : '✕ Cancel';
-      }
-    };
-    
-    window.saveProfile = async (event) => {
-      event.preventDefault();
-      try {
-        const name = document.getElementById('profile-edit-name')?.value;
-        const email = document.getElementById('profile-edit-email')?.value;
-        const phone = document.getElementById('profile-edit-phone')?.value;
-        const location = document.getElementById('profile-edit-location')?.value;
-        const institution = document.getElementById('profile-edit-inst')?.value;
-        const year = document.getElementById('profile-edit-year')?.value;
-        const cgpa = document.getElementById('profile-edit-cgpa')?.value;
-        const goal = document.getElementById('profile-edit-goal')?.value;
-        const weeklyGoal = document.getElementById('profile-edit-weekly-goal')?.value;
-        const professionalSummary = document.getElementById('profile-edit-summary')?.value;
-        
-        const res = await window.API.updateProfile({ 
-          name, email, phone, location, institution, year, cgpa, goal, weeklyGoal, professionalSummary 
-        });
-        Toast.show('Profile updated successfully!', 'success');
-        
-        toggleEditProfile();
-        
-        // Re-run init to reload ui
-        setTimeout(() => window.location.reload(), 500);
-      } catch (err) {
-        Toast.show(err.message, 'error');
-      }
-    };
-
-    const renderEducationTimeline = () => {
-      const container = document.getElementById('education-timeline-container');
-      if (!container) return;
-      const usr = window.API.getUser();
-      const eduList = usr?.education || [];
-
-      if (eduList.length === 0) {
-        container.innerHTML = `
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div style="background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;">
-              <div class="timeline-desc">No education added yet.</div>
-            </div>
-          </div>
-        `;
-        return;
-      }
-
-      container.innerHTML = eduList.map((edu, index) => {
-        const isFirst = index === 0;
-        const bg = isFirst ? 'var(--primary-50)' : 'var(--bg-card)';
-        const border = isFirst ? 'var(--primary-100)' : 'var(--gray-200)';
-        
-        let tagsHtml = '';
-        if (edu.cgpa) {
-          tagsHtml += `<span style="background:var(--primary);color:white;font-size:0.72rem;font-weight:700;padding:2px 10px;border-radius:999px;">CGPA: ${edu.cgpa}</span>`;
-        }
-        if (edu.achievements) {
-          tagsHtml += `<span style="background:var(--accent-50);color:var(--accent-dark);font-size:0.72rem;font-weight:600;padding:2px 10px;border-radius:999px;margin-left:8px;">${edu.achievements}</span>`;
-        }
-
-        return `
-          <div class="timeline-item">
-            <div class="timeline-dot" ${!isFirst ? 'style="background:var(--secondary);"' : ''}></div>
-            <div style="background:${bg};border:1px solid ${border};border-radius:var(--radius-md);padding:16px;">
-              <div class="timeline-date">${edu.startDate || ''} – ${edu.endDate || 'Present'}</div>
-              <div class="timeline-title">${edu.degree || 'Degree'}</div>
-              <div class="timeline-desc">${edu.institution || 'Institution'}</div>
-              ${tagsHtml ? `<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">${tagsHtml}</div>` : ''}
-            </div>
-          </div>
-        `;
-      }).join('');
-    };
-
-    window.addEducationEntry = (edu = {}) => {
-      const container = document.getElementById('education-entries-container');
-      if (!container) return;
-      const div = document.createElement('div');
-      div.className = 'edu-entry';
-      div.style.cssText = 'border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;margin-bottom:16px;background:var(--bg-card);position:relative;';
-      div.innerHTML = `
-        <button type="button" class="btn btn-ghost btn-sm" onclick="this.parentElement.remove()" style="position:absolute;top:10px;right:10px;color:var(--error);">✕ Remove</button>
-        <div class="form-grid-2" style="margin-top:10px;">
-          <div class="form-group">
-            <label class="form-label">Degree/Program</label>
-            <input type="text" class="form-control edu-degree" value="${edu.degree || ''}" placeholder="e.g. B.Tech in CSE" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Institution</label>
-            <input type="text" class="form-control edu-inst" value="${edu.institution || ''}" placeholder="e.g. IIT Bombay" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Start Year</label>
-            <input type="text" class="form-control edu-start" value="${edu.startDate || ''}" placeholder="e.g. 2021" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label">End Year</label>
-            <input type="text" class="form-control edu-end" value="${edu.endDate || ''}" placeholder="e.g. 2025 (Expected)" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label">CGPA / Percentage</label>
-            <input type="text" class="form-control edu-cgpa" value="${edu.cgpa || ''}" placeholder="e.g. 9.2/10">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Achievements</label>
-            <input type="text" class="form-control edu-achiev" value="${edu.achievements || ''}" placeholder="e.g. Dean's List">
-          </div>
-        </div>
-      `;
-      container.appendChild(div);
-    };
-
-    window.toggleEditEducation = () => {
-      const formDiv = document.getElementById('edit-education-form');
-      const timelineDiv = document.getElementById('education-timeline-container');
-      const editBtn = document.getElementById('edit-education-btn');
-      
-      if (!formDiv || !timelineDiv) return;
-      
-      const isEditing = formDiv.style.display !== 'none';
-      if (isEditing) {
-        // Cancel: hide form, show timeline
-        formDiv.style.display = 'none';
-        timelineDiv.style.display = 'block';
-        if (editBtn) editBtn.textContent = 'Edit';
-      } else {
-        // Edit: show form, hide timeline, populate
-        formDiv.style.display = 'block';
-        timelineDiv.style.display = 'none';
-        if (editBtn) editBtn.textContent = '✕ Cancel';
-        
-        const container = document.getElementById('education-entries-container');
-        container.innerHTML = '';
-        const usr = window.API.getUser();
-        const eduList = usr?.education || [];
-        if (eduList.length > 0) {
-          eduList.forEach(edu => addEducationEntry(edu));
-        } else {
-          addEducationEntry(); // one blank entry
-        }
-      }
-    };
-
-    window.saveEducation = async (event) => {
-      event.preventDefault();
-      
-      // Gather data
-      const entries = document.querySelectorAll('.edu-entry');
-      const newEducation = Array.from(entries).map(entry => ({
-        degree: entry.querySelector('.edu-degree').value,
-        institution: entry.querySelector('.edu-inst').value,
-        startDate: entry.querySelector('.edu-start').value,
-        endDate: entry.querySelector('.edu-end').value,
-        cgpa: entry.querySelector('.edu-cgpa').value,
-        achievements: entry.querySelector('.edu-achiev').value
-      }));
-
-      try {
-        await window.API.updateProfile({ education: newEducation });
-        Toast.show('Education updated successfully!', 'success');
-        
-        // Hide form, render timeline
-        const formDiv = document.getElementById('edit-education-form');
-        const timelineDiv = document.getElementById('education-timeline-container');
-        const editBtn = document.getElementById('edit-education-btn');
-        if (formDiv) formDiv.style.display = 'none';
-        if (timelineDiv) timelineDiv.style.display = 'block';
-        if (editBtn) editBtn.textContent = 'Edit';
-        
-        renderEducationTimeline();
-      } catch (err) {
-        Toast.show(err.message || 'Failed to save education', 'error');
-      }
-    };
-
-    // --- SKILLS ---
-    const renderSkills = () => {
-      const container = document.getElementById('skills-display-container');
-      if (!container) return;
-      const usr = window.API.getUser();
-      const tech = usr?.technicalSkills || { languages: [], frameworks: [], concepts: [] };
-      
-      const makeTags = (arr) => arr && arr.length ? arr.map(t => `<span class="skill-tag">${t}</span>`).join('') : '<span style="color:var(--text-muted);font-size:0.85rem;">None</span>';
-      
-      let html = '';
-      if (!tech.languages?.length && !tech.frameworks?.length && !tech.concepts?.length) {
-        html = '<div style="text-align:center;padding:20px;color:var(--text-muted);font-size:0.9rem;">No skills added yet</div>';
-      } else {
-        html = `
-          <div style="margin-bottom:16px;">
-            <div style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">Languages</div>
-            <div class="skills-grid">${makeTags(tech.languages)}</div>
-          </div>
-          <div style="margin-bottom:16px;">
-            <div style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">Frameworks & Tools</div>
-            <div class="skills-grid">${makeTags(tech.frameworks)}</div>
-          </div>
-          <div>
-            <div style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">Concepts</div>
-            <div class="skills-grid">${makeTags(tech.concepts)}</div>
-          </div>
-        `;
-      }
-      container.innerHTML = html;
-    };
-
-    window.toggleEditSkills = () => {
-      const formDiv = document.getElementById('edit-skills-form');
-      const dispDiv = document.getElementById('skills-display-container');
-      const editBtn = document.getElementById('edit-skills-btn');
-      if (!formDiv || !dispDiv) return;
-      
-      const isEditing = formDiv.style.display !== 'none';
-      formDiv.style.display = isEditing ? 'none' : 'block';
-      dispDiv.style.display = isEditing ? 'block' : 'none';
-      if (editBtn) editBtn.textContent = isEditing ? 'Edit' : '✕ Cancel';
-      
-      if (!isEditing) {
-        const usr = window.API.getUser();
-        const tech = usr?.technicalSkills || {};
-        document.getElementById('edit-skills-languages').value = (tech.languages || []).join(', ');
-        document.getElementById('edit-skills-frameworks').value = (tech.frameworks || []).join(', ');
-        document.getElementById('edit-skills-concepts').value = (tech.concepts || []).join(', ');
-      }
-    };
-
-    window.saveSkills = async (e) => {
-      e.preventDefault();
-      const parse = (val) => val.split(',').map(s => s.trim()).filter(s => s);
-      const newSkills = {
-        languages: parse(document.getElementById('edit-skills-languages').value),
-        frameworks: parse(document.getElementById('edit-skills-frameworks').value),
-        concepts: parse(document.getElementById('edit-skills-concepts').value),
-      };
-      
-      try {
-        await window.API.updateProfile({ technicalSkills: newSkills });
-        Toast.show('Skills updated successfully!', 'success');
-        toggleEditSkills();
-        renderSkills();
-      } catch(err) { Toast.show(err.message, 'error'); }
-    };
-
-    // --- EXPERIENCE ---
-    const renderExperience = () => {
-      const container = document.getElementById('experience-display-container');
-      if (!container) return;
-      const usr = window.API.getUser();
-      const expList = usr?.workExperience || [];
-      
-      if (expList.length === 0) {
-        container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);font-size:0.9rem;">No experience added yet</div>';
-        return;
-      }
-      
-      container.innerHTML = expList.map((exp, idx) => {
-        const isFirst = idx === 0;
-        return `
-          <div class="timeline-item">
-            <div class="timeline-dot" ${!isFirst ? 'style="background:var(--secondary);"' : ''}></div>
-            <div style="background:var(--bg-card);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;">
-              <div class="timeline-date">${exp.startDate} – ${exp.current ? 'Present' : exp.endDate}</div>
-              <div class="timeline-title">${exp.role}</div>
-              <div class="timeline-desc" style="font-weight:600;color:var(--text-primary);">${exp.company} ${exp.location ? '- ' + exp.location : ''}</div>
-              <div class="timeline-desc" style="margin-top:8px;">${exp.description || ''}</div>
-            </div>
-          </div>
-        `;
-      }).join('');
-    };
-
-    window.addExperienceEntry = (exp = {}) => {
-      const container = document.getElementById('experience-entries-container');
-      if (!container) return;
-      const div = document.createElement('div');
-      div.className = 'exp-entry';
-      div.style.cssText = 'border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;margin-bottom:16px;background:var(--bg-card);position:relative;';
-      div.innerHTML = `
-        <button type="button" class="btn btn-ghost btn-sm" onclick="this.parentElement.remove()" style="position:absolute;top:10px;right:10px;color:var(--error);">✕ Remove</button>
-        <div class="form-grid-2" style="margin-top:10px;">
-          <div class="form-group"><label class="form-label">Role</label><input type="text" class="form-control exp-role" value="${exp.role||''}" required></div>
-          <div class="form-group"><label class="form-label">Company</label><input type="text" class="form-control exp-comp" value="${exp.company||''}" required></div>
-          <div class="form-group"><label class="form-label">Location</label><input type="text" class="form-control exp-loc" value="${exp.location||''}"></div>
-          <div class="form-group"><label class="form-label">Start Date</label><input type="text" class="form-control exp-start" value="${exp.startDate||''}" required></div>
-          <div class="form-group"><label class="form-label">End Date</label><input type="text" class="form-control exp-end" value="${exp.endDate||''}"></div>
-          <div class="form-group" style="display:flex;align-items:center;padding-top:28px;">
-            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox" class="exp-curr" ${exp.current?'checked':''}> Current Job</label>
-          </div>
-        </div>
-        <div class="form-group" style="margin-top:12px;">
-          <label class="form-label">Description</label>
-          <textarea class="form-control exp-desc">${exp.description||''}</textarea>
-        </div>
-      `;
-      container.appendChild(div);
-    };
-
-    window.toggleEditExperience = () => {
-      const formDiv = document.getElementById('edit-experience-form');
-      const dispDiv = document.getElementById('experience-display-container');
-      const editBtn = document.getElementById('edit-experience-btn');
-      if (!formDiv || !dispDiv) return;
-      const isEditing = formDiv.style.display !== 'none';
-      formDiv.style.display = isEditing ? 'none' : 'block';
-      dispDiv.style.display = isEditing ? 'block' : 'none';
-      if (editBtn) editBtn.textContent = isEditing ? 'Edit' : '✕ Cancel';
-      
-      if (!isEditing) {
-        const container = document.getElementById('experience-entries-container');
-        container.innerHTML = '';
-        const usr = window.API.getUser();
-        const exps = usr?.workExperience || [];
-        if (exps.length > 0) exps.forEach(ex => addExperienceEntry(ex));
-        else addExperienceEntry();
-      }
-    };
-
-    window.saveExperience = async (e) => {
-      e.preventDefault();
-      const entries = document.querySelectorAll('.exp-entry');
-      const newExps = Array.from(entries).map(entry => ({
-        role: entry.querySelector('.exp-role').value,
-        company: entry.querySelector('.exp-comp').value,
-        location: entry.querySelector('.exp-loc').value,
-        startDate: entry.querySelector('.exp-start').value,
-        endDate: entry.querySelector('.exp-end').value,
-        current: entry.querySelector('.exp-curr').checked,
-        description: entry.querySelector('.exp-desc').value
-      }));
-      try {
-        await window.API.updateProfile({ workExperience: newExps });
-        Toast.show('Experience updated successfully!', 'success');
-        toggleEditExperience();
-        renderExperience();
-      } catch(err) { Toast.show(err.message, 'error'); }
-    };
-
-    // --- CONTACT ---
-    window.toggleEditContact = () => {
-      const formDiv = document.getElementById('edit-contact-form');
-      const dispDiv = document.getElementById('contact-display-container');
-      const editBtn = document.getElementById('edit-contact-btn');
-      if (!formDiv || !dispDiv) return;
-      const isEditing = formDiv.style.display !== 'none';
-      formDiv.style.display = isEditing ? 'none' : 'block';
-      dispDiv.style.display = isEditing ? 'flex' : 'none';
-      if (editBtn) editBtn.textContent = isEditing ? 'Edit' : '✕ Cancel';
-      
-      if (!isEditing) {
-        const usr = window.API.getUser() || {};
-        document.getElementById('contact-edit-email').value = usr.email || '';
-        document.getElementById('contact-edit-phone').value = usr.phone || '';
-        document.getElementById('contact-edit-linkedin').value = usr.linkedin || '';
-        document.getElementById('contact-edit-github').value = usr.github || '';
-        document.getElementById('contact-edit-location').value = usr.location || '';
-      }
-    };
-
-    window.saveContact = async (e) => {
-      e.preventDefault();
-      try {
-        await window.API.updateProfile({
-          email: document.getElementById('contact-edit-email').value,
-          phone: document.getElementById('contact-edit-phone').value,
-          linkedin: document.getElementById('contact-edit-linkedin').value,
-          github: document.getElementById('contact-edit-github').value,
-          location: document.getElementById('contact-edit-location').value,
-        });
-        Toast.show('Contact info updated!', 'success');
-        toggleEditContact();
-        setTimeout(() => window.location.reload(), 500);
-      } catch(err) { Toast.show(err.message, 'error'); }
-    };
-
-    // --- RESUME ---
-    const renderResume = () => {
-      const usr = window.API.getUser();
-      if (!usr) return;
-      const fileNameEl = document.getElementById('resume-file-name');
-      const dBtn = document.getElementById('resume-download-btn');
-      if (usr.resume && usr.resume.fileName) {
-        if (fileNameEl) fileNameEl.textContent = usr.resume.fileName;
-        if (dBtn) dBtn.style.display = 'inline-block';
-      }
-    };
-
-    window.handleResumeUpload = (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      
-      if (file.size > 5 * 1024 * 1024) {
-        Toast.show("File must be smaller than 5MB", "error");
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.onload = async (ev) => {
-        const base64Data = ev.target.result;
-        try {
-          await window.API.updateProfile({
-            resume: { fileName: file.name, data: base64Data }
-          });
-          Toast.show('Resume uploaded successfully!', 'success');
-          renderResume();
-        } catch(err) { Toast.show(err.message, 'error'); }
-      };
-      reader.readAsDataURL(file);
-    };
-
-    window.downloadResume = () => {
-      const usr = window.API.getUser();
-      if (usr && usr.resume && usr.resume.data) {
-        const link = document.createElement('a');
-        link.href = usr.resume.data;
-        link.download = usr.resume.fileName;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        Toast.show('Resume downloading...', 'success');
-      }
-    };
-
-    if (window.API && window.API.isLoggedIn()) {
-      const user = window.API.getUser();
-      if (user) {
-        // Form inputs
-        const fieldsToPopulate = ['name', 'email', 'phone', 'location', 'inst', 'year', 'cgpa', 'goal', 'weeklyGoal', 'summary', 'linkedin'];
-        fieldsToPopulate.forEach(f => {
-          let val;
-          if (f === 'inst') val = user.institution;
-          else if (f === 'summary') val = user.professionalSummary;
-          else if (f === 'weeklyGoal') val = user.weeklyGoal;
-          else val = user[f];
-          
-          const el = document.getElementById(f === 'weeklyGoal' ? 'profile-edit-weekly-goal' : `profile-edit-${f}`);
-          if (el) el.value = val !== undefined && val !== null ? val : '';
-        });
-
-        // Display elements
-        const updateText = (id, val, fallback = 'Not provided') => {
-          const el = document.getElementById(id);
-          if (el) el.textContent = val && val.trim() !== '' ? val : fallback;
-        };
-
-        updateText('profile-hero-name', user.name);
-        updateText('profile-hero-role', user.goal, 'Role not provided');
-        updateText('profile-display-email', user.email);
-        updateText('profile-display-phone', user.phone);
-        updateText('profile-display-location', user.location);
-        updateText('profile-display-linkedin', user.linkedin);
-        updateText('profile-display-github', user.github);
-        updateText('profile-display-summary', user.professionalSummary, 'Summary not provided.');
-        updateText('profile-display-cgpa-stat', user.cgpa, '-');
-        
-        // Badges rendering
-        const badgesContainer = document.getElementById('profile-badges-container');
-        if (badgesContainer) {
-          let badgesHtml = '';
-          if (user.year) badgesHtml += `<span class="profile-badge">🎓 ${user.year}</span>`;
-          if (user.location) badgesHtml += `<span class="profile-badge">📍 ${user.location}</span>`;
-          if (user.goal) badgesHtml += `<span class="profile-badge">💼 ${user.goal}</span>`;
-          if (user.cgpa) badgesHtml += `<span class="profile-badge">⭐ CGPA ${user.cgpa}/10</span>`;
-          badgesContainer.innerHTML = badgesHtml;
-        }
-
-        // Initialize sections
-        renderEducationTimeline();
-        renderSkills();
-        renderExperience();
-        renderResume();
-      }
-      
-      // Load and display statistics from real application data
-      try {
-        const data = await window.API.getAnalytics();
-        const sMap = data.statusCounts || {};
-        
-        const elTotal = document.getElementById('profile-total-applications');
-        const elInterviews = document.getElementById('profile-interviews');
-        const elOffers = document.getElementById('profile-offers');
-        
-        if (elTotal) elTotal.textContent = data.totalApplications || 0;
-        if (elInterviews) elInterviews.textContent = sMap['interview'] || 0;
-        if (elOffers) elOffers.textContent = sMap['offer'] || 0;
-      } catch (e) {
-        console.error('Failed to load profile analytics', e);
-      }
-    }
-  }
-};
 
 /* ==========================================
    ANALYTICS PAGE - INITIALIZE CHARTS
@@ -1774,7 +1273,7 @@ const UserUtils = {
       'name', 'email', 'goal', 'location', 'phone', 'year', 'cgpa',
       'institution', 'linkedin', 'professionalSummary'
     ];
-    let filled = fields.filter(f => user[f] && user[f].trim() !== '').length;
+    let filled = fields.filter(f => user[f] && String(user[f]).trim() !== '').length;
     
     // Arrays / Objects
     if (user.education && user.education.length > 0) filled++;
@@ -1826,6 +1325,285 @@ const UserUtils = {
       const timeGreeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
       greeting.innerHTML = `${timeGreeting}, ${user.name.split(' ')[0]}! 👋`;
     }
+  }
+};
+
+/* ==========================================
+   PROFILE PAGE LOGIC
+   ========================================== */
+const profile = {
+  init() {
+    if (!window.location.pathname.includes('profile.html')) return;
+    this.loadProfileData();
+  },
+  async loadProfileData() {
+    if (!window.API || !window.API.isLoggedIn()) return;
+    try {
+      const user = await window.API.getProfile();
+      // Render Profile Data
+      document.getElementById('profile-hero-name').textContent = user.name || 'Not provided';
+      document.getElementById('profile-hero-role').textContent = user.goal || 'Role not provided';
+      document.getElementById('profile-hero-avatar').textContent = UserUtils.getInitials(user.name);
+      
+      const summaryEl = document.getElementById('profile-display-summary');
+      if (summaryEl) summaryEl.textContent = user.professionalSummary || 'Summary not provided.';
+      
+      // Update form values
+      const setValue = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.value = val || '';
+      };
+      setValue('profile-edit-name', user.name);
+      setValue('profile-edit-email', user.email);
+      setValue('profile-edit-phone', user.phone);
+      setValue('profile-edit-location', user.location);
+      setValue('profile-edit-inst', user.institution);
+      setValue('profile-edit-year', user.year);
+      setValue('profile-edit-cgpa', user.cgpa);
+      setValue('profile-edit-goal', user.goal);
+      setValue('profile-edit-weekly-goal', user.weeklyGoal);
+      setValue('profile-edit-summary', user.professionalSummary);
+      
+      // Skills
+      const skillsContainer = document.getElementById('skills-display-container');
+      if (skillsContainer) {
+        if (!user.technicalSkills || (!user.technicalSkills.languages?.length && !user.technicalSkills.frameworks?.length && !user.technicalSkills.concepts?.length)) {
+          skillsContainer.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);font-size:0.9rem;">No skills added yet</div>';
+        } else {
+          skillsContainer.innerHTML = '';
+          const addTags = (title, tags) => {
+            if (!tags || tags.length === 0) return;
+            skillsContainer.innerHTML += `
+              <div style="margin-bottom:12px;">
+                <div style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:6px;">${title}</div>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                  ${tags.map(t => `<span class="badge" style="background:var(--gray-100);color:var(--text-primary);">${t}</span>`).join('')}
+                </div>
+              </div>
+            `;
+          };
+          addTags('Languages', user.technicalSkills.languages);
+          addTags('Frameworks', user.technicalSkills.frameworks);
+          addTags('Concepts', user.technicalSkills.concepts);
+          
+          setValue('edit-skills-languages', (user.technicalSkills.languages || []).join(', '));
+          setValue('edit-skills-frameworks', (user.technicalSkills.frameworks || []).join(', '));
+          setValue('edit-skills-concepts', (user.technicalSkills.concepts || []).join(', '));
+        }
+      }
+
+      // Experience
+      const expContainer = document.getElementById('experience-display-container');
+      if (expContainer) {
+        if (!user.workExperience || user.workExperience.length === 0) {
+          expContainer.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);font-size:0.9rem;">No experience added yet</div>';
+        } else {
+          expContainer.innerHTML = user.workExperience.map((exp, i) => `
+            <div class="timeline-item">
+              <div class="timeline-dot" style="background:var(--primary);border-color:var(--primary-100);"></div>
+              <div class="timeline-content">
+                <div style="font-weight:700;font-size:0.95rem;">${exp.title}</div>
+                <div style="font-size:0.85rem;color:var(--primary);margin-bottom:4px;">${exp.company}</div>
+                <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:8px;">${exp.duration}</div>
+                <p style="font-size:0.88rem;color:var(--text-secondary);">${exp.description}</p>
+              </div>
+            </div>
+          `).join('');
+          
+          const editEntries = document.getElementById('experience-entries-container');
+          if (editEntries) {
+            editEntries.innerHTML = user.workExperience.map((exp, i) => `
+              <div class="experience-entry" data-index="${i}" style="border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;margin-bottom:12px;position:relative;">
+                <button type="button" onclick="this.parentElement.remove()" style="position:absolute;top:8px;right:8px;background:none;border:none;color:var(--danger);cursor:pointer;">✖</button>
+                <div class="form-group"><label class="form-label">Title</label><input type="text" class="form-control exp-title" value="${exp.title || ''}"></div>
+                <div class="form-group"><label class="form-label">Company</label><input type="text" class="form-control exp-company" value="${exp.company || ''}"></div>
+                <div class="form-group"><label class="form-label">Duration</label><input type="text" class="form-control exp-duration" value="${exp.duration || ''}"></div>
+                <div class="form-group"><label class="form-label">Description</label><textarea class="form-control exp-desc">${exp.description || ''}</textarea></div>
+              </div>
+            `).join('');
+          }
+        }
+      }
+      
+      // Resume
+      const resumeName = document.getElementById('resume-file-name');
+      const resumeBtn = document.getElementById('resume-download-btn');
+      if (resumeName) {
+        if (user.resume && user.resume.fileName) {
+          resumeName.textContent = user.resume.fileName;
+          if (resumeBtn) resumeBtn.style.display = 'inline-block';
+        } else {
+          resumeName.textContent = 'No resume uploaded';
+          if (resumeBtn) resumeBtn.style.display = 'none';
+        }
+      }
+
+      // Stats
+      const apps = await window.API.getApplications();
+      document.getElementById('profile-total-applications').textContent = apps.length;
+      document.getElementById('profile-interviews').textContent = apps.filter(a => a.status === 'interview').length;
+      document.getElementById('profile-offers').textContent = apps.filter(a => a.status === 'offer').length;
+      document.getElementById('profile-display-cgpa-stat').textContent = user.cgpa || '-';
+      
+    } catch (e) {
+      console.error('Failed to load profile', e);
+    }
+  }
+};
+
+// Global Profile Editor Functions
+window.toggleEditProfile = () => {
+  const form = document.getElementById('edit-profile-form');
+  form.style.display = form.style.display === 'none' ? 'block' : 'none';
+};
+
+window.saveProfile = async (e) => {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type="submit"]');
+  const ogText = btn.textContent;
+  btn.textContent = 'Saving...';
+  try {
+    await window.API.updateProfile({
+      name: document.getElementById('profile-edit-name').value,
+      email: document.getElementById('profile-edit-email').value,
+      phone: document.getElementById('profile-edit-phone').value,
+      location: document.getElementById('profile-edit-location').value,
+      institution: document.getElementById('profile-edit-inst').value,
+      year: document.getElementById('profile-edit-year').value,
+      cgpa: document.getElementById('profile-edit-cgpa').value,
+      goal: document.getElementById('profile-edit-goal').value,
+      weeklyGoal: document.getElementById('profile-edit-weekly-goal').value,
+      professionalSummary: document.getElementById('profile-edit-summary').value,
+    });
+    Toast.show('Profile updated successfully!', 'success');
+    window.toggleEditProfile();
+    profile.init();
+    runGlobalInit();
+  } catch (error) {
+    Toast.show(error.message, 'error');
+  } finally {
+    btn.textContent = ogText;
+  }
+};
+
+window.toggleEditSkills = () => {
+  const form = document.getElementById('edit-skills-form');
+  const display = document.getElementById('skills-display-container');
+  if (form.style.display === 'none') {
+    form.style.display = 'block';
+    display.style.display = 'none';
+  } else {
+    form.style.display = 'none';
+    display.style.display = 'block';
+  }
+};
+
+window.saveSkills = async (e) => {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type="submit"]');
+  const ogText = btn.textContent;
+  btn.textContent = 'Saving...';
+  try {
+    const parseTags = str => str.split(',').map(s => s.trim()).filter(s => s.length > 0);
+    await window.API.updateProfile({
+      technicalSkills: {
+        languages: parseTags(document.getElementById('edit-skills-languages').value),
+        frameworks: parseTags(document.getElementById('edit-skills-frameworks').value),
+        concepts: parseTags(document.getElementById('edit-skills-concepts').value),
+      }
+    });
+    Toast.show('Skills updated successfully!', 'success');
+    window.toggleEditSkills();
+    profile.init();
+  } catch (error) {
+    Toast.show(error.message, 'error');
+  } finally {
+    btn.textContent = ogText;
+  }
+};
+
+window.toggleEditExperience = () => {
+  const form = document.getElementById('edit-experience-form');
+  const display = document.getElementById('experience-display-container');
+  if (form.style.display === 'none') {
+    form.style.display = 'block';
+    display.style.display = 'none';
+  } else {
+    form.style.display = 'none';
+    display.style.display = 'block';
+  }
+};
+
+window.addExperienceEntry = () => {
+  const container = document.getElementById('experience-entries-container');
+  container.insertAdjacentHTML('beforeend', `
+    <div class="experience-entry" style="border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:16px;margin-bottom:12px;position:relative;">
+      <button type="button" onclick="this.parentElement.remove()" style="position:absolute;top:8px;right:8px;background:none;border:none;color:var(--danger);cursor:pointer;">✖</button>
+      <div class="form-group"><label class="form-label">Title</label><input type="text" class="form-control exp-title" placeholder="Software Engineer"></div>
+      <div class="form-group"><label class="form-label">Company</label><input type="text" class="form-control exp-company" placeholder="Tech Corp"></div>
+      <div class="form-group"><label class="form-label">Duration</label><input type="text" class="form-control exp-duration" placeholder="Jan 2021 - Present"></div>
+      <div class="form-group"><label class="form-label">Description</label><textarea class="form-control exp-desc"></textarea></div>
+    </div>
+  `);
+};
+
+window.saveExperience = async (e) => {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type="submit"]');
+  const ogText = btn.textContent;
+  btn.textContent = 'Saving...';
+  try {
+    const entries = Array.from(document.querySelectorAll('.experience-entry')).map(el => ({
+      title: el.querySelector('.exp-title').value,
+      company: el.querySelector('.exp-company').value,
+      duration: el.querySelector('.exp-duration').value,
+      description: el.querySelector('.exp-desc').value,
+    }));
+    await window.API.updateProfile({ workExperience: entries });
+    Toast.show('Experience updated successfully!', 'success');
+    window.toggleEditExperience();
+    profile.init();
+  } catch (error) {
+    Toast.show(error.message, 'error');
+  } finally {
+    btn.textContent = ogText;
+  }
+};
+
+window.handleResumeUpload = (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = async (ev) => {
+    try {
+      await window.API.updateProfile({
+        resume: {
+          fileName: file.name,
+          data: ev.target.result // Base64 data URL
+        }
+      });
+      Toast.show('Resume uploaded successfully!', 'success');
+      profile.init();
+      runGlobalInit();
+    } catch (error) {
+      Toast.show('Failed to upload resume', 'error');
+    }
+  };
+  reader.readAsDataURL(file);
+};
+
+window.downloadResume = () => {
+  const user = window.API.getUser();
+  if (user && user.resume && user.resume.data) {
+    const link = document.createElement('a');
+    link.href = user.resume.data;
+    link.download = user.resume.fileName || 'resume';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    Toast.show('Resume downloaded!', 'success');
+  } else {
+    Toast.show('No resume found', 'error');
   }
 };
 

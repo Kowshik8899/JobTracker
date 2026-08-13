@@ -3075,8 +3075,8 @@ tbody tr:last-child td {
 }
 
 /* Fix Email Overflow */
-#sidebar-user-inst, 
-#profile-display-email, 
+#sidebar-user-inst,
+#profile-display-email,
 #settings-user-email {
   word-break: break-all;
   overflow-wrap: anywhere;

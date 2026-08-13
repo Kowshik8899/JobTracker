@@ -39,10 +39,14 @@
             <span class="badge-dot unread-badge"
               style="display:none;position:absolute;top:2px;right:2px;width:8px;height:8px;background:var(--danger);border-radius:50%;border:2px solid white;"></span>
           </div>
-          <div class="dropdown-menu notifications-menu" id="notifications-menu" style="width: 320px; right: -60px; left: auto; max-height: 400px; overflow-y: auto;">
-            <div style="padding: 12px 16px; border-bottom: 1px solid var(--gray-200); font-weight: 600; display:flex; justify-content:space-between; align-items:center;">
+          <div class="dropdown-menu notifications-menu" id="notifications-menu"
+            style="width: 320px; right: -60px; left: auto; max-height: 400px; overflow-y: auto;">
+            <div
+              style="padding: 12px 16px; border-bottom: 1px solid var(--gray-200); font-weight: 600; display:flex; justify-content:space-between; align-items:center;">
               <span>Notifications</span>
-              <button onclick="window.JobTracker.NotificationsUI.markAllRead()" style="background:none;border:none;color:var(--primary);font-size:0.75rem;cursor:pointer;font-weight:600;">Mark all read</button>
+              <button onclick="window.JobTracker.NotificationsUI.markAllRead()"
+                style="background:none;border:none;color:var(--primary);font-size:0.75rem;cursor:pointer;font-weight:600;">Mark
+                all read</button>
             </div>
             <div id="notifications-list"></div>
           </div>
@@ -275,7 +279,7 @@
           if (search && !(app.company.toLowerCase().includes(search.toLowerCase()) || app.role.toLowerCase().includes(search.toLowerCase()))) return false;
           return true;
         });
-        
+
         // Handle sort in JS since we fetched all
         apps.sort((a, b) => {
           if (sortVal === 'Deadline Soon') {
@@ -342,19 +346,30 @@
       return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), ms); };
     }
 
-    let isGridView = true;
-    function toggleView() {
-      isGridView = !isGridView;
+    let isGridView = localStorage.getItem('jobtracker-view') !== 'list';
+
+    function applyView() {
       const container = document.getElementById('app-cards-container');
       const btn = document.getElementById('view-toggle');
+      if (!container || !btn) return;
       if (isGridView) {
+        container.style.gridTemplateColumns = ''; // Clear inline styles
         container.className = 'app-cards-grid';
-        btn.textContent = '⊞ Grid View';
+        btn.innerHTML = '☰ List View';
       } else {
         container.style.gridTemplateColumns = '1fr';
-        btn.textContent = '☰ List View';
+        btn.innerHTML = '⊞ Grid View';
       }
     }
+
+    function toggleView() {
+      isGridView = !isGridView;
+      localStorage.setItem('jobtracker-view', isGridView ? 'grid' : 'list');
+      applyView();
+    }
+
+    // Apply layout on load
+    applyView();
 
     // Load on page ready
     loadApplications();
